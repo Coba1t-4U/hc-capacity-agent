@@ -1,0 +1,4 @@
+! 光伏元件（设计文档 17.11：PVSystem.kVA 与 Pmpp 不等同）
+New PVSystem.pv_PV001 bus1=BUS-LV-001B.1.2.3 phases=3 kv=0.4 kVA=66 Pmpp=60 irradiance=1 pf=1
+New PVSystem.pv_PV002 bus1=BUS-LV-002B.1.2.3 phases=3 kv=0.4 kVA=66 Pmpp=60 irradiance=1 pf=1
+New PVSystem.pv_PV003 bus1=BUS-MV-006.1.2.3 phases=3 kv=10 kVA=176 Pmpp=160 irradiance=1 pf=1

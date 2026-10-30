@@ -1,0 +1,682 @@
+{
+  "schema_version": "hc-skills-v1",
+  "registry_version": "1.0.0",
+  "generated_at": "2026-10-09",
+  "design_reference": "配网承载力与主配微协同优化 Agent 设计文档 4.4 技能注册与生命周期 / 4.7 首期专业技能清单 / 表 17",
+  "notes": [
+    "技能不是提示词，而是受约束的专业工具契约（设计文档 4.6）。",
+    "技能正文采用固定顺序：目的—适用范围—输入—前置条件—执行步骤—输出—异常—证据—边界—测试样例。",
+    "步骤中避免使用'适当、合理、必要时'等无法验收的词语。",
+    "影响数值结论的常数、阈值、同时率、裕度和离散步长一律写成 rule_ref，不写死在技能中。",
+    "状态枚举：draft / test / approved / deprecated。只有 approved 技能可被正式任务选用。"
+  ],
+  "skills": [
+    {
+      "skill_id": "HC.TOPOLOGY.CONSISTENCY",
+      "skill_code": "SK-01",
+      "version": "1.0.0",
+      "name": "拓扑与模型一致性检查",
+      "purpose": "校验网架连通性、孤岛、环路、相别与版本一致性，生成可计算网络的前提结论。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "voltage_levels_kv": [0.4, 10, 35],
+      "requires_engine": false,
+      "module": "hc_agent.io.validation",
+      "entrypoints": ["check_topology", "check_version_consistency", "check_resource_mapping"],
+      "inputs": [
+        {"field": "network.xlsx:buses", "unit": "-", "required": true, "note": "节点主键 node_id"},
+        {"field": "network.xlsx:lines", "unit": "ohm/km", "required": true},
+        {"field": "network.xlsx:transformers", "unit": "kVA/kV/%", "required": false},
+        {"field": "network.xlsx:switches", "unit": "A", "required": false},
+        {"field": "network.xlsx:sources", "unit": "ohm/pu", "required": true},
+        {"field": "network.xlsx:meta.topology_version", "unit": "-", "required": true}
+      ],
+      "preconditions": [
+        "network.xlsx 的 meta 工作表必需键齐备",
+        "task.snapshot_id 与 meta.snapshot_id 一致",
+        "对象范围 scope.ids 能解析为节点或馈线"
+      ],
+      "procedure": [
+        "1. 校验外键：lines/transformers/loads/pv 的节点引用必须存在于 buses。",
+        "2. 校验开关状态与有效时间，断开开关不得构成供电路径。",
+        "3. 建图（networkx，不可用时退化为邻接表），求连通分量。",
+        "4. 标记无供电路径至 sources 的孤岛节点为阻断缺陷。",
+        "5. 从 sources 出发做可达性遍历，校验 scope 与候选接入点可达。",
+        "6. 检测多电源边界并记录运行方式确认要求。",
+        "7. 校验设备相别不超过节点相别。"
+      ],
+      "outputs": [
+        {"field": "components", "unit": "-", "note": "连通分量列表"},
+        {"field": "islands", "unit": "-", "note": "孤岛节点，blocking"},
+        {"field": "unreachable", "unit": "-"},
+        {"field": "multi_source_boundaries", "unit": "-"},
+        {"field": "quality_issues.csv", "unit": "-", "note": "issue_id/file/row/field/severity/code/blocking"}
+      ],
+      "failure_policy": {
+        "retryable": ["临时文件读取失败"],
+        "needs_data": ["节点或线路字段缺失"],
+        "needs_human": ["拓扑与现场台账不符", "开关状态时标冲突"],
+        "forbidden": ["自动补全缺失的网架连接", "猜测相别"]
+      },
+      "evidence_policy": ["snapshot_hash", "topology_version", "quality_issues.csv"],
+      "safety_boundary": ["只读分析", "不得修改源数据", "不得推断不存在的设备或接线"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["拓扑孤岛", "开关状态矛盾", "重复 node_id", "版本冲突"]
+      },
+      "owner": "数据治理组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "low"
+    },
+    {
+      "skill_id": "HC.PROFILE.STANDARDIZE",
+      "skill_code": "SK-02",
+      "version": "1.0.0",
+      "name": "负荷与光伏曲线标准化",
+      "purpose": "把历史与典型曲线统一为带时区的标准时序，并标注质量标签与插值记录。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": false,
+      "module": "hc_agent.io.ingest",
+      "entrypoints": ["_normalize_profiles", "check_time_coverage"],
+      "inputs": [
+        {"field": "profiles.csv", "unit": "kW/kvar/pu", "required": true,
+         "note": "profile_id,resource_id,resource_type,timestamp,phase,p_kw,q_kvar,available_p_pu,quality_flag,source_id"}
+      ],
+      "preconditions": [
+        "timestamp 为带时区 ISO 8601",
+        "复合唯一键 profile_id+timestamp+phase 不重复",
+        "p_kw 与 available_p_pu 二选一并声明输入模式"
+      ],
+      "procedure": [
+        "1. 读取 CSV（UTF-8、逗号分隔、首行表头），ID 按字符串保留前导零。",
+        "2. 校验时区、resource_type 枚举、phase 枚举。",
+        "3. 校验复合唯一键，重复即阻断。",
+        "4. 校验同一设备同一时刻不得混用 ALL 与分相值。",
+        "5. 校验曲线对时间窗的覆盖率不低于配置阈值。",
+        "6. 校验负荷/光伏引用的 profile_id 在文件中存在。",
+        "7. 输出规范化长表与质量标签，原始曲线保留、派生曲线另存。"
+      ],
+      "outputs": [
+        {"field": "profiles[]", "unit": "-"},
+        {"field": "distinct_timestamps", "unit": "-"},
+        {"field": "coverage", "unit": "ratio", "note": "观测时间片 / 期望时间片"},
+        {"field": "quality_issues.csv", "unit": "-"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["连续缺测超过阈值", "覆盖率不足"],
+        "needs_human": ["时区口径不一致", "单位无法判定"],
+        "forbidden": ["用 0 代替缺失值", "未经记录的重采样"]
+      },
+      "evidence_policy": ["source_id", "quality_flag", "derived_version_id", "transform_id"],
+      "safety_boundary": ["只读分析", "不得覆盖原始曲线", "重采样仅生成派生版本并记录方法"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001/profiles.csv", "tests/golden/FD002/profiles.csv"],
+        "negative_cases": ["缺时区", "重复键", "ALL 与分相混用", "覆盖率不足", "单位错误"]
+      },
+      "owner": "数据治理组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "low"
+    },
+    {
+      "skill_id": "HC.SCENARIO.BUILD",
+      "skill_code": "SK-03",
+      "version": "1.0.0",
+      "name": "运行场景生成",
+      "purpose": "按批准场景集生成典型日、极端时段与检修转供场景，形成场景参数快照。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": false,
+      "module": "hc_agent.model.scenarios",
+      "entrypoints": ["build_scenarios"],
+      "inputs": [
+        {"field": "profiles.csv", "unit": "kW/kvar/pu", "required": true},
+        {"field": "rules.yaml:scenarios", "unit": "-", "required": true},
+        {"field": "scenario_set.json", "unit": "-", "required": false,
+         "note": "已登记场景集；提供时按其定义切片"}
+      ],
+      "preconditions": [
+        "时间窗内至少存在一个时间片",
+        "场景权重与拓扑引用完整"
+      ],
+      "procedure": [
+        "1. 解析场景集定义；未登记时生成基准典型日场景（使用真实曲线）。",
+        "2. 按 rule_ref 指定的场景类别派生极端场景，取值一律来自真实曲线。",
+        "3. 每个时间片先应用开关/分接状态，再写入负荷 P/Q 与已有光伏出力。",
+        "4. 同时率如已体现在曲线中不得再次相乘。",
+        "5. 输出场景集、参数快照与适用范围。"
+      ],
+      "outputs": [
+        {"field": "scenarios.json", "unit": "-",
+         "note": "scenario_id,topology_ref,profile_ref,time_window,control_ref"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["时间窗内无时间片"],
+        "needs_human": ["业务要求未登记的运行方式"],
+        "forbidden": ["为凑场景虚构曲线数据"]
+      },
+      "evidence_policy": ["scenarios.json", "profile_ref", "topology_ref"],
+      "safety_boundary": ["只读分析", "不得改变业务口径"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["空时间窗", "场景引用缺失"]
+      },
+      "owner": "Agent/平台研发组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "low"
+    },
+    {
+      "skill_id": "HC.POWERFLOW.BASELINE",
+      "skill_code": "SK-04",
+      "version": "1.0.0",
+      "name": "基线潮流计算",
+      "purpose": "在冻结模型与场景下计算全时间片基线潮流并返回收敛状态与约束结果。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py",
+                 "adapter": "hc_agent.engines.opendss_adapter.OpenDSSAdapter"},
+      "module": "hc_agent.model.powerflow",
+      "entrypoints": ["run_baseline", "require_baseline_admissible"],
+      "inputs": [
+        {"field": "Master.dss 及引用文件", "unit": "-", "required": true},
+        {"field": "scenarios.json", "unit": "-", "required": true},
+        {"field": "task.solver", "unit": "-", "required": true,
+         "note": "max_iter、tolerance、timeout_s"}
+      ],
+      "preconditions": [
+        "拓扑校验通过且无阻断缺陷",
+        "引擎版本与锁定版本一致",
+        "电压基准由 CalcVoltageBases 依元件额定值推导（不得下发 Set voltagebases）"
+      ],
+      "procedure": [
+        "1. 新建独立 OpenDSS 上下文与独立工作目录。",
+        "2. Compile 经审核的 Master.dss。",
+        "3. 设置该场景的开关、分接与控制。",
+        "4. 逐时间片写入负荷 P/Q 与光伏出力参数。",
+        "5. Solution.Solve() 并检查 Solution.Converged()。",
+        "6. 按母线节点与设备端子提取电压、电流、功率。",
+        "7. 执行静默失效检测：Converged 为真但全网电压恒为 0 时必须判为无解。",
+        "8. 保存原生模型、参数与输出。"
+      ],
+      "outputs": [
+        {"field": "bus_results.csv", "unit": "V/pu/deg",
+         "note": "scenario_id,timestamp,node_id,phase,v_v,v_pu,angle_deg,converged"},
+        {"field": "element_results.csv", "unit": "kW/kvar/A/%",
+         "note": "明确端子方向；分相量与三相合计分列"},
+        {"field": "convergence_status", "unit": "-"},
+        {"field": "engine_fingerprint", "unit": "-"}
+      ],
+      "failure_policy": {
+        "retryable": ["引擎临时错误", "依赖加载失败"],
+        "needs_data": ["关键参数缺失"],
+        "needs_human": ["需改变业务边界或网络状态才能收敛"],
+        "forbidden": ["通过关闭必要控制、改变拓扑或放宽业务约束使结果表面收敛",
+                      "把不收敛记为可行或不可行"]
+      },
+      "evidence_policy": ["snapshot_hash", "engine_run_id", "raw_result_uri",
+                          "engine_fingerprint", "opendss_adapter.log"],
+      "safety_boundary": ["只读分析", "不得下发控制命令", "不得覆盖原始数据",
+                          "不得执行用户上传的任意 DSS 脚本"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002",
+                   "IEEETestCases/13Bus"],
+        "negative_cases": ["不收敛算例", "电压基准错误", "电源未接入"]
+      },
+      "owner": "计算引擎组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "high"
+    },
+    {
+      "skill_id": "HC.POWERFLOW.INCREMENT",
+      "skill_code": "SK-05",
+      "version": "1.0.0",
+      "name": "增量接入潮流计算",
+      "purpose": "在冻结基线之上注入指定新增容量并计算增量场景，输出基线与增量的差异。",
+      "business_scope": ["capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py"},
+      "module": "hc_agent.model.powerflow",
+      "entrypoints": ["run_scenario_set", "apply_slice", "make_new_pv_specs"],
+      "inputs": [
+        {"field": "task.candidate_nodes", "unit": "-", "required": true,
+         "note": "node_id、phase、weight（和为 1）"},
+        {"field": "task.application_ref", "unit": "-", "required": false},
+        {"field": "increment_kw", "unit": "kW", "required": true}
+      ],
+      "preconditions": [
+        "基线全场景收敛且满足基线准入规则",
+        "候选接入点在模型中存在",
+        "分配权重之和为 1"
+      ],
+      "procedure": [
+        "1. 每次从冻结基线复制或重建算例，避免新增容量累积。",
+        "2. 按固定分配权重计算各接入点新增容量。",
+        "3. 注入新增容量（PVSystem.kVA 为视在容量、Pmpp 为阵列功率，不得默认等同）。",
+        "4. 逐场景逐时间片求解并检查收敛。",
+        "5. 计算基线/增量差异并定位新增申请引起的约束变化。",
+        "6. 失败记为 unknown，不得当作 pass 或不可行。"
+      ],
+      "outputs": [
+        {"field": "element_results_increment.csv", "unit": "kW/kvar/A"},
+        {"field": "baseline_vs_increment", "unit": "-"},
+        {"field": "status", "unit": "enum", "note": "ok/unknown"}
+      ],
+      "failure_policy": {
+        "retryable": ["引擎临时错误"],
+        "needs_data": ["接入点不存在"],
+        "needs_human": ["需改变接入位置或控制方式"],
+        "forbidden": ["把 unknown 当作不可行上界", "复用主任务中间结果"]
+      },
+      "evidence_policy": ["snapshot_hash", "engine_run_id", "increment_kw", "allocation"],
+      "safety_boundary": ["只读分析", "不得虚构设备或接线"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["接入点不存在", "权重和不为 1", "注入不收敛"]
+      },
+      "owner": "计算引擎组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "high"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.VOLTAGE",
+      "skill_code": "SK-06",
+      "version": "1.0.0",
+      "name": "节点电压越限校核",
+      "purpose": "按节点、相别、时间片检查电压幅值、持续时间与变化量，输出越限清单与最不利节点。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py",
+                 "note": "指标派生自引擎电压结果，属于结果后处理"},
+      "module": "hc_agent.model.constraints",
+      "entrypoints": ["ConstraintEvaluator.evaluate_voltage"],
+      "inputs": [
+        {"field": "bus_results.csv", "unit": "pu", "required": true},
+        {"field": "rules.yaml:VOLTAGE_LIMIT", "unit": "pu", "required": true,
+         "rule_ref": "VOLTAGE_LIMIT"}
+      ],
+      "preconditions": [
+        "电压 pu 的相电压基准与模型 kVBase 对齐",
+        "规则包中 min/max 与 duration_minutes 已批准（非 null）"
+      ],
+      "procedure": [
+        "1. 按 (scenario,node,phase) 收集时间序列。",
+        "2. 排除 OpenDSS 内部等值母线（sourcebus），它不是被评估的网络节点。",
+        "3. 求最小值与最大值对应的时间片。",
+        "4. 按规则 operator 与限值判定，并按相邻时间戳差值累加越限持续时间。",
+        "5. 持续时间未达配置阈值时不计为越限。",
+        "6. 输出 v_min/v_max、节点、持续时间、余量。"
+      ],
+      "outputs": [
+        {"field": "v_min", "unit": "pu"}, {"field": "v_max", "unit": "pu"},
+        {"field": "node", "unit": "-"}, {"field": "duration_minutes", "unit": "min"},
+        {"field": "margin", "unit": "pu"}, {"field": "status", "unit": "enum"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["电压结果缺失"],
+        "needs_human": ["阈值未批准"],
+        "forbidden": ["内置未经确认的电压常数", "用经验阈值替代规则"]
+      },
+      "evidence_policy": ["constraint_id", "limit_source=rule_package", "bus_results.csv"],
+      "safety_boundary": ["只读分析", "不得改变原始计算值"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["越上限", "越下限", "临界", "持续时间不足"]
+      },
+      "owner": "配网专业组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "medium"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.THERMAL",
+      "skill_code": "SK-07",
+      "version": "1.0.0",
+      "name": "设备载流与反向潮流校核",
+      "purpose": "按设备允许能力检查线路、变压器载流率，并按批准边界检查反向潮流。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py"},
+      "module": "hc_agent.model.constraints",
+      "entrypoints": ["ConstraintEvaluator.evaluate_thermal",
+                      "ConstraintEvaluator.evaluate_reverse_flow"],
+      "inputs": [
+        {"field": "element_results.csv", "unit": "A/kW", "required": true},
+        {"field": "equipment_limits.csv", "unit": "A/kW", "required": true},
+        {"field": "rules.yaml:THERMAL_LIMIT", "unit": "pct", "required": true},
+        {"field": "rules.yaml:REVERSE_FLOW_LIMIT", "unit": "kW", "required": true}
+      ],
+      "preconditions": [
+        "设备允许载流值 rating_a 齐备",
+        "反向潮流判定的端子方向已确认"
+      ],
+      "procedure": [
+        "1. 取元件端子 1 的各相电流与额定值，载流率 = 100×I/I_rated。",
+        "2. 只按端子 1 的最大相电流判定，不得跨端子累加（会重复计入）。",
+        "3. 缺少设备允许值时标 unknown，不得判为 pass。",
+        "4. 反向潮流只对输电类元件（line/transformer/reactor）判定。",
+        "5. 端子 1 P>0 表示功率倒送回 bus1，即反向潮流；反向功率 = max(0, P)。",
+        "6. 注入型元件（PVSystem/Generator）是反向潮流成因而非承载通道，不参与判定。",
+        "7. 余量统一换算至电流或功率口径，不同量纲不得混比。"
+      ],
+      "outputs": [
+        {"field": "current", "unit": "A"}, {"field": "rating", "unit": "A"},
+        {"field": "loading", "unit": "pct"}, {"field": "margin", "unit": "pct"},
+        {"field": "max_reverse_flow", "unit": "kW"},
+        {"field": "status", "unit": "enum"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["设备额定载流值缺失"],
+        "needs_human": ["反送边界未批准"],
+        "forbidden": ["用电压推算额定电流", "内置未经确认的载流常数"]
+      },
+      "evidence_policy": ["constraint_id", "rating_a", "equipment_limits.csv", "sign_convention"],
+      "safety_boundary": ["只读分析", "不得改变原始计算值"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["过载", "临界负载", "反向潮流", "额定值缺失"]
+      },
+      "owner": "配网专业组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "medium"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.IMBALANCE",
+      "skill_code": "SK-08",
+      "version": "1.0.0",
+      "name": "三相不平衡校核",
+      "purpose": "由三相复电压求序分量，按批准定义计算不平衡度并定位最不利相与时段。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py"},
+      "module": "hc_agent.model.constraints",
+      "entrypoints": ["ConstraintEvaluator.evaluate_imbalance",
+                      "negative_sequence_imbalance"],
+      "inputs": [
+        {"field": "bus_results.csv", "unit": "V/deg", "required": true,
+         "note": "需要三相复电压（幅值+相角）"},
+        {"field": "rules.yaml:IMBALANCE_LIMIT", "unit": "pct", "required": true}
+      ],
+      "preconditions": [
+        "相别映射经校验：导体编号不等于业务相别的假设必须验证",
+        "同一母线同一时刻三相齐全"
+      ],
+      "procedure": [
+        "1. 按 (scenario,bus,timestamp) 聚合 A/B/C 三相复电压。",
+        "2. 求序分量：V1=(Va+aVb+a²Vc)/3，V2=(Va+a²Vb+aVc)/3，a=1∠120°。",
+        "3. 不平衡度 = 100×|V2|/|V1|。",
+        "4. 仅幅值不能完整求该指标；缺相角时标 unknown。",
+        "5. 若业务采用电流幅值偏差等其他定义，须使用不同 metric_id 与独立规则。",
+        "6. 输出最不利母线、时段与三相幅值明细。"
+      ],
+      "outputs": [
+        {"field": "imbalance", "unit": "pct"}, {"field": "phase", "unit": "-"},
+        {"field": "threshold", "unit": "pct"}, {"field": "time", "unit": "-"},
+        {"field": "metric_definition", "unit": "-"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["三相电压不全", "相角缺失"],
+        "needs_human": ["不平衡定义口径需确认"],
+        "forbidden": ["混用不同的不平衡定义", "用幅值近似替代序分量计算"]
+      },
+      "evidence_policy": ["metric_definition", "constraint_id", "bus_results.csv"],
+      "safety_boundary": ["只读分析", "模型不支持中性线时不得宣称已覆盖全部低压不平衡风险"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["三相不平衡越限", "缺相", "相别映射错误"]
+      },
+      "owner": "配网专业组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "medium"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.SHORTCIRCUIT",
+      "skill_code": "SK-09",
+      "version": "1.0.0",
+      "name": "短路容量与保护触发校核",
+      "purpose": "校验新增电源后短路水平与设备开断能力，输出短路电流与保护复核触发标志。",
+      "business_scope": ["capacity_assessment", "access_check"],
+      "object_levels": ["feeder", "substation"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py",
+                 "api": ["Set mode=FaultStudy", "Bus.Isc", "Bus.ZscMatrix",
+                         "New Fault"]},
+      "module": "hc_agent.engines.opendss_adapter",
+      "entrypoints": ["OpenDSSAdapter.short_circuit",
+                      "ConstraintEvaluator.evaluate_short_circuit"],
+      "inputs": [
+        {"field": "fault_models.csv", "unit": "-", "required": true,
+         "note": "逆变器故障电流模型与有效期；缺少模型则相关短路能力 unknown"},
+        {"field": "rules.yaml:SHORT_CIRCUIT_LIMIT", "unit": "A", "required": true},
+        {"field": "零序参数 r0/x0", "unit": "ohm/km", "required": true}
+      ],
+      "preconditions": [
+        "短路与零序参数完整",
+        "故障类型、故障电阻、接地方式、上级电源阻抗与分布式电源故障模型已冻结"
+      ],
+      "procedure": [
+        "1. 设置 Set mode=FaultStudy 并求解，读取母线等值量。",
+        "2. 明确记录：FaultStudy 的母线等值量不能直接当成任意接地或相间故障的实际电流。",
+        "3. 按故障方案新建显式 Fault 元件求解具体故障电流，读取对应端子结果。",
+        "4. 与设备开断能力及系统边界比较。",
+        "5. 缺少故障模型或零序参数时标 unknown（能力未覆盖）。",
+        "6. 恢复 Set mode=snapshot 并记录状态。"
+      ],
+      "outputs": [
+        {"field": "fault_level", "unit": "A"}, {"field": "rating", "unit": "A"},
+        {"field": "margin", "unit": "A"}, {"field": "location", "unit": "-"},
+        {"field": "status", "unit": "enum", "note": "pass/fail/unknown"}
+      ],
+      "failure_policy": {
+        "retryable": ["依赖加载失败"],
+        "needs_data": ["短路模型或零序参数缺失"],
+        "needs_human": ["保护配合需专业判断"],
+        "forbidden": ["把 FaultStudy 等值量当实际故障电流",
+                      "把未验证的逆变器故障响应标为已覆盖",
+                      "称为保护配合或暂态稳定验证"]
+      },
+      "evidence_policy": ["fault_spec", "bus_isc", "zsc", "fault_element_currents"],
+      "safety_boundary": ["只读分析", "仅稳态短路计算", "不含暂态稳定与保护配合验证"],
+      "test_suite": {
+        "golden": ["IEEETestCases（含短路算例）", "tests/golden/FD001"],
+        "negative_cases": ["缺故障模型", "零序参数缺失", "故障元件不收敛"]
+      },
+      "owner": "计算引擎组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "high"
+    },
+    {
+      "skill_id": "HC.CAPACITY.SEARCH",
+      "skill_code": "SK-10",
+      "version": "1.0.0",
+      "name": "开放容量搜索",
+      "purpose": "在指定对象、时间窗、场景、分配与控制权限下搜索使全部强制约束仍满足的最大新增容量。",
+      "business_scope": ["capacity_publication", "capacity_assessment"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py"},
+      "module": "hc_agent.capacity_search",
+      "entrypoints": ["search_capacity", "check_monotonicity"],
+      "inputs": [
+        {"field": "task.search", "unit": "kW", "required": true,
+         "note": "lower_kw、upper_kw、precision_kw、max_iter"},
+        {"field": "task.allocation_mode", "unit": "-", "required": true},
+        {"field": "rules.yaml:search", "unit": "-", "required": true}
+      ],
+      "preconditions": [
+        "基线全场景收敛且满足基线准入规则",
+        "候选接入点与分配权重已确定",
+        "单调性已验证或明确采用离散扫描"
+      ],
+      "procedure": [
+        "1. 计算当前基线状态并确认所有基准场景收敛；基线已违规时先输出存量问题。",
+        "2. 试探下界；下界不可行则物理容量为 0。",
+        "3. 试探上界；上界仍可行只能输出'至少为上界'并按规则扩展搜索，不得宣称找到最大值。",
+        "4. 上界不可行才形成可行/不可行括区间。",
+        "5. 仅当可行性随增量容量单调已验证且采用固定接入分配时执行二分；否则使用经批准步长的离散全域扫描。",
+        "6. unknown（超时/不收敛/短路模型缺失）不得当作不可行上界。",
+        "7. 终止时保留可行下界、不可行上界及间隔。",
+        "8. 取各约束容量上界的最小值作为物理约束容量，记录主导限制因素。"
+      ],
+      "outputs": [
+        {"field": "capacity_physical_kw", "unit": "kW",
+         "note": "含已并网源基线之上可增加的容量，不再扣一次已并网装机"},
+        {"field": "feasible_lower_kw", "unit": "kW"},
+        {"field": "infeasible_upper_kw", "unit": "kW"},
+        {"field": "bracket_gap_kw", "unit": "kW"},
+        {"field": "binding_constraint", "unit": "-"},
+        {"field": "search_status", "unit": "enum",
+         "note": "ok / at_least_upper_bound / unknown / blocked"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["搜索上下界或精度非法"],
+        "needs_human": ["需扩展搜索上界", "需改变接入分配策略"],
+        "forbidden": ["对上界仍可行宣称已找到最大值",
+                      "把 unknown 当作不可行",
+                      "把各点独立最大值直接相加"]
+      },
+      "evidence_policy": ["search_trace.csv", "capacity.csv", "result_hash",
+                          "monotonicity.json"],
+      "safety_boundary": ["只读分析", "不得使用未批准的管理口径"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["上界仍可行", "非单调搜索", "unknown 试探点",
+                           "基线已违规", "多点独立上限相加"]
+      },
+      "owner": "Agent/平台研发组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "high"
+    },
+    {
+      "skill_id": "HC.ACCESS.CHECK",
+      "skill_code": "SK-11",
+      "version": "1.0.0",
+      "name": "并网申请方案校核",
+      "purpose": "对具体并网申请组织基线与增量校核，输出可行性候选、限制因素与整改方向。",
+      "business_scope": ["access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder"],
+      "requires_engine": true,
+      "engine": {"id": "opendss", "interface": "OpenDSSDirect.py"},
+      "module": "hc_agent.pipeline",
+      "entrypoints": ["Pipeline.s04_s05_s06"],
+      "inputs": [
+        {"field": "application.json", "unit": "kW/kV", "required": true},
+        {"field": "task.business_scene", "unit": "-", "required": true,
+         "note": "必须为 access_check 或 remediation_review"}
+      ],
+      "preconditions": [
+        "申请材料关键字段完整",
+        "前置判定通过：重复申请、接入点存在性、容量单位、设备归属、快照完整性、基线收敛"
+      ],
+      "procedure": [
+        "1. 解析并结构化申请；关键字段缺失则生成补充清单并暂停。",
+        "2. 依据规则生成候选接入点与允许的方案变量，不得虚构设备或接线。",
+        "3. 使用申请容量（而非容量搜索试探值）执行基线与增量校核。",
+        "4. 执行潮流、电压、载流量、三相不平衡与短路容量校核，定位新增申请引起的差异。",
+        "5. 区分存量问题与新增变化，不得一概推导为申请导致违规。",
+        "6. 基于真实约束结果生成整改方向；建议仅供专业人员复核。",
+        "7. 需比较多个接入方案时，各方案分别生成 scenario_set 与 scheme_id。"
+      ],
+      "outputs": [
+        {"field": "decision_candidate", "unit": "enum",
+         "note": "可行 / 有条件可行 / 不可行 / 无法评估"},
+        {"field": "binding_constraints", "unit": "-"},
+        {"field": "baseline_vs_increment", "unit": "-"},
+        {"field": "recommended_actions", "unit": "-"},
+        {"field": "uncertainties", "unit": "-"},
+        {"field": "review_status", "unit": "enum"}
+      ],
+      "failure_policy": {
+        "retryable": [],
+        "needs_data": ["申请关键字段缺失"],
+        "needs_human": ["多方案取舍", "例外放行"],
+        "forbidden": ["自动批准并网", "生成未经计算的可行性结论"]
+      },
+      "evidence_policy": ["application_ref", "constraint_results.csv",
+                          "baseline_vs_increment"],
+      "safety_boundary": ["只读分析", "不得作出业务审批决定",
+                          "不得自动批准并网、停电或改接线"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001"],
+        "negative_cases": ["字段缺失", "接入点不存在", "重复申请",
+                           "存量问题误判为新增"]
+      },
+      "owner": "配网专业组",
+      "approver": "业务主管部门",
+      "status": "approved",
+      "risk_level": "high"
+    },
+    {
+      "skill_id": "HC.REPORT.EVIDENCE",
+      "skill_code": "SK-12",
+      "version": "1.0.0",
+      "name": "证据包与专业报告生成",
+      "purpose": "将任务清单、结果、规则、复算与审批信息组织为报告与可审计证据包。",
+      "business_scope": ["capacity_assessment", "capacity_publication", "access_check", "remediation_review"],
+      "object_levels": ["dt", "feeder", "substation"],
+      "requires_engine": false,
+      "module": "hc_agent.reporting",
+      "entrypoints": ["generate_report", "build_report_context"],
+      "inputs": [
+        {"field": "run_summary.json", "unit": "-", "required": true},
+        {"field": "verification.json", "unit": "-", "required": true,
+         "note": "缺失时报告须声明尚未独立复算，禁止发布"},
+        {"field": "manifest.json", "unit": "-", "required": true}
+      ],
+      "preconditions": [
+        "结果哈希已计算",
+        "报告所有数字可回链至数据快照、规则版本或引擎输出"
+      ],
+      "procedure": [
+        "1. 汇集运行摘要、容量、约束、搜索轨迹、质量缺陷。",
+        "2. 按附录 B 的九个章节组织报告。",
+        "3. 逐项执行回链检查：无法回链的内容不得进入正式报告。",
+        "4. 计算 result_hash 供审批绑定。",
+        "5. 生成 Word 报告；不可用时退化为 Markdown。",
+        "6. 封存证据包（inputs/config/model/results/logs/verification/review/audit）。"
+      ],
+      "outputs": [
+        {"field": "report.docx", "unit": "-"},
+        {"field": "evidence.zip", "unit": "-"},
+        {"field": "traceability", "unit": "-", "note": "回链完整性检查"},
+        {"field": "result_hash", "unit": "-"}
+      ],
+      "failure_policy": {
+        "retryable": ["报告生成失败可重试"],
+        "needs_data": [],
+        "needs_human": ["回链缺失需补正"],
+        "forbidden": ["把无法回链的内容写入正式报告",
+                      "在证据包中保存密钥或令牌"]
+      },
+      "evidence_policy": ["result_hash", "package_digest", "audit events"],
+      "safety_boundary": ["只读分析", "不得修改已封存的正式证据"],
+      "test_suite": {
+        "golden": ["tests/golden/FD001", "tests/golden/FD002"],
+        "negative_cases": ["缺复算结论", "回链缺失"]
+      },
+      "owner": "Agent/平台研发组",
+      "approver": "配网专业复核人",
+      "status": "approved",
+      "risk_level": "medium"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "report_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\report\\report.docx",
+  "format": "docx",
+  "generated_at": "2026-10-28T21:51:35+08:00",
+  "sections": [
+    "1. 任务概况：场景、范围、时间窗、发起与复核信息",
+    "2. 数据与口径：快照、质量、规则、假设、模型/技能/引擎版本",
+    "3. 计算过程：场景、方法、收敛、约束校验和开放容量搜索记录",
+    "4. 评估结果：三级对象结果、分区分时容量、红黄绿等级和主导限制因素",
+    "5. 接入校核（如适用）：基线/增量对比、结论候选和整改建议",
+    "6. 风险与缺口：数据、模型、算法、场景和未解决问题",
+    "7. 独立验证：复算任务、输入一致性、差异和通过状态",
+    "8. 人工审批：意见、签署、有效期和发布范围",
+    "9. 证据索引：各类文件哈希、日志、结果和审计事件编号"
+  ],
+  "traceability": {
+    "links": {
+      "snapshot_id": "SNAP-016",
+      "rule_package": "HC-RULES@1.0",
+      "engine_fingerprint": {
+        "engine_id": "opendss",
+        "interface": "OpenDSSDirect.py",
+        "python_version": "3.12.14",
+        "python_executable": "C:\\Users\\Chen\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "pylib_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+        "interface_version": "0.9.4",
+        "available": true,
+        "engine_version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4"
+      },
+      "input_digest": "f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555",
+      "evidence_refs": [
+        "manifest.json",
+        "results/capacity.csv",
+        "results/constraint_results.csv",
+        "results/search_trace.csv",
+        "results/bus_results.csv",
+        "results/element_results.csv",
+        "verification/verification.json",
+        "config/rules.yaml",
+        "audit/events.jsonl"
+      ]
+    },
+    "missing": [],
+    "complete": true
+  },
+  "result_hash": "7d855361fb72ec7219a183d29b8d0fd191e0f9cbc3db8f970bd4bec6fa7f0492"
+}

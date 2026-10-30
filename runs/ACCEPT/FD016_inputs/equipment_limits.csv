@@ -1,0 +1,16 @@
+﻿equipment_id,limit_type,value,unit,direction,duration_minutes,rule_ref
+LN-MV-001,continuous_current,400,A,forward,0,THERMAL_LIMIT
+LN-MV-002,continuous_current,400,A,forward,0,THERMAL_LIMIT
+LN-MV-003,continuous_current,400,A,forward,0,THERMAL_LIMIT
+LN-MV-004,continuous_current,400,A,forward,0,THERMAL_LIMIT
+LN-MV-005,continuous_current,400,A,forward,0,THERMAL_LIMIT
+LN-MV-006,continuous_current,400,A,forward,0,THERMAL_LIMIT
+LN-LV-011,continuous_current,600,A,forward,0,THERMAL_LIMIT
+LN-LV-012,continuous_current,600,A,forward,0,THERMAL_LIMIT
+LN-LV-021,continuous_current,600,A,forward,0,THERMAL_LIMIT
+LN-LV-022,continuous_current,600,A,forward,0,THERMAL_LIMIT
+LN-LV-031,continuous_current,600,A,forward,0,THERMAL_LIMIT
+LN-LV-032,continuous_current,600,A,forward,0,THERMAL_LIMIT
+DT-001,continuous_current,577,A,forward,0,THERMAL_LIMIT
+DT-002,continuous_current,577,A,forward,0,THERMAL_LIMIT
+DT-003,continuous_current,289,A,forward,0,THERMAL_LIMIT

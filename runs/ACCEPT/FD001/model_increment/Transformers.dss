@@ -1,0 +1,2 @@
+! 变压器元件（设计文档 17.7 / 17.11）
+New Transformer.xf_DT_001 phases=3 windings=2 buses=[BUS-MV-003.1.2.3 BUS-LV-001.1.2.3] conns=[delta wye] kvs=[10 0.4] kvas=[400 400] %loadloss=1.2 XHL=3.815756806 %noloadloss=0.15 %imag=0.5 tap=[1 1.0]

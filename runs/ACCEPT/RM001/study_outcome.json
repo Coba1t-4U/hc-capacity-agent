@@ -1,0 +1,33 @@
+{
+  "study_id": "STUDY-20261016-230654",
+  "exit_code": 0,
+  "status": "feasible",
+  "lambda_mw": 1.40625,
+  "limiting_constraint": "REVERSE_FLOW_LIMIT",
+  "iterations": 9,
+  "reason": "已验证可行 λ=1.40625 MW、不可行上界 1.64062 MW，间隔 0.234375 MW ≤ 精度 0.25 MW",
+  "holdout": {
+    "sample_count": 9,
+    "expected_cost": 0.0,
+    "violation_count": 6,
+    "violation_rate": 0.6666666666666666,
+    "note": "样本外越限率仅说明该测试集表现，不替代一般可靠性保证；最坏期望成本不等价于概率安全保证"
+  },
+  "mode": "atc",
+  "report": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\RM001\\report\\research_report.docx",
+  "metrics": {
+    "study_id": "STUDY-20261016-230654",
+    "mode": "atc",
+    "scope": "dm_equivalent",
+    "dataset_version": "c771654107f373448b6bb259ee63dbdc7a846e3ca89c1d6b6269ac87e87ddc87",
+    "max_lambda_mw": 1.40625,
+    "feasible_points": 3,
+    "infeasible_points": 6,
+    "unknown_points": 0,
+    "total_cost_yuan": 0.0,
+    "nonanticipativity_pass": true,
+    "energy_conservation_pass": true,
+    "generated_at": "2026-10-16T23:06:55+08:00"
+  },
+  "elapsed_s": 0.871
+}

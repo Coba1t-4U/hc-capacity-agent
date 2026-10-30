@@ -1,0 +1,1340 @@
+{
+  "generated_from": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT",
+  "case_count": 4,
+  "cases": [
+    {
+      "id": "APP001",
+      "title": "APP001 单笔并网申请校核",
+      "subtitle": "250 kW 并网申请（SK-11，按申请容量校核）",
+      "kind": "access",
+      "available": true,
+      "run_id": "RUN-20261013-224838",
+      "task_id": "TASK-003",
+      "business_scene": "access_check",
+      "scope_type": "feeder",
+      "scope_ids": "FD-002",
+      "window_start": "2026-07-01T00:00:00+08:00",
+      "window_end": "2026-07-02T00:00:00+08:00",
+      "snapshot_id": "SNAP-002",
+      "topology_version": "TOPO-002",
+      "rule_version": "HC-RULES@1.0",
+      "skill_version_count": 12,
+      "engine": {
+        "id": "opendss",
+        "interface": "OpenDSSDirect.py",
+        "interface_version": "0.9.4",
+        "backend": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c"
+      },
+      "input_digest": "3d1db3760c618facccb8bd5d5cde1073d7106abe19829962616773ca0182b745",
+      "capacity_physical_kw": 250.0,
+      "capacity_managed_kw": null,
+      "level": "green",
+      "level_reason": "单笔并网审查结论：可行（申请容量 250.0 kW）",
+      "binding_constraint": "",
+      "binding_detail": {},
+      "search_method": "",
+      "search_status": "",
+      "search_iterations": 0,
+      "search_notes": [],
+      "feasible_lower_kw": null,
+      "infeasible_upper_kw": null,
+      "baseline_converged": true,
+      "scenario_count": 3,
+      "slice_count": 36,
+      "constraint_summary": {
+        "total": 121,
+        "pass": 120,
+        "fail": 0,
+        "unknown": 1,
+        "all_pass": false,
+        "binding_constraints": []
+      },
+      "risks": [],
+      "unknowns": [],
+      "verification": {
+        "pass": true,
+        "verify_run_id": "VERIFY-20261013T224839+0800",
+        "input_match": true,
+        "mismatch_count": 0,
+        "total_metrics": 14,
+        "note": "独立复算验证可重复性，不能证明共同模型或算法假设没有系统性偏差；正确性另由黄金算例和专业复核验证"
+      },
+      "release_gate": {
+        "passed": false,
+        "failed_gates": [
+          "professional_review",
+          "approval"
+        ],
+        "gates": [
+          {
+            "gate": "independent_verification",
+            "required": true,
+            "passed": true
+          },
+          {
+            "gate": "professional_review",
+            "required": true,
+            "passed": false
+          },
+          {
+            "gate": "approval",
+            "required": true,
+            "passed": false
+          }
+        ],
+        "result_hash": "02db3f449fda6f19526bc8ae86bf3cd3d6dc1b0cca54ab0491b75655d7c41a10"
+      },
+      "publication": {
+        "status": "not_published",
+        "reason": "发布门禁未通过（缺人工复核与审批）；审批绑定 result_hash 后才能发布"
+      },
+      "search_trace": [],
+      "constraint_classes": [
+        {
+          "constraint_id": "IMBALANCE_LIMIT",
+          "pass": 15,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "SHORT_CIRCUIT_LIMIT",
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "pass": 48,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "pass": 45,
+          "fail": 0,
+          "unknown": 0
+        }
+      ],
+      "failures": [],
+      "failure_total": 0,
+      "access_check": {
+        "application_id": "APP-2026-0001",
+        "requested_capacity_kw": 250.0,
+        "decision_candidate": "可行",
+        "constraint_summary": {
+          "total": 121,
+          "pass": 120,
+          "fail": 0,
+          "unknown": 1,
+          "all_pass": false,
+          "binding_constraints": []
+        },
+        "baseline_fail": 0,
+        "application_fail": 0,
+        "newly_induced": [],
+        "preexisting": [],
+        "binding_constraints": []
+      },
+      "scenario_basis": "含申请场景（application）",
+      "capacity_rows": []
+    },
+    {
+      "id": "FD001",
+      "title": "FD001 受限低压馈线",
+      "subtitle": "250 A 低压线路 + 240 kW 末端负荷 → 基线即越限",
+      "kind": "capacity",
+      "available": true,
+      "run_id": "RUN-20261013-224836",
+      "task_id": "TASK-001",
+      "business_scene": "capacity_publication",
+      "scope_type": "feeder",
+      "scope_ids": "FD-001",
+      "window_start": "2026-07-01T00:00:00+08:00",
+      "window_end": "2026-07-02T00:00:00+08:00",
+      "snapshot_id": "SNAP-001",
+      "topology_version": "TOPO-001",
+      "rule_version": "HC-RULES@1.0",
+      "skill_version_count": 12,
+      "engine": {
+        "id": "opendss",
+        "interface": "OpenDSSDirect.py",
+        "interface_version": "0.9.4",
+        "backend": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c"
+      },
+      "input_digest": "84bba2f1057ad2c1d126ed376c2338b5d68eb5a70ffb3cb8a908f5584823c8bf",
+      "capacity_physical_kw": 0.0,
+      "capacity_managed_kw": 0.0,
+      "level": "grey",
+      "level_reason": "1 项约束为 unknown，不生成正式结论",
+      "binding_constraint": "THERMAL_LIMIT",
+      "binding_detail": {
+        "object_id": "Line.line_ln_lv_001.C",
+        "metric": "loading_pct",
+        "value": 136.16454259157453,
+        "unit": "pct",
+        "limit_lower": null,
+        "limit_upper": 100.0,
+        "margin": -36.16454259157453
+      },
+      "search_method": "bracket_and_bisect",
+      "search_status": "ok",
+      "search_iterations": 1,
+      "search_notes": [
+        "下界 0 kW 已不可行，物理可开放容量为 0（存量问题优先）"
+      ],
+      "feasible_lower_kw": 0.0,
+      "infeasible_upper_kw": null,
+      "baseline_converged": true,
+      "scenario_count": 3,
+      "slice_count": 36,
+      "constraint_summary": {
+        "total": 121,
+        "pass": 106,
+        "fail": 14,
+        "unknown": 1,
+        "all_pass": false,
+        "binding_constraints": [
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.C",
+            "metric": "loading_pct",
+            "value": 136.16454259157453,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.16454259157453,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.ALL",
+            "metric": "loading_pct",
+            "value": 136.16454259157453,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.16454259157453,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.B",
+            "metric": "loading_pct",
+            "value": 136.1645425915685,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.164542591568505,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.A",
+            "metric": "loading_pct",
+            "value": 136.1645425754361,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.16454257543609,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.C",
+            "metric": "loading_pct",
+            "value": 136.16131728587575,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.161317285875754,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.ALL",
+            "metric": "loading_pct",
+            "value": 136.16131728587575,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.161317285875754,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.B",
+            "metric": "loading_pct",
+            "value": 136.16131728587285,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.161317285872855,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "THERMAL_LIMIT",
+            "object_id": "Line.line_ln_lv_001.A",
+            "metric": "loading_pct",
+            "value": 136.16131726982132,
+            "unit": "pct",
+            "limit_lower": null,
+            "limit_upper": 100.0,
+            "margin": -36.161317269821325,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "VOLTAGE_LIMIT",
+            "object_id": "bus-lv-002.A",
+            "metric": "voltage_pu",
+            "value": 0.9044328670957864,
+            "unit": "pu",
+            "limit_lower": 0.93,
+            "limit_upper": 1.07,
+            "margin": -0.02556713290421364,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "VOLTAGE_LIMIT",
+            "object_id": "bus-lv-002.B",
+            "metric": "voltage_pu",
+            "value": 0.9044328671809896,
+            "unit": "pu",
+            "limit_lower": 0.93,
+            "limit_upper": 1.07,
+            "margin": -0.025567132819010463,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "VOLTAGE_LIMIT",
+            "object_id": "bus-lv-002.C",
+            "metric": "voltage_pu",
+            "value": 0.9044328671810229,
+            "unit": "pu",
+            "limit_lower": 0.93,
+            "limit_upper": 1.07,
+            "margin": -0.025567132818977156,
+            "scenario_id": "S_BASE",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "VOLTAGE_LIMIT",
+            "object_id": "bus-lv-002.A",
+            "metric": "voltage_pu",
+            "value": 0.9044364144671765,
+            "unit": "pu",
+            "limit_lower": 0.93,
+            "limit_upper": 1.07,
+            "margin": -0.025563585532823563,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "VOLTAGE_LIMIT",
+            "object_id": "bus-lv-002.B",
+            "metric": "voltage_pu",
+            "value": 0.9044364145524774,
+            "unit": "pu",
+            "limit_lower": 0.93,
+            "limit_upper": 1.07,
+            "margin": -0.025563585447522685,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          },
+          {
+            "constraint_id": "VOLTAGE_LIMIT",
+            "object_id": "bus-lv-002.C",
+            "metric": "voltage_pu",
+            "value": 0.9044364145525169,
+            "unit": "pu",
+            "limit_lower": 0.93,
+            "limit_upper": 1.07,
+            "margin": -0.02556358544748316,
+            "scenario_id": "S_LOW_PV_HIGH_LOAD",
+            "timestamp": "2026-07-01T19:00:00+08:00"
+          }
+        ]
+      },
+      "risks": [],
+      "unknowns": [],
+      "verification": {
+        "pass": true,
+        "verify_run_id": "VERIFY-20261013T224836+0800",
+        "input_match": true,
+        "mismatch_count": 0,
+        "total_metrics": 14,
+        "note": "独立复算验证可重复性，不能证明共同模型或算法假设没有系统性偏差；正确性另由黄金算例和专业复核验证"
+      },
+      "release_gate": {
+        "passed": false,
+        "failed_gates": [
+          "professional_review",
+          "approval"
+        ],
+        "gates": [
+          {
+            "gate": "independent_verification",
+            "required": true,
+            "passed": true
+          },
+          {
+            "gate": "professional_review",
+            "required": true,
+            "passed": false
+          },
+          {
+            "gate": "approval",
+            "required": true,
+            "passed": false
+          }
+        ],
+        "result_hash": "ba2c6b5e8f84635dc01e430ea97ac9836acca6184307341250ed800b6c094018"
+      },
+      "publication": {
+        "status": "not_published",
+        "reason": "发布门禁未通过（缺人工复核与审批）；审批绑定 result_hash 后才能发布"
+      },
+      "search_trace": [
+        {
+          "iteration": 1,
+          "delta_kw": 0.0,
+          "status": "infeasible",
+          "binding_constraint": "THERMAL_LIMIT",
+          "pass": 106,
+          "fail": 14,
+          "unknown": 1
+        },
+        {
+          "iteration": 2,
+          "delta_kw": 500.0,
+          "status": "infeasible",
+          "binding_constraint": "THERMAL_LIMIT",
+          "pass": 95,
+          "fail": 25,
+          "unknown": 1
+        },
+        {
+          "iteration": 3,
+          "delta_kw": 1000.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 91,
+          "fail": 29,
+          "unknown": 1
+        },
+        {
+          "iteration": 4,
+          "delta_kw": 1500.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 91,
+          "fail": 29,
+          "unknown": 1
+        },
+        {
+          "iteration": 5,
+          "delta_kw": 2000.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 91,
+          "fail": 29,
+          "unknown": 1
+        },
+        {
+          "iteration": 1,
+          "delta_kw": 0.0,
+          "status": "infeasible",
+          "binding_constraint": "THERMAL_LIMIT",
+          "pass": 106,
+          "fail": 14,
+          "unknown": 1
+        }
+      ],
+      "constraint_classes": [
+        {
+          "constraint_id": "IMBALANCE_LIMIT",
+          "pass": 15,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "SHORT_CIRCUIT_LIMIT",
+          "pass": 0,
+          "fail": 0,
+          "unknown": 1
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "pass": 40,
+          "fail": 8,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "pass": 39,
+          "fail": 6,
+          "unknown": 0
+        }
+      ],
+      "failures": [
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "object_id": "bus-lv-002.A",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "voltage_pu",
+          "value": 0.9044328671,
+          "lower_limit": 0.93,
+          "upper_limit": 1.07,
+          "margin": -0.0255671329,
+          "unit": "pu"
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "object_id": "bus-lv-002.B",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "voltage_pu",
+          "value": 0.9044328672,
+          "lower_limit": 0.93,
+          "upper_limit": 1.07,
+          "margin": -0.02556713282,
+          "unit": "pu"
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "object_id": "bus-lv-002.C",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "voltage_pu",
+          "value": 0.9044328672,
+          "lower_limit": 0.93,
+          "upper_limit": 1.07,
+          "margin": -0.02556713282,
+          "unit": "pu"
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "object_id": "bus-lv-002.A",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "voltage_pu",
+          "value": 0.9044364145,
+          "lower_limit": 0.93,
+          "upper_limit": 1.07,
+          "margin": -0.02556358553,
+          "unit": "pu"
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "object_id": "bus-lv-002.B",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "voltage_pu",
+          "value": 0.9044364146,
+          "lower_limit": 0.93,
+          "upper_limit": 1.07,
+          "margin": -0.02556358545,
+          "unit": "pu"
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "object_id": "bus-lv-002.C",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "voltage_pu",
+          "value": 0.9044364146,
+          "lower_limit": 0.93,
+          "upper_limit": 1.07,
+          "margin": -0.02556358545,
+          "unit": "pu"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.A",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1645426,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16454258,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.B",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1645426,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16454259,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.C",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1645426,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16454259,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.ALL",
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1645426,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16454259,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.A",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1613173,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16131727,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.B",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1613173,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16131729,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.C",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1613173,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16131729,
+          "unit": "pct"
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "object_id": "Line.line_ln_lv_001.ALL",
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "metric": "loading_pct",
+          "value": 136.1613173,
+          "lower_limit": null,
+          "upper_limit": 100.0,
+          "margin": -36.16131729,
+          "unit": "pct"
+        }
+      ],
+      "failure_total": 14,
+      "capacity_rows": [
+        {
+          "object_id": "FD-001",
+          "allocation_id": "BUS-LV-002",
+          "window_start": "2026-07-01T00:00:00+08:00",
+          "window_end": "2026-07-02T00:00:00+08:00",
+          "capacity_physical_kw": "0",
+          "capacity_managed_kw": "0",
+          "search_lower_kw": "0",
+          "search_upper_kw": "2000",
+          "search_status": "ok",
+          "level": "grey",
+          "binding_constraint": "THERMAL_LIMIT",
+          "result_hash": "3229c8c63103db44447adc5d0713b4d2ee00e6846c4b5c0fdcdb931b9455d8d1"
+        }
+      ]
+    },
+    {
+      "id": "FD002",
+      "title": "FD002 健康馈线",
+      "subtitle": "600 A 低压线路 + 1000 kVA 配变，启用短路校核",
+      "kind": "capacity",
+      "available": true,
+      "run_id": "RUN-20261013-224837",
+      "task_id": "TASK-002",
+      "business_scene": "capacity_publication",
+      "scope_type": "feeder",
+      "scope_ids": "FD-002",
+      "window_start": "2026-07-01T00:00:00+08:00",
+      "window_end": "2026-07-02T00:00:00+08:00",
+      "snapshot_id": "SNAP-002",
+      "topology_version": "TOPO-002",
+      "rule_version": "HC-RULES@1.0",
+      "skill_version_count": 12,
+      "engine": {
+        "id": "opendss",
+        "interface": "OpenDSSDirect.py",
+        "interface_version": "0.9.4",
+        "backend": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c"
+      },
+      "input_digest": "02712447b5a4c1315371c51436beddc8f5f11c30f03da03d19c38ed787909ef2",
+      "capacity_physical_kw": 333.984375,
+      "capacity_managed_kw": 270.52734375,
+      "level": "green",
+      "level_reason": "在批准口径下具有开放空间，未触发重点风险",
+      "binding_constraint": "VOLTAGE_LIMIT",
+      "binding_detail": {
+        "object_id": "bus-lv-002.C",
+        "metric": "voltage_pu",
+        "value": 1.1008292527209553,
+        "unit": "pu",
+        "limit_lower": 0.9,
+        "limit_upper": 1.1,
+        "margin": -0.0008292527209552425
+      },
+      "search_method": "bracket_and_bisect",
+      "search_status": "ok",
+      "search_iterations": 11,
+      "search_notes": [
+        "已验证可行下界 333.984 kW，不可行上界 339.844 kW，间隔 5.85938 kW ≤ 精度 10 kW"
+      ],
+      "feasible_lower_kw": 333.984375,
+      "infeasible_upper_kw": 339.84375,
+      "baseline_converged": true,
+      "scenario_count": 3,
+      "slice_count": 36,
+      "constraint_summary": {
+        "total": 123,
+        "pass": 123,
+        "fail": 0,
+        "unknown": 0,
+        "all_pass": true,
+        "binding_constraints": []
+      },
+      "risks": [],
+      "unknowns": [],
+      "verification": {
+        "pass": true,
+        "verify_run_id": "VERIFY-20261013T224838+0800",
+        "input_match": true,
+        "mismatch_count": 0,
+        "total_metrics": 14,
+        "note": "独立复算验证可重复性，不能证明共同模型或算法假设没有系统性偏差；正确性另由黄金算例和专业复核验证"
+      },
+      "release_gate": {
+        "passed": false,
+        "failed_gates": [
+          "professional_review",
+          "approval"
+        ],
+        "gates": [
+          {
+            "gate": "independent_verification",
+            "required": true,
+            "passed": true
+          },
+          {
+            "gate": "professional_review",
+            "required": true,
+            "passed": false
+          },
+          {
+            "gate": "approval",
+            "required": true,
+            "passed": false
+          }
+        ],
+        "result_hash": "53fd1057cadba253773fcfb114b2b73039832b9171506c939f81b2b4335f20ac"
+      },
+      "publication": {
+        "status": "not_published",
+        "reason": "发布门禁未通过（缺人工复核与审批）；审批绑定 result_hash 后才能发布"
+      },
+      "search_trace": [
+        {
+          "iteration": 1,
+          "delta_kw": 0.0,
+          "status": "feasible",
+          "binding_constraint": "",
+          "pass": 123,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "iteration": 2,
+          "delta_kw": 750.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 3,
+          "delta_kw": 1500.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 4,
+          "delta_kw": 2250.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 5,
+          "delta_kw": 3000.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 1,
+          "delta_kw": 0.0,
+          "status": "feasible",
+          "binding_constraint": "",
+          "pass": 123,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "iteration": 2,
+          "delta_kw": 3000.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 3,
+          "delta_kw": 1500.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 4,
+          "delta_kw": 750.0,
+          "status": "infeasible",
+          "binding_constraint": "REVERSE_FLOW_LIMIT",
+          "pass": 101,
+          "fail": 22,
+          "unknown": 0
+        },
+        {
+          "iteration": 5,
+          "delta_kw": 375.0,
+          "status": "infeasible",
+          "binding_constraint": "VOLTAGE_LIMIT",
+          "pass": 117,
+          "fail": 6,
+          "unknown": 0
+        },
+        {
+          "iteration": 6,
+          "delta_kw": 187.5,
+          "status": "feasible",
+          "binding_constraint": "",
+          "pass": 123,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "iteration": 7,
+          "delta_kw": 281.25,
+          "status": "feasible",
+          "binding_constraint": "",
+          "pass": 123,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "iteration": 8,
+          "delta_kw": 328.125,
+          "status": "feasible",
+          "binding_constraint": "",
+          "pass": 123,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "iteration": 9,
+          "delta_kw": 351.5625,
+          "status": "infeasible",
+          "binding_constraint": "VOLTAGE_LIMIT",
+          "pass": 117,
+          "fail": 6,
+          "unknown": 0
+        },
+        {
+          "iteration": 10,
+          "delta_kw": 339.84375,
+          "status": "infeasible",
+          "binding_constraint": "VOLTAGE_LIMIT",
+          "pass": 117,
+          "fail": 6,
+          "unknown": 0
+        },
+        {
+          "iteration": 11,
+          "delta_kw": 333.984375,
+          "status": "feasible",
+          "binding_constraint": "",
+          "pass": 123,
+          "fail": 0,
+          "unknown": 0
+        }
+      ],
+      "constraint_classes": [
+        {
+          "constraint_id": "IMBALANCE_LIMIT",
+          "pass": 15,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "SHORT_CIRCUIT_LIMIT",
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "THERMAL_LIMIT",
+          "pass": 48,
+          "fail": 0,
+          "unknown": 0
+        },
+        {
+          "constraint_id": "VOLTAGE_LIMIT",
+          "pass": 45,
+          "fail": 0,
+          "unknown": 0
+        }
+      ],
+      "failures": [],
+      "failure_total": 0,
+      "capacity_rows": [
+        {
+          "object_id": "FD-002",
+          "allocation_id": "BUS-LV-002",
+          "window_start": "2026-07-01T00:00:00+08:00",
+          "window_end": "2026-07-02T00:00:00+08:00",
+          "capacity_physical_kw": "333.984375",
+          "capacity_managed_kw": "270.5273438",
+          "search_lower_kw": "0",
+          "search_upper_kw": "3000",
+          "search_status": "ok",
+          "level": "green",
+          "binding_constraint": "VOLTAGE_LIMIT",
+          "result_hash": "9b54357c8290cbaf02a85d36d8836adfd388d68e9c8758edf65803fbeab8703e"
+        }
+      ]
+    },
+    {
+      "id": "RM001",
+      "title": "RM001 主配微协同研究",
+      "subtitle": "配网 D1 + 3 微网，目标级联协调容量边界",
+      "kind": "research",
+      "available": true,
+      "study_id": "STUDY-20261013-224839",
+      "task": {
+        "schema_version": "hc-research-v1",
+        "study_id": "RM001",
+        "mode": "atc",
+        "scope": "dm_equivalent",
+        "description": "配网 + 3 微网 目标级联协调容量研究（主网为已批准接口等值）",
+        "capacity_direction": "D1",
+        "outer_search": {
+          "lambda_max_mw": 30.0,
+          "precision_mw": 0.25,
+          "max_iter": 15
+        },
+        "atc": {
+          "max_iter": 8,
+          "time_limit_s": 120,
+          "residual_tol": 0.001,
+          "objective_tol": 0.0001,
+          "rho0": 1.0
+        },
+        "dro": {
+          "enabled": false,
+          "radius_l1": null,
+          "radius_linf": null
+        },
+        "solver": {
+          "max_iter": 300,
+          "tolerance": 1e-06
+        },
+        "seed": 20261009
+      },
+      "regions": [
+        {
+          "region_id": "D1",
+          "level": "D",
+          "parent_region_id": "",
+          "model_id": "model_d1"
+        },
+        {
+          "region_id": "T1",
+          "level": "T",
+          "parent_region_id": "",
+          "model_id": "model_t1"
+        },
+        {
+          "region_id": "M1",
+          "level": "M",
+          "parent_region_id": "D1",
+          "model_id": "model_m1"
+        },
+        {
+          "region_id": "M2",
+          "level": "M",
+          "parent_region_id": "D1",
+          "model_id": "model_m2"
+        },
+        {
+          "region_id": "M3",
+          "level": "M",
+          "parent_region_id": "D1",
+          "model_id": "model_m3"
+        }
+      ],
+      "interfaces": [
+        {
+          "pcc_id": "PCC-T1-D1",
+          "parent_region_id": "T1",
+          "child_region_id": "D1",
+          "parent_bus_id": "BUS-T1-01",
+          "child_bus_id": "BUS-D1-01",
+          "meter_side": "parent",
+          "transformer_id": "TR-TD-01",
+          "p_min_mw": -20.0,
+          "p_max_mw": 20.0,
+          "q_min_mvar": -10.0,
+          "q_max_mvar": 10.0,
+          "v_min_pu": 0.95,
+          "v_max_pu": 1.05,
+          "limit_ref": "LIMIT-REF-TD-001",
+          "p_base_mw": 20.0,
+          "q_base_mvar": 10.0,
+          "v_base_pu": 0.10000000000000009
+        },
+        {
+          "pcc_id": "PCC-D1-M1",
+          "parent_region_id": "D1",
+          "child_region_id": "M1",
+          "parent_bus_id": "BUS-D1-11",
+          "child_bus_id": "BUS-M1-01",
+          "meter_side": "parent",
+          "transformer_id": "TR-DM-01",
+          "p_min_mw": -5.0,
+          "p_max_mw": 5.0,
+          "q_min_mvar": -3.0,
+          "q_max_mvar": 3.0,
+          "v_min_pu": 0.95,
+          "v_max_pu": 1.05,
+          "limit_ref": "LIMIT-REF-DM-001",
+          "p_base_mw": 5.0,
+          "q_base_mvar": 3.0,
+          "v_base_pu": 0.10000000000000009
+        },
+        {
+          "pcc_id": "PCC-D1-M2",
+          "parent_region_id": "D1",
+          "child_region_id": "M2",
+          "parent_bus_id": "BUS-D1-12",
+          "child_bus_id": "BUS-M2-01",
+          "meter_side": "parent",
+          "transformer_id": "TR-DM-02",
+          "p_min_mw": -5.0,
+          "p_max_mw": 5.0,
+          "q_min_mvar": -3.0,
+          "q_max_mvar": 3.0,
+          "v_min_pu": 0.95,
+          "v_max_pu": 1.05,
+          "limit_ref": "LIMIT-REF-DM-002",
+          "p_base_mw": 5.0,
+          "q_base_mvar": 3.0,
+          "v_base_pu": 0.10000000000000009
+        },
+        {
+          "pcc_id": "PCC-D1-M3",
+          "parent_region_id": "D1",
+          "child_region_id": "M3",
+          "parent_bus_id": "BUS-D1-13",
+          "child_bus_id": "BUS-M3-01",
+          "meter_side": "parent",
+          "transformer_id": "TR-DM-03",
+          "p_min_mw": -5.0,
+          "p_max_mw": 5.0,
+          "q_min_mvar": -3.0,
+          "q_max_mvar": 3.0,
+          "v_min_pu": 0.95,
+          "v_max_pu": 1.05,
+          "limit_ref": "LIMIT-REF-DM-003",
+          "p_base_mw": 5.0,
+          "q_base_mvar": 3.0,
+          "v_base_pu": 0.10000000000000009
+        }
+      ],
+      "max_lambda_mw": 1.40625,
+      "feasible_points": 3,
+      "infeasible_points": 6,
+      "unknown_points": 0,
+      "nonanticipativity_pass": true,
+      "energy_conservation_pass": true,
+      "dataset_version": "c771654107f373448b6bb259ee63dbdc7a846e3ca89c1d6b6269ac87e87ddc87",
+      "scope_declaration": [
+        "研究范围模式：dm_equivalent",
+        "控制模式：atc",
+        "电气计算全部由 OpenDSS 完成；数学优化器仅生成候选调度，不替代电气仿真",
+        "暂不覆盖：暂态稳定、保护配合、谐波、频率全过程和现场控制闭环",
+        "上级网络为批准的主配接口限额与 OpenDSS 电源等值；本结论不构成完整主网优化结论"
+      ],
+      "reason": "已验证可行 λ=1.40625 MW、不可行上界 1.64062 MW，间隔 0.234375 MW ≤ 精度 0.25 MW",
+      "exit_code": 0,
+      "frontier": [
+        {
+          "lambda_mw": 0.0,
+          "status": "feasible",
+          "limiting_constraint": "",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 0.0, \"PV-M1\": 0.0, \"PV-M2\": 0.0, \"PV-M3\": 0.0}"
+        },
+        {
+          "lambda_mw": 30.0,
+          "status": "infeasible",
+          "limiting_constraint": "REVERSE_FLOW_LIMIT",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 15.0, \"PV-M1\": 6.0, \"PV-M2\": 4.5, \"PV-M3\": 4.5}"
+        },
+        {
+          "lambda_mw": 15.0,
+          "status": "infeasible",
+          "limiting_constraint": "REVERSE_FLOW_LIMIT",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 7.5, \"PV-M1\": 3.0, \"PV-M2\": 2.25, \"PV-M3\": 2.25}"
+        },
+        {
+          "lambda_mw": 7.5,
+          "status": "infeasible",
+          "limiting_constraint": "REVERSE_FLOW_LIMIT",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 3.75, \"PV-M1\": 1.5, \"PV-M2\": 1.125, \"PV-M3\": 1.125}"
+        },
+        {
+          "lambda_mw": 3.75,
+          "status": "infeasible",
+          "limiting_constraint": "REVERSE_FLOW_LIMIT",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 1.875, \"PV-M1\": 0.75, \"PV-M2\": 0.5625, \"PV-M3\": 0.5625}"
+        },
+        {
+          "lambda_mw": 1.875,
+          "status": "infeasible",
+          "limiting_constraint": "REVERSE_FLOW_LIMIT",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 0.9375, \"PV-M1\": 0.375, \"PV-M2\": 0.28125, \"PV-M3\": 0.28125}"
+        },
+        {
+          "lambda_mw": 0.9375,
+          "status": "feasible",
+          "limiting_constraint": "",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 0.46875, \"PV-M1\": 0.1875, \"PV-M2\": 0.140625, \"PV-M3\": 0.140625}"
+        },
+        {
+          "lambda_mw": 1.40625,
+          "status": "feasible",
+          "limiting_constraint": "",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 0.703125, \"PV-M1\": 0.28125, \"PV-M2\": 0.2109375, \"PV-M3\": 0.2109375}"
+        },
+        {
+          "lambda_mw": 1.640625,
+          "status": "infeasible",
+          "limiting_constraint": "REVERSE_FLOW_LIMIT",
+          "cost_yuan": 0.0,
+          "region_mw": "{\"PV-D1\": 0.8203125, \"PV-M1\": 0.328125, \"PV-M2\": 0.24609375, \"PV-M3\": 0.24609375}"
+        }
+      ],
+      "interface_trace": [
+        {
+          "iteration": 1,
+          "lambda_mw": 0.0,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 0.0,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 30.0,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 30.0,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 15.0,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 15.0,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 7.5,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 7.5,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 3.75,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 3.75,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 1.875,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 1.875,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 0.9375,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 0.9375,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 1.40625,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 1.40625,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 1,
+          "lambda_mw": 1.640625,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        },
+        {
+          "iteration": 2,
+          "lambda_mw": 1.640625,
+          "objective": 0.0,
+          "residual": 0.0,
+          "security_ok": true
+        }
+      ]
+    }
+  ],
+  "note": "本页所有数值均来自运行产物文件（run_summary.json / constraint_results.csv / access_check.json / research_summary.json 等），未做任何估算或填充；取不到的字段显示为 null。"
+}

@@ -1,0 +1,30 @@
+{
+  "formula_id": "HC-MGMT-STD",
+  "capacity_physical_kw": 515.625,
+  "reservations_kw": 0,
+  "steps": [
+    {
+      "step": "coincidence_factor",
+      "factor": 0.9,
+      "before_kw": 515.625,
+      "after_kw": 464.0625
+    },
+    {
+      "step": "management_margin",
+      "ratio": 0.1,
+      "before_kw": 464.0625,
+      "after_kw": 417.65625
+    },
+    {
+      "step": "deduct_reservations",
+      "reservations_kw": 0.0,
+      "before_kw": 417.65625,
+      "after_kw": 417.65625
+    }
+  ],
+  "status": "ok",
+  "capacity_managed_kw": 417.65625,
+  "coincidence_factor": 0.9,
+  "margin_ratio": 0.1,
+  "note": "capacity_physical_kw 为含已并网源基线之上可增加的容量，不再扣一次已并网装机"
+}

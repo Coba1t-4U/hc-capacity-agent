@@ -1,0 +1,52 @@
+{
+  "model_files": {
+    "LineCodes.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\LineCodes.dss",
+    "Lines.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Lines.dss",
+    "Transformers.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Transformers.dss",
+    "Sources.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Sources.dss",
+    "Loads.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Loads.dss",
+    "PVSystems.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\PVSystems.dss",
+    "Switches.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Switches.dss",
+    "Controls.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Controls.dss",
+    "Master.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\model\\Master.dss"
+  },
+  "master_hash": "141605a6d13b1e8249744b0d0d03a5a98716fd9481daec8f427c1c95f9d4cf2c",
+  "id_map": {
+    "line": {
+      "LN-MV-001": "line_LN_MV_001",
+      "LN-MV-002": "line_LN_MV_002",
+      "LN-MV-003": "line_LN_MV_003",
+      "LN-MV-004": "line_LN_MV_004",
+      "LN-MV-005": "line_LN_MV_005",
+      "LN-MV-006": "line_LN_MV_006",
+      "LN-LV-011": "line_LN_LV_011",
+      "LN-LV-012": "line_LN_LV_012",
+      "LN-LV-021": "line_LN_LV_021",
+      "LN-LV-022": "line_LN_LV_022",
+      "LN-LV-031": "line_LN_LV_031",
+      "LN-LV-032": "line_LN_LV_032"
+    },
+    "transformer": {
+      "DT-001": "xf_DT_001",
+      "DT-002": "xf_DT_002",
+      "DT-003": "xf_DT_003"
+    },
+    "source": {
+      "SRC-001": "src_SRC_001"
+    },
+    "load": {
+      "L001": "load_L001",
+      "L002": "load_L002",
+      "L003": "load_L003",
+      "L004": "load_L004"
+    },
+    "pv": {
+      "PV001": "pv_PV001",
+      "PV002": "pv_PV002",
+      "PV003": "pv_PV003"
+    }
+  },
+  "notes": [
+    "生成 12 条线路、3 台变压器、4 个负荷、3 个光伏、1 个电源"
+  ]
+}

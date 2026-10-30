@@ -1,0 +1,19 @@
+{
+  "publication_id": null,
+  "status": "not_published",
+  "reason": "发布门禁未通过（缺人工复核与审批）；审批绑定 result_hash 后才能发布",
+  "failed_gates": [
+    "professional_review",
+    "approval"
+  ],
+  "candidate_result_hash": "02db3f449fda6f19526bc8ae86bf3cd3d6dc1b0cca54ab0491b75655d7c41a10",
+  "scope": {
+    "type": "feeder",
+    "ids": [
+      "FD-002"
+    ]
+  },
+  "evidence_package": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\evidence\\evidence.zip",
+  "evidence_digest": "dec610655e570a0bb364e5f8d69f5dd4eb50d1ae68714106b28e4004bc31c0b6",
+  "generated_at": "2026-10-16T23:06:54+08:00"
+}

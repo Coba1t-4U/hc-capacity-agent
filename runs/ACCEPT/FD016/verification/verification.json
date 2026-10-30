@@ -1,0 +1,3628 @@
+{
+  "verify_run_id": "VERIFY-20261028T215135+0800",
+  "primary_run_id": "RUN-20261028-215125",
+  "created_at": "2026-10-28T21:51:35+08:00",
+  "output_dir": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\verification",
+  "input_match": true,
+  "checks": [
+    {
+      "check": "input_hash",
+      "object": "equipment_limits.csv",
+      "expected": "723788e80577d4d61bf0ed31f93a2af5dc6b6ecfedbabbd36d0cdbb30ecdb019",
+      "actual": "723788e80577d4d61bf0ed31f93a2af5dc6b6ecfedbabbd36d0cdbb30ecdb019",
+      "pass": true
+    },
+    {
+      "check": "input_hash",
+      "object": "fault_models.csv",
+      "expected": "55d6b21b68ab5ff167dd97418b9cc158c81a734a5743813119dfb1b6c1e10f8e",
+      "actual": "55d6b21b68ab5ff167dd97418b9cc158c81a734a5743813119dfb1b6c1e10f8e",
+      "pass": true
+    },
+    {
+      "check": "input_hash",
+      "object": "network.xlsx",
+      "expected": "02eeadf2ed43a1e8bf736434674cd0f6a50fda64d9139c66bae279bbaa4b40b5",
+      "actual": "02eeadf2ed43a1e8bf736434674cd0f6a50fda64d9139c66bae279bbaa4b40b5",
+      "pass": true
+    },
+    {
+      "check": "input_hash",
+      "object": "profiles.csv",
+      "expected": "6f1c72b39ff7fce28124527664ba5961bcefccc2040a8e22c59736d14d2f69cf",
+      "actual": "6f1c72b39ff7fce28124527664ba5961bcefccc2040a8e22c59736d14d2f69cf",
+      "pass": true
+    },
+    {
+      "check": "input_hash",
+      "object": "reservations.csv",
+      "expected": "0818d2aa86d81aa6fa1e5a6e6aa26ab12642fe582292fe6b84e86475854a9366",
+      "actual": "0818d2aa86d81aa6fa1e5a6e6aa26ab12642fe582292fe6b84e86475854a9366",
+      "pass": true
+    },
+    {
+      "check": "input_hash",
+      "object": "rules.yaml",
+      "expected": "7072ca63215498fd5d6d53f19ca8469a9660d2065d885cd10e1160e20400e104",
+      "actual": "7072ca63215498fd5d6d53f19ca8469a9660d2065d885cd10e1160e20400e104",
+      "pass": true
+    },
+    {
+      "check": "input_hash",
+      "object": "task.json",
+      "expected": "7e9861c50114ad4ddad742afa52fb6a7a2ddd76a425c2aa702e98c6c893d0481",
+      "actual": "7e9861c50114ad4ddad742afa52fb6a7a2ddd76a425c2aa702e98c6c893d0481",
+      "pass": true
+    },
+    {
+      "check": "engine_version",
+      "expected": "0.9.4",
+      "actual": "0.9.4",
+      "pass": true
+    },
+    {
+      "check": "independent_rebuild",
+      "object": "case",
+      "pass": true,
+      "note": "全新目录、全新上下文、从冻结输入重建"
+    }
+  ],
+  "comparison": {
+    "primary_run_id": "RUN-20261028-215125",
+    "verify_run_id": "VERIFY-20261028T215135+0800",
+    "input_match": true,
+    "compared_at": "2026-10-28T21:51:35+08:00",
+    "total_metrics": 14,
+    "mismatch_count": 0,
+    "pass": true,
+    "diffs": [
+      {
+        "metric_key": "input_digest",
+        "object_ref": "",
+        "primary": "f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555",
+        "verify": "f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555",
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "engine_interface_version",
+        "object_ref": "",
+        "primary": "0.9.4",
+        "verify": "0.9.4",
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "scenario_coverage",
+        "object_ref": "",
+        "primary": "S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD",
+        "verify": "S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD",
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "all_converged",
+        "object_ref": "",
+        "primary": true,
+        "verify": true,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint.total",
+        "object_ref": "",
+        "primary": 420,
+        "verify": 420,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint.pass",
+        "object_ref": "",
+        "primary": 420,
+        "verify": 420,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint.fail",
+        "object_ref": "",
+        "primary": 0,
+        "verify": 0,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint.unknown",
+        "object_ref": "",
+        "primary": 0,
+        "verify": 0,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint_rows.count",
+        "object_ref": "",
+        "primary": 420,
+        "verify": 420,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint_rows.digest",
+        "object_ref": "",
+        "primary": "19f39f77b7136d673ff0d84d6847c0feb582479d564f6d7ceba2a6e4504cf44c",
+        "verify": "19f39f77b7136d673ff0d84d6847c0feb582479d564f6d7ceba2a6e4504cf44c",
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "constraint.all_pass",
+        "object_ref": "",
+        "primary": true,
+        "verify": true,
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "capacity_physical_kw",
+        "object_ref": "",
+        "primary": 515.625,
+        "verify": 515.625,
+        "abs_diff": 0.0,
+        "tolerance": 0.001,
+        "status": "match"
+      },
+      {
+        "metric_key": "search_status",
+        "object_ref": "",
+        "primary": "ok",
+        "verify": "ok",
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      },
+      {
+        "metric_key": "binding_constraint",
+        "object_ref": "",
+        "primary": "VOLTAGE_LIMIT",
+        "verify": "VOLTAGE_LIMIT",
+        "abs_diff": null,
+        "tolerance": null,
+        "status": "exact_match"
+      }
+    ],
+    "mismatches": [],
+    "tolerances": {
+      "voltage_pu": 1e-06,
+      "v_v": 0.001,
+      "i_a": 1e-06,
+      "loading_pct": 0.0001,
+      "capacity_kw": 0.001,
+      "angle_deg": 1e-06
+    },
+    "note": "独立复算验证可重复性，不能证明共同模型或算法假设没有系统性偏差；正确性另由黄金算例和专业复核验证"
+  },
+  "pass": true,
+  "verify_payload": {
+    "run_id": "VERIFY-20261028T215135+0800",
+    "input_digest": "f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555",
+    "engine_fingerprint": {
+      "engine_id": "opendss",
+      "interface": "OpenDSSDirect.py",
+      "python_version": "3.12.14",
+      "python_executable": "C:\\Users\\Chen\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+      "platform": "Windows-11-10.0.26300-SP0",
+      "pylib_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+      "interface_version": "0.9.4",
+      "available": true,
+      "engine_version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4"
+    },
+    "all_converged": true,
+    "scenario_ids": [
+      "S_BASE",
+      "S_HIGH_PV_LOW_LOAD",
+      "S_LOW_PV_HIGH_LOAD"
+    ],
+    "constraint_summary": {
+      "total": 420,
+      "pass": 420,
+      "fail": 0,
+      "unknown": 0,
+      "all_pass": true,
+      "binding_constraints": []
+    },
+    "search_status": "ok",
+    "binding_constraint": "VOLTAGE_LIMIT",
+    "constraint_rows": {
+      "count": 420,
+      "status_counts": {
+        "pass": 420
+      },
+      "digest": "19f39f77b7136d673ff0d84d6847c0feb582479d564f6d7ceba2a6e4504cf44c",
+      "rows": [
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-001",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-001",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-001",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-001a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-001a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-001a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-001b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-001b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-001b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-002",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-002",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-002",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-002a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-002a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-002a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-002b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-002b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-002b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-003",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-003",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-lv-003",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-lv-003a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-003a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-003a",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-003b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-lv-003b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-003b",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-001",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-001",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-001",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-002",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-002",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-002",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-003",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-003",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-003",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-004",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-004",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-004",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-005",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-005",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-005",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-006",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-006",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-006",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T18:00:00+08:00",
+          "object_id": "bus-mv-007",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "bus-mv-007",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T21:00:00+08:00",
+          "object_id": "bus-mv-007",
+          "constraint_id": "IMBALANCE_LIMIT",
+          "status": "pass",
+          "value": 7e-09
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.879658471
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.879658471
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.939866012
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.939866012
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.879579054
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.879579054
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.939831267
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.939831267
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.25071472
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.25071472
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 105.068837899
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 105.068837899
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.25095114
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.25095114
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.251325228
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 6.251325228
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T00:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003",
+          "constraint_id": "REVERSE_FLOW_LIMIT",
+          "status": "pass",
+          "value": 0.0
+        },
+        {
+          "scenario_id": "SC",
+          "timestamp": "",
+          "object_id": "BUS-LV-001B.A",
+          "constraint_id": "SHORT_CIRCUIT_LIMIT",
+          "status": "pass",
+          "value": 2555.602208079
+        },
+        {
+          "scenario_id": "SC",
+          "timestamp": "",
+          "object_id": "BUS-LV-001B.B",
+          "constraint_id": "SHORT_CIRCUIT_LIMIT",
+          "status": "pass",
+          "value": 2555.602208328
+        },
+        {
+          "scenario_id": "SC",
+          "timestamp": "",
+          "object_id": "BUS-LV-001B.C",
+          "constraint_id": "SHORT_CIRCUIT_LIMIT",
+          "status": "pass",
+          "value": 2555.602208329
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.06877451
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.09235836
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902256
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068774513
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.09235836
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902259
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068774513
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.092358359
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902259
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068774513
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.092358359
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_011.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902259
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.06877451
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.09235836
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902256
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068774513
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.09235836
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902259
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068774513
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.092358359
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902259
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068774513
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.092358359
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_012.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.068902259
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160511
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659143
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273763
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160514
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659143
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273766
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160514
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659142
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273766
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160514
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659142
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_021.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273766
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160511
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659143
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273763
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160514
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659143
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273766
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160514
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659142
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273766
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010160514
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.097659142
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_022.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 28.010273766
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442579
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.12854007
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960666
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442579
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.12854007
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960666
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442577
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.128540069
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960665
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442577
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.128540069
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_031.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960665
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442579
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.12854007
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960666
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442579
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.12854007
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960666
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442577
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.128540069
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960665
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336442577
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 7.128540069
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_lv_032.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 14.336960665
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.32431139
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.814224617
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.324343926
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.32431139
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.814224617
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.324343926
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.32431139
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.814224617
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.324343926
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.32431139
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.814224617
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_001.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.324343926
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.325495045
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.816166671
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.32552758
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.325495045
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.816166671
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.325527581
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.325495045
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.816166671
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.325527581
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.325495045
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.816166671
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_002.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 5.32552758
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192545259
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.521878664
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192572679
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192545259
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.521878664
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192572679
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192545259
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.521878664
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192572679
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192545259
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.521878664
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_003.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 4.192572679
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130935645
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.298450216
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130940165
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130935646
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.298450216
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130940165
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130935646
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.298450216
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130940165
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130935645
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.298450216
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_004.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.130940165
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T20:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.527530727
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T20:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.527530727
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T20:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.527530727
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.99660372
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T20:00:00+08:00",
+          "object_id": "Line.line_ln_mv_005.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.527530727
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.580790771
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.292588502
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.58081149
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.580790771
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.292588502
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.58081149
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.580790771
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.292588502
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.58081149
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.580790771
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.292588502
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Line.line_ln_mv_006.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.58081149
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179061638
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312441558
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179066934
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179061639
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312441558
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179066934
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179061639
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312441558
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179066934
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179061638
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312441558
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_001.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.179066934
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176604227
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312648681
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176608921
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176604227
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312648681
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176608921
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176604227
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312648681
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176608921
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176604227
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.312648681
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_002.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.176608921
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.209658135
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.610699895
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.A",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.2097012
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.209658135
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.610699895
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.ALL",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.2097012
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.209658135
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.610699895
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.B",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.2097012
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.209658135
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T10:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 0.610699895
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "Transformer.xf_dt_003.C",
+          "constraint_id": "THERMAL_LIMIT",
+          "status": "pass",
+          "value": 1.2097012
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016159249
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016159249
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-001.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01350547
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016159249
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016159249
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-001.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01350547
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016159249
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016159249
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-001.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01350547
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016932242
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016932242
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-001a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002959303
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016932243
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016932243
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-001a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002959303
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016932243
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016932243
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-001a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002959303
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017719734
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017719734
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-001b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 0.945508089
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017719734
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017719734
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-001b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 0.945508089
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017719734
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-001b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017719734
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-001b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 0.945508089
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015782765
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015782765
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-002.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.012808036
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015782765
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015782765
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-002.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.012808036
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015782765
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015782765
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-002.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.012808036
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016556029
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016556029
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-002a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002254309
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016556029
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016556029
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-002a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002254309
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016556029
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016556029
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-002a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002254309
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017343808
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017343808
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-002b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 0.94385088
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017343808
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017343808
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-002b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 0.94385088
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017343808
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-002b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017343808
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T19:00:00+08:00",
+          "object_id": "bus-lv-002b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 0.94385088
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.014380723
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.014380723
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.012803252
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.014380723
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.014380723
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.012803253
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.014380723
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.014380723
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.012803253
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T03:00:00+08:00",
+          "object_id": "bus-lv-003a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.009639748
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.008681482
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003a.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.007527988
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T03:00:00+08:00",
+          "object_id": "bus-lv-003a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.009639748
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.008681482
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003a.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.007527988
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T03:00:00+08:00",
+          "object_id": "bus-lv-003a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.009639748
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.008681482
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003a.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.007527988
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T03:00:00+08:00",
+          "object_id": "bus-lv-003b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.005233053
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002982416
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003b.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002252873
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T03:00:00+08:00",
+          "object_id": "bus-lv-003b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.005233053
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002982416
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003b.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002252873
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T03:00:00+08:00",
+          "object_id": "bus-lv-003b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.005233053
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-lv-003b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002982416
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-lv-003b.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.002252873
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-001.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01828392
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-001.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01828392
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-001.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017614518
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-001.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01828392
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-001.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01828392
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-001.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017614518
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-001.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01828392
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-001.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01828392
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-001.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017614518
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-002.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017910151
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-002.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017910151
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-002.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016920319
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-002.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017910151
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-002.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017910151
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-002.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016920319
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-002.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017910151
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-002.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017910151
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-002.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016920319
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-003.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017534822
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-003.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017534822
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-003.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016225031
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-003.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017534822
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-003.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017534822
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-003.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016225031
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-003.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017534822
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-003.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017534822
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-003.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.016225031
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-004.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017212138
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-004.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017212138
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-004.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015676271
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-004.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017212138
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-004.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017212138
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-004.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015676271
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-004.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017212138
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-004.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017212138
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-004.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015676271
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-005.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017158697
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-005.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017158697
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-005.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015529249
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-005.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017158697
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-005.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017158697
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-005.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015529249
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-005.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017158697
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-005.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017158697
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-005.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015529249
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-006.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017391161
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-006.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017391161
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-006.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01560657
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-006.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017391161
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-006.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017391161
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-006.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01560657
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-006.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017391161
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-006.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017391161
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-006.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.01560657
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-007.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017312057
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-007.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017312057
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-007.A",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015533029
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-007.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017312057
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-007.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017312057
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-007.B",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015533029
+        },
+        {
+          "scenario_id": "S_BASE",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-007.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017312057
+        },
+        {
+          "scenario_id": "S_HIGH_PV_LOW_LOAD",
+          "timestamp": "2026-07-01T13:00:00+08:00",
+          "object_id": "bus-mv-007.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.017312057
+        },
+        {
+          "scenario_id": "S_LOW_PV_HIGH_LOAD",
+          "timestamp": "2026-07-01T06:00:00+08:00",
+          "object_id": "bus-mv-007.C",
+          "constraint_id": "VOLTAGE_LIMIT",
+          "status": "pass",
+          "value": 1.015533029
+        }
+      ]
+    },
+    "capacity_physical_kw": 515.625,
+    "capacity_reproduced": true,
+    "capacity_constraint_summary": {
+      "total": 418,
+      "pass": 417,
+      "fail": 0,
+      "unknown": 1,
+      "all_pass": false,
+      "binding_constraints": []
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "frozen_at": "2026-10-16T23:06:52+08:00",
+  "input_root": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\_stage",
+  "snapshot_root": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots",
+  "inputs": [
+    {
+      "path": "_verify_inputs.py",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\_verify_inputs.py",
+      "size_bytes": 5005,
+      "sha256": "a44c4d0ca24956420a26f08466d1c87888b325e372575b9a95e56ffd54a80525",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "_verify_inputs.py",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "_verify_inputs.py"
+    },
+    {
+      "path": "application.json",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\application.json",
+      "size_bytes": 401,
+      "sha256": "9d54ca443601c67edf7b81dd8c868c73c2672fd1540973d213408c7a5a723e95",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "application.json",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "application.json"
+    },
+    {
+      "path": "equipment_limits.csv",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\equipment_limits.csv",
+      "size_bytes": 313,
+      "sha256": "db94a737ae5b4c3eaf56504bc7e900362916d9f293dd6e6bfd213ee266483257",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "equipment_limits.csv",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "equipment_limits.csv"
+    },
+    {
+      "path": "fault_models.csv",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\fault_models.csv",
+      "size_bytes": 272,
+      "sha256": "6b53ec1d1d123bad40af8643926cb9277e34fea98c5f065c5f2dcbb709b6ca9f",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "fault_models.csv",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "fault_models.csv"
+    },
+    {
+      "path": "network.xlsx",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\network.xlsx",
+      "size_bytes": 10120,
+      "sha256": "4b628c5bc855c344f875121e85713e624f392ddb6de14d0fd28f2995785a01ea",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "network.xlsx",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "network.xlsx"
+    },
+    {
+      "path": "profiles.csv",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\profiles.csv",
+      "size_bytes": 7307,
+      "sha256": "37a301b9e72dab1172a073cbcf32d5d9871a66d6ab40d4f11d9f6031f1c55295",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "profiles.csv",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "profiles.csv"
+    },
+    {
+      "path": "reservations.csv",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\reservations.csv",
+      "size_bytes": 113,
+      "sha256": "0818d2aa86d81aa6fa1e5a6e6aa26ab12642fe582292fe6b84e86475854a9366",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "reservations.csv",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "reservations.csv"
+    },
+    {
+      "path": "rules.yaml",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\rules.yaml",
+      "size_bytes": 1949,
+      "sha256": "a3a47295e156fe55d595e6637e8a61257e888801ea0d054c66656ee21709e46d",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "rules.yaml",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "rules.yaml"
+    },
+    {
+      "path": "task.json",
+      "abspath": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\snapshots\\task.json",
+      "size_bytes": 1215,
+      "sha256": "31243d82b19de285185f3cb999cb0c276fb88035f76bee49c8860267f7d26983",
+      "source": "frozen_snapshot",
+      "registered_at": "2026-10-16T23:06:52+08:00",
+      "business_object": "task.json",
+      "mode": "0o666",
+      "readonly": true,
+      "relpath": "task.json"
+    }
+  ],
+  "input_digest": "88881dcb50c2bf7f98b95d881c426a1c3cdbab5eb89a7eeeb6a8600d08900f91",
+  "run_id": "RUN-20261016-230652",
+  "task_id": "TASK-003",
+  "agent_version": "1.0.0",
+  "skill_version": {
+    "HC.TOPOLOGY.CONSISTENCY": "1.0.0",
+    "HC.PROFILE.STANDARDIZE": "1.0.0",
+    "HC.SCENARIO.BUILD": "1.0.0",
+    "HC.POWERFLOW.BASELINE": "1.0.0",
+    "HC.POWERFLOW.INCREMENT": "1.0.0",
+    "HC.CONSTRAINT.VOLTAGE": "1.0.0",
+    "HC.CONSTRAINT.THERMAL": "1.0.0",
+    "HC.CONSTRAINT.IMBALANCE": "1.0.0",
+    "HC.CONSTRAINT.SHORTCIRCUIT": "1.0.0",
+    "HC.CAPACITY.SEARCH": "1.0.0",
+    "HC.ACCESS.CHECK": "1.0.0",
+    "HC.REPORT.EVIDENCE": "1.0.0"
+  },
+  "run_dir": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001",
+  "started_at": "2026-10-16T23:06:52+08:00",
+  "engine_fingerprint": {
+    "engine_id": "opendss",
+    "interface": "OpenDSSDirect.py",
+    "python_version": "3.12.14",
+    "python_executable": "C:\\Users\\Chen\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pylib_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+    "interface_version": "0.9.4",
+    "available": true,
+    "engine_version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4"
+  },
+  "parameters": {
+    "max_slices": null
+  },
+  "rule_version": "HC-RULES@1.0",
+  "snapshot_id": "SNAP-002",
+  "topology_version": "TOPO-002"
+}

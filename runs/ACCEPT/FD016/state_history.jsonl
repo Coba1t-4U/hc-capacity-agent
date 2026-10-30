@@ -1,0 +1,10 @@
+{"stage": "init", "status": "running", "at": "2026-10-28 21:51:25"}
+{"stage": "S01_freeze_inputs", "status": "ok", "at": "2026-10-28 21:51:26"}
+{"stage": "S02_validate_bundle", "status": "ok", "at": "2026-10-28 21:51:26"}
+{"stage": "S03_build_case", "status": "ok", "at": "2026-10-28 21:51:33"}
+{"stage": "S04_run_baseline", "status": "ok", "at": "2026-10-28 21:51:34"}
+{"stage": "S06_search_capacity", "status": "ok", "at": "2026-10-28 21:51:35"}
+{"stage": "S07_verify_run", "status": "ok", "at": "2026-10-28 21:51:35"}
+{"stage": "S08_generate_report", "status": "ok", "at": "2026-10-28 21:51:35"}
+{"stage": "S09_seal_evidence", "status": "ok", "at": "2026-10-28 21:51:35"}
+{"stage": "final", "status": "awaiting_approval", "at": "2026-10-28 21:51:35"}

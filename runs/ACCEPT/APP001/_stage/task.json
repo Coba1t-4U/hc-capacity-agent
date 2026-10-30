@@ -1,0 +1,57 @@
+{
+  "schema_version": "hc-input-v1",
+  "task_id": "TASK-003",
+  "business_scene": "access_check",
+  "scope": {
+    "type": "feeder",
+    "ids": [
+      "FD-002"
+    ]
+  },
+  "time_window": {
+    "start": "2026-07-01T00:00:00+08:00",
+    "end": "2026-07-02T00:00:00+08:00"
+  },
+  "time_step_minutes": 60,
+  "snapshot_id": "SNAP-002",
+  "rule_package": "HC-RULES@1.0",
+  "engine": {
+    "id": "opendss",
+    "version": "LOCKED_DSS_VERSION",
+    "interface": "OpenDSSDirect.py",
+    "interface_version": "LOCKED_API_VERSION"
+  },
+  "analysis_types": [
+    "powerflow_3ph",
+    "imbalance",
+    "shortcircuit"
+  ],
+  "candidate_nodes": [
+    {
+      "node_id": "BUS-LV-002",
+      "phase": "ABC",
+      "weight": 1.0
+    }
+  ],
+  "search": {
+    "lower_kw": 0,
+    "upper_kw": 3000,
+    "precision_kw": 10,
+    "max_iter": 25
+  },
+  "solver": {
+    "max_iter": 100,
+    "tolerance": 0.0001,
+    "timeout_s": 120
+  },
+  "verification": {
+    "enabled": true,
+    "metric_tolerances_ref": "TOL-001"
+  },
+  "allocation_mode": "fixed_weights",
+  "short_circuit": {
+    "fault_type": "three_phase",
+    "r_fault_ohm": 0.0
+  },
+  "application_ref": "application.json"
+}

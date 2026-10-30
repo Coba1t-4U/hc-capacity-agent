@@ -1,0 +1,135 @@
+{
+  "registry_version": "1.0.0",
+  "skill_count": 12,
+  "by_status": {
+    "approved": 12
+  },
+  "by_risk": {
+    "low": 3,
+    "high": 5,
+    "medium": 4
+  },
+  "engine_required": 8,
+  "skills": [
+    {
+      "skill_id": "HC.TOPOLOGY.CONSISTENCY",
+      "skill_code": "SK-01",
+      "version": "1.0.0",
+      "name": "拓扑与模型一致性检查",
+      "status": "approved",
+      "risk_level": "low",
+      "requires_engine": false,
+      "module": "hc_agent.io.validation"
+    },
+    {
+      "skill_id": "HC.PROFILE.STANDARDIZE",
+      "skill_code": "SK-02",
+      "version": "1.0.0",
+      "name": "负荷与光伏曲线标准化",
+      "status": "approved",
+      "risk_level": "low",
+      "requires_engine": false,
+      "module": "hc_agent.io.ingest"
+    },
+    {
+      "skill_id": "HC.SCENARIO.BUILD",
+      "skill_code": "SK-03",
+      "version": "1.0.0",
+      "name": "运行场景生成",
+      "status": "approved",
+      "risk_level": "low",
+      "requires_engine": false,
+      "module": "hc_agent.model.scenarios"
+    },
+    {
+      "skill_id": "HC.POWERFLOW.BASELINE",
+      "skill_code": "SK-04",
+      "version": "1.0.0",
+      "name": "基线潮流计算",
+      "status": "approved",
+      "risk_level": "high",
+      "requires_engine": true,
+      "module": "hc_agent.model.powerflow"
+    },
+    {
+      "skill_id": "HC.POWERFLOW.INCREMENT",
+      "skill_code": "SK-05",
+      "version": "1.0.0",
+      "name": "增量接入潮流计算",
+      "status": "approved",
+      "risk_level": "high",
+      "requires_engine": true,
+      "module": "hc_agent.model.powerflow"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.VOLTAGE",
+      "skill_code": "SK-06",
+      "version": "1.0.0",
+      "name": "节点电压越限校核",
+      "status": "approved",
+      "risk_level": "medium",
+      "requires_engine": true,
+      "module": "hc_agent.model.constraints"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.THERMAL",
+      "skill_code": "SK-07",
+      "version": "1.0.0",
+      "name": "设备载流与反向潮流校核",
+      "status": "approved",
+      "risk_level": "medium",
+      "requires_engine": true,
+      "module": "hc_agent.model.constraints"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.IMBALANCE",
+      "skill_code": "SK-08",
+      "version": "1.0.0",
+      "name": "三相不平衡校核",
+      "status": "approved",
+      "risk_level": "medium",
+      "requires_engine": true,
+      "module": "hc_agent.model.constraints"
+    },
+    {
+      "skill_id": "HC.CONSTRAINT.SHORTCIRCUIT",
+      "skill_code": "SK-09",
+      "version": "1.0.0",
+      "name": "短路容量与保护触发校核",
+      "status": "approved",
+      "risk_level": "high",
+      "requires_engine": true,
+      "module": "hc_agent.engines.opendss_adapter"
+    },
+    {
+      "skill_id": "HC.CAPACITY.SEARCH",
+      "skill_code": "SK-10",
+      "version": "1.0.0",
+      "name": "开放容量搜索",
+      "status": "approved",
+      "risk_level": "high",
+      "requires_engine": true,
+      "module": "hc_agent.capacity_search"
+    },
+    {
+      "skill_id": "HC.ACCESS.CHECK",
+      "skill_code": "SK-11",
+      "version": "1.0.0",
+      "name": "并网申请方案校核",
+      "status": "approved",
+      "risk_level": "high",
+      "requires_engine": true,
+      "module": "hc_agent.pipeline"
+    },
+    {
+      "skill_id": "HC.REPORT.EVIDENCE",
+      "skill_code": "SK-12",
+      "version": "1.0.0",
+      "name": "证据包与专业报告生成",
+      "status": "approved",
+      "risk_level": "medium",
+      "requires_engine": false,
+      "module": "hc_agent.reporting"
+    }
+  ]
+}

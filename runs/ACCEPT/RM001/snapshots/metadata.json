@@ -1,0 +1,17 @@
+{
+  "schema_version": "hc-research-v1",
+  "timezone": "+08:00",
+  "interval_hours": 1.0,
+  "power_base_mva": 10.0,
+  "voltage_bases_kv": [
+    10.0,
+    0.4
+  ],
+  "units": {
+    "power": "MW",
+    "energy": "MWh",
+    "time": "h"
+  },
+  "scenario_source": "synthetic-reference-derived",
+  "input_hashes": {}
+}

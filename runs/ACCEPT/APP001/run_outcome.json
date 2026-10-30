@@ -1,0 +1,147 @@
+{
+  "run_id": "RUN-20261016-230652",
+  "exit_code": 5,
+  "stage": "S05",
+  "status": "ok",
+  "capacity_physical_kw": 250.0,
+  "capacity_managed_kw": null,
+  "level": "green",
+  "level_reason": "单笔并网审查结论：可行",
+  "binding_constraint": "",
+  "search_status": "access_check",
+  "baseline_summary": {
+    "total": 123,
+    "pass": 123,
+    "fail": 0,
+    "unknown": 0,
+    "all_pass": true,
+    "binding_constraints": []
+  },
+  "access_check": {
+    "application_id": "APP-2026-0001",
+    "requested_capacity_kw": 250.0,
+    "decision_candidate": "可行",
+    "constraint_summary": {
+      "total": 121,
+      "pass": 120,
+      "fail": 0,
+      "unknown": 1,
+      "all_pass": false,
+      "binding_constraints": []
+    },
+    "baseline_fail": 0,
+    "application_fail": 0,
+    "newly_induced": [],
+    "preexisting": [],
+    "binding_constraints": []
+  },
+  "grading": {
+    "level": "green",
+    "formal": true,
+    "reason": "申请校核结论：可行"
+  },
+  "search": null,
+  "new_pv_ids": [
+    "PV_NEW_BUS-LV-002"
+  ],
+  "weights": {
+    "PV_NEW_BUS-LV-002": 1.0
+  },
+  "release_gate": {
+    "rule_package": "HC-RULES@1.0",
+    "gates": [
+      {
+        "gate": "independent_verification",
+        "required": true,
+        "passed": true
+      },
+      {
+        "gate": "professional_review",
+        "required": true,
+        "passed": false
+      },
+      {
+        "gate": "approval",
+        "required": true,
+        "passed": false
+      }
+    ],
+    "failed_gates": [
+      "professional_review",
+      "approval"
+    ],
+    "result_hash": "02db3f449fda6f19526bc8ae86bf3cd3d6dc1b0cca54ab0491b75655d7c41a10",
+    "approval_bound": false,
+    "passed": false
+  },
+  "report": {
+    "report_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\report\\report.docx",
+    "format": "docx",
+    "generated_at": "2026-10-16T23:06:53+08:00",
+    "sections": [
+      "1. 任务概况：场景、范围、时间窗、发起与复核信息",
+      "2. 数据与口径：快照、质量、规则、假设、模型/技能/引擎版本",
+      "3. 计算过程：场景、方法、收敛、约束校验和开放容量搜索记录",
+      "4. 评估结果：三级对象结果、分区分时容量、红黄绿等级和主导限制因素",
+      "5. 接入校核（如适用）：基线/增量对比、结论候选和整改建议",
+      "6. 风险与缺口：数据、模型、算法、场景和未解决问题",
+      "7. 独立验证：复算任务、输入一致性、差异和通过状态",
+      "8. 人工审批：意见、签署、有效期和发布范围",
+      "9. 证据索引：各类文件哈希、日志、结果和审计事件编号"
+    ],
+    "traceability": {
+      "links": {
+        "snapshot_id": "SNAP-002",
+        "rule_package": "HC-RULES@1.0",
+        "engine_fingerprint": {
+          "engine_id": "opendss",
+          "interface": "OpenDSSDirect.py",
+          "python_version": "3.12.14",
+          "python_executable": "C:\\Users\\Chen\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+          "platform": "Windows-11-10.0.26200-SP0",
+          "pylib_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+          "interface_version": "0.9.4",
+          "available": true,
+          "engine_version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4"
+        },
+        "input_digest": "88881dcb50c2bf7f98b95d881c426a1c3cdbab5eb89a7eeeb6a8600d08900f91",
+        "evidence_refs": [
+          "manifest.json",
+          "results/capacity.csv",
+          "results/constraint_results.csv",
+          "results/search_trace.csv",
+          "results/bus_results.csv",
+          "results/element_results.csv",
+          "verification/verification.json",
+          "config/rules.yaml",
+          "audit/events.jsonl"
+        ]
+      },
+      "missing": [],
+      "complete": true
+    },
+    "result_hash": "02db3f449fda6f19526bc8ae86bf3cd3d6dc1b0cca54ab0491b75655d7c41a10"
+  },
+  "publication": {
+    "publication_id": null,
+    "status": "not_published",
+    "reason": "发布门禁未通过（缺人工复核与审批）；审批绑定 result_hash 后才能发布",
+    "failed_gates": [
+      "professional_review",
+      "approval"
+    ],
+    "candidate_result_hash": "02db3f449fda6f19526bc8ae86bf3cd3d6dc1b0cca54ab0491b75655d7c41a10",
+    "scope": {
+      "type": "feeder",
+      "ids": [
+        "FD-002"
+      ]
+    },
+    "evidence_package": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\evidence\\evidence.zip",
+    "evidence_digest": "dec610655e570a0bb364e5f8d69f5dd4eb50d1ae68714106b28e4004bc31c0b6",
+    "generated_at": "2026-10-16T23:06:54+08:00"
+  },
+  "note": "结果候选已具备，但人工复核与审批未提交，按设计不得发布",
+  "elapsed_s": 1.662,
+  "finished_at": "2026-10-16T23:06:54+08:00"
+}

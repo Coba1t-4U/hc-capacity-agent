@@ -1,0 +1,6 @@
+{
+  "generated_from": "runs",
+  "case_count": 0,
+  "cases": [],
+  "note": "本页所有数值均来自运行产物文件（run_summary.json / constraint_results.csv / access_check.json / research_summary.json 等），未做任何估算或填充；取不到的字段显示为 null。"
+}

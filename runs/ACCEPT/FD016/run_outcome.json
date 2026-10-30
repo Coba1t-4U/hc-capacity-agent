@@ -1,0 +1,173 @@
+{
+  "run_id": "RUN-20261028-215125",
+  "exit_code": 5,
+  "stage": "S06",
+  "status": "ok",
+  "capacity_physical_kw": 515.625,
+  "capacity_managed_kw": 417.65625,
+  "level": "green",
+  "level_reason": "在批准口径下具有开放空间，未触发重点风险",
+  "binding_constraint": "VOLTAGE_LIMIT",
+  "binding_detail": {
+    "object_id": "bus-lv-002b.B",
+    "metric": "voltage_pu",
+    "value": 1.1005962902868858,
+    "unit": "pu",
+    "limit_lower": 0.9,
+    "limit_upper": 1.1,
+    "margin": -0.0005962902868856812
+  },
+  "search_status": "ok",
+  "baseline_summary": {
+    "total": 420,
+    "pass": 420,
+    "fail": 0,
+    "unknown": 0,
+    "all_pass": true,
+    "binding_constraints": []
+  },
+  "management": {
+    "formula_id": "HC-MGMT-STD",
+    "capacity_physical_kw": 515.625,
+    "reservations_kw": 0,
+    "steps": [
+      {
+        "step": "coincidence_factor",
+        "factor": 0.9,
+        "before_kw": 515.625,
+        "after_kw": 464.0625
+      },
+      {
+        "step": "management_margin",
+        "ratio": 0.1,
+        "before_kw": 464.0625,
+        "after_kw": 417.65625
+      },
+      {
+        "step": "deduct_reservations",
+        "reservations_kw": 0.0,
+        "before_kw": 417.65625,
+        "after_kw": 417.65625
+      }
+    ],
+    "status": "ok",
+    "capacity_managed_kw": 417.65625,
+    "coincidence_factor": 0.9,
+    "margin_ratio": 0.1,
+    "note": "capacity_physical_kw 为含已并网源基线之上可增加的容量，不再扣一次已并网装机"
+  },
+  "grading": {
+    "level": "green",
+    "formal": true,
+    "min_margin_ratio": 0.2192543991888334,
+    "reason": "在批准口径下具有开放空间，未触发重点风险"
+  },
+  "search": "SearchResult(capacity_physical_kw=515.625, search_status='ok', feasible_lower_kw=515.625, infeasible_upper_kw=523.4375, bracket_gap_kw=7.8125, binding_constraint='VOLTAGE_LIMIT', binding_detail={'object_id': 'bus-lv-002b.B', 'metric': 'voltage_pu', 'value': 1.1005962902868858, 'unit': 'pu', 'limit_lower': 0.9, 'limit_upper': 1.1, 'margin': -0.0005962902868856812}, method='bracket_and_bisect', iterations=10, trace=[TrialResult(iteration=1, delta_kw=0.0, status='feasible', binding_constraint='', scenario_id='', timestamp='', constraint_status={'pass': 420}, result_hash='424a17488841510bbe094ba5783a73589c9b3dfdda414d0ba9884f9855bac46e', engine_run_ref='', detail={}), TrialResult(iteration=2, delta_kw=500.0, status='feasible', binding_constraint='', scenario_id='', timestamp='', constraint_status={'pass': 420}, result_hash='144d534ca01a5da6ce86049cdeea1c97f21fb9c208367d98abacc4ed35709d52', engine_run_ref='', detail={}), TrialResult(iteration=3, delta_kw=1000.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 390, 'fail': 30}, result_hash='d0601615d13fa6ff29fa9ff66ccfe30f14cde8ebbd25b5253ff93b02f10deccc', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 801.1951202270255, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -401.19512022702554}), TrialResult(iteration=4, delta_kw=1500.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 338, 'fail': 82}, result_hash='ccd0849d08565ef81c4bd4f1976168745bc49fe5f0abf01bbb83c606c11f536f', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 1306.0962315274253, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -906.0962315274253}), TrialResult(iteration=5, delta_kw=2000.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 330, 'fail': 90}, result_hash='91875ab30f5e816546b899fd13ab90fd28e7555c043f355af9f0cc9246da5885', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 1880.1229622415603, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -1480.1229622415603}), TrialResult(iteration=1, delta_kw=0.0, status='feasible', binding_constraint='', scenario_id='', timestamp='', constraint_status={'pass': 420}, result_hash='424a17488841510bbe094ba5783a73589c9b3dfdda414d0ba9884f9855bac46e', engine_run_ref='', detail={}), TrialResult(iteration=2, delta_kw=2000.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 330, 'fail': 90}, result_hash='91875ab30f5e816546b899fd13ab90fd28e7555c043f355af9f0cc9246da5885', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 1880.1229622415603, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -1480.1229622415603}), TrialResult(iteration=3, delta_kw=1000.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 390, 'fail': 30}, result_hash='d0601615d13fa6ff29fa9ff66ccfe30f14cde8ebbd25b5253ff93b02f10deccc', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 801.1951202270255, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -401.19512022702554}), TrialResult(iteration=4, delta_kw=500.0, status='feasible', binding_constraint='', scenario_id='', timestamp='', constraint_status={'pass': 420}, result_hash='144d534ca01a5da6ce86049cdeea1c97f21fb9c208367d98abacc4ed35709d52', engine_run_ref='', detail={}), TrialResult(iteration=5, delta_kw=750.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 404, 'fail': 16}, result_hash='285759e3993222c15217fd2cb54ef0fda2ce62087b7b495b83a8683f83b0b4e9', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 575.7042031439794, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -175.70420314397938}), TrialResult(iteration=6, delta_kw=625.0, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 404, 'fail': 16}, result_hash='724fc33cddd5873ff59dfb4a9f5e399e71de353d50af1ddc37878496f61ccf85', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 467.6742614663168, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -67.6742614663168}), TrialResult(iteration=7, delta_kw=562.5, status='infeasible', binding_constraint='REVERSE_FLOW_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 404, 'fail': 16}, result_hash='16a65efb3911a0bc62cc3e1889f6d2f29c1eb9d7b5134fc8d9fa3ec7d7fecfcb', engine_run_ref='', detail={'object_id': 'Line.line_ln_mv_002', 'metric': 'reverse_flow_kw', 'value': 414.78976061924243, 'unit': 'kW', 'limit_lower': None, 'limit_upper': 400.0, 'margin': -14.78976061924243}), TrialResult(iteration=8, delta_kw=531.25, status='infeasible', binding_constraint='VOLTAGE_LIMIT', scenario_id='S_HIGH_PV_LOW_LOAD', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 408, 'fail': 12}, result_hash='cb06c9505771a11500acf1c6455f683697dc6732dd118c00add3fc9618711435', engine_run_ref='', detail={'object_id': 'bus-lv-002b.B', 'metric': 'voltage_pu', 'value': 1.101958172862322, 'unit': 'pu', 'limit_lower': 0.9, 'limit_upper': 1.1, 'margin': -0.0019581728623219163}), TrialResult(iteration=9, delta_kw=515.625, status='feasible', binding_constraint='', scenario_id='', timestamp='', constraint_status={'pass': 420}, result_hash='48932064ee981c6537bd5d3e30dbae79598b312ee236f3f1ad708bf072384e05', engine_run_ref='', detail={}), TrialResult(iteration=10, delta_kw=523.4375, status='infeasible', binding_constraint='VOLTAGE_LIMIT', scenario_id='S_BASE', timestamp='2026-07-01T13:00:00+08:00', constraint_status={'pass': 408, 'fail': 12}, result_hash='9789c991ac4c6034e549dd26521b9f6df57cc49ec6eebdd672053c1847c7c002', engine_run_ref='', detail={'object_id': 'bus-lv-002b.B', 'metric': 'voltage_pu', 'value': 1.1005962902868858, 'unit': 'pu', 'limit_lower': 0.9, 'limit_upper': 1.1, 'margin': -0.0005962902868856812})], unknowns=[], notes=['已验证可行下界 515.625 kW，不可行上界 523.438 kW，间隔 7.8125 kW ≤ 精度 10 kW'])",
+  "new_pv_ids": [
+    "PV_NEW_BUS-LV-001B",
+    "PV_NEW_BUS-LV-002B",
+    "PV_NEW_BUS-LV-003B"
+  ],
+  "weights": {
+    "PV_NEW_BUS-LV-001B": 0.4,
+    "PV_NEW_BUS-LV-002B": 0.4,
+    "PV_NEW_BUS-LV-003B": 0.2
+  },
+  "release_gate": {
+    "rule_package": "HC-RULES@1.0",
+    "gates": [
+      {
+        "gate": "independent_verification",
+        "required": true,
+        "passed": true
+      },
+      {
+        "gate": "professional_review",
+        "required": true,
+        "passed": false
+      },
+      {
+        "gate": "approval",
+        "required": true,
+        "passed": false
+      }
+    ],
+    "failed_gates": [
+      "professional_review",
+      "approval"
+    ],
+    "result_hash": "7d855361fb72ec7219a183d29b8d0fd191e0f9cbc3db8f970bd4bec6fa7f0492",
+    "approval_bound": false,
+    "passed": false
+  },
+  "report": {
+    "report_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\report\\report.docx",
+    "format": "docx",
+    "generated_at": "2026-10-28T21:51:35+08:00",
+    "sections": [
+      "1. 任务概况：场景、范围、时间窗、发起与复核信息",
+      "2. 数据与口径：快照、质量、规则、假设、模型/技能/引擎版本",
+      "3. 计算过程：场景、方法、收敛、约束校验和开放容量搜索记录",
+      "4. 评估结果：三级对象结果、分区分时容量、红黄绿等级和主导限制因素",
+      "5. 接入校核（如适用）：基线/增量对比、结论候选和整改建议",
+      "6. 风险与缺口：数据、模型、算法、场景和未解决问题",
+      "7. 独立验证：复算任务、输入一致性、差异和通过状态",
+      "8. 人工审批：意见、签署、有效期和发布范围",
+      "9. 证据索引：各类文件哈希、日志、结果和审计事件编号"
+    ],
+    "traceability": {
+      "links": {
+        "snapshot_id": "SNAP-016",
+        "rule_package": "HC-RULES@1.0",
+        "engine_fingerprint": {
+          "engine_id": "opendss",
+          "interface": "OpenDSSDirect.py",
+          "python_version": "3.12.14",
+          "python_executable": "C:\\Users\\Chen\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "pylib_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+          "interface_version": "0.9.4",
+          "available": true,
+          "engine_version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4"
+        },
+        "input_digest": "f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555",
+        "evidence_refs": [
+          "manifest.json",
+          "results/capacity.csv",
+          "results/constraint_results.csv",
+          "results/search_trace.csv",
+          "results/bus_results.csv",
+          "results/element_results.csv",
+          "verification/verification.json",
+          "config/rules.yaml",
+          "audit/events.jsonl"
+        ]
+      },
+      "missing": [],
+      "complete": true
+    },
+    "result_hash": "7d855361fb72ec7219a183d29b8d0fd191e0f9cbc3db8f970bd4bec6fa7f0492"
+  },
+  "publication": {
+    "publication_id": null,
+    "status": "not_published",
+    "reason": "发布门禁未通过（缺人工复核与审批）；审批绑定 result_hash 后才能发布",
+    "failed_gates": [
+      "professional_review",
+      "approval"
+    ],
+    "candidate_result_hash": "7d855361fb72ec7219a183d29b8d0fd191e0f9cbc3db8f970bd4bec6fa7f0492",
+    "scope": {
+      "type": "feeder",
+      "ids": [
+        "FD-016"
+      ]
+    },
+    "evidence_package": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD016\\evidence\\evidence.zip",
+    "evidence_digest": "d7e11ea808f5b7c176baedd3994092239b8aedeca8a869abe1049bcba510c93a",
+    "generated_at": "2026-10-28T21:51:35+08:00"
+  },
+  "note": "结果候选已具备，但人工复核与审批未提交，按设计不得发布",
+  "elapsed_s": 9.965,
+  "finished_at": "2026-10-28T21:51:35+08:00"
+}

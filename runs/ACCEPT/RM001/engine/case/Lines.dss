@@ -1,0 +1,4 @@
+! 线路元件（设计文档 17.6）
+New Line.line_LN_D1_01 bus1=BUS-D1-01.1.2.3 bus2=BUS-D1-05.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_D1_02 bus1=BUS-D1-05.1.2.3 bus2=BUS-D1-11.1.2.3 linecode=LC_001 length=0.8 units=km
+New Line.line_LN_D1_LV bus1=BUS-D1-LV.1.2.3 bus2=BUS-D1-LV2.1.2.3 linecode=LC_002 length=0.08 units=km

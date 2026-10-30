@@ -1,0 +1,19 @@
+{
+  "id": "HC.ACCEPTANCE.MATRIX",
+  "version": "1.0.0",
+  "skill_code": "SK-17",
+  "card": "skills/cards/SK-17_HC_ACCEPTANCE_MATRIX.md",
+  "display_name": "验收指标矩阵",
+  "description": "按开发文档 11.2 的九条指标评估一次运行是否达到验收门槛；无数据与不适用的项如实标注。",
+  "actions": ["evaluate_acceptance"],
+  "handler": "hc_agent.acceptance_check:evaluate",
+  "permission": "read_only",
+  "requires": ["run_dir"],
+  "outputs": ["items", "summary", "gate"],
+  "auto_enabled": true,
+  "notes": [
+    "只读技能。",
+    "判定四态：pass / fail / unknown / unavailable —— '无数据' 不得显示为 '达标'。",
+    "需要专家标签或人工基准的指标标 unavailable，不猜。"
+  ]
+}

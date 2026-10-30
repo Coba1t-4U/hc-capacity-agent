@@ -1,0 +1,18 @@
+{
+  "validated": true,
+  "pattern": [
+    "infeasible",
+    "infeasible",
+    "infeasible",
+    "infeasible",
+    "infeasible"
+  ],
+  "points_kw": [
+    0.0,
+    500.0,
+    1000.0,
+    1500.0,
+    2000.0
+  ],
+  "reason": "可行性随增量容量单调"
+}

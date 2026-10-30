@@ -1,0 +1,7 @@
+# PyCharm 本机状态
+workspace.xml
+shelf/
+usage.statistics.xml
+httpRequests/
+# SDK 表由 IDE 维护
+jdk.table.xml

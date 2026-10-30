@@ -1,0 +1,3 @@
+﻿asset_id,owner_region_id,bus_id,p_reduce_max_mw,energy_shift_max_mwh,max_duration_h,recovery_policy,compensation_yuan_per_mwh,permission_ref
+FL-D1,D1,BUS-D1-07,0.5,1.5,3,recover_same_day,400,PERM-FL-D1-001
+FL-M1,M1,BUS-M1-04,0.15,0.4,2,recover_same_day,400,PERM-FL-M1-001

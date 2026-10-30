@@ -1,0 +1,5 @@
+﻿asset_id,baseline_capacity_mw,direction_weight,control_policy_id
+PV-D1,BASE-D1-0,0.5,fixed
+PV-M1,BASE-M1-0,0.2,fixed
+PV-M2,BASE-M2-0,0.15,fixed
+PV-M3,BASE-M3-0,0.15,fixed

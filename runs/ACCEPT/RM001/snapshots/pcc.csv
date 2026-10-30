@@ -1,0 +1,5 @@
+﻿pcc_id,parent_region_id,child_region_id,parent_bus_id,child_bus_id,meter_side,transformer_id,p_min_mw,p_max_mw,q_min_mvar,q_max_mvar,v_min_pu,v_max_pu,limit_ref
+PCC-T1-D1,T1,D1,BUS-T1-01,BUS-D1-01,parent,TR-TD-01,-20,20,-10,10,0.95,1.05,LIMIT-REF-TD-001
+PCC-D1-M1,D1,M1,BUS-D1-11,BUS-M1-01,parent,TR-DM-01,-5,5,-3,3,0.95,1.05,LIMIT-REF-DM-001
+PCC-D1-M2,D1,M2,BUS-D1-12,BUS-M2-01,parent,TR-DM-02,-5,5,-3,3,0.95,1.05,LIMIT-REF-DM-002
+PCC-D1-M3,D1,M3,BUS-D1-13,BUS-M3-01,parent,TR-DM-03,-5,5,-3,3,0.95,1.05,LIMIT-REF-DM-003

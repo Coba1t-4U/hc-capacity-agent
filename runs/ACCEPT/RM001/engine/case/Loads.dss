@@ -1,0 +1,3 @@
+! 负荷元件（设计文档 17.7：低压三相负荷采用分相 P/Q）
+New Load.load_LD_D1_LV bus1=BUS-D1-LV2.1.2.3 phases=3 conn=wye kv=0.4 kW=1 kvar=1 model=1 vminpu=0.95
+New Load.load_LD_D1_MV bus1=BUS-D1-11.1.2.3 phases=3 conn=wye kv=10 kW=1 kvar=1 model=1 vminpu=0.95

@@ -1,0 +1,18 @@
+{
+  "application_id": "APP-2026-0001",
+  "requested_capacity_kw": 250.0,
+  "decision_candidate": "可行",
+  "constraint_summary": {
+    "total": 121,
+    "pass": 120,
+    "fail": 0,
+    "unknown": 1,
+    "all_pass": false,
+    "binding_constraints": []
+  },
+  "baseline_fail": 0,
+  "application_fail": 0,
+  "newly_induced": [],
+  "preexisting": [],
+  "binding_constraints": []
+}

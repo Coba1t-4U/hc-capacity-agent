@@ -1,0 +1,346 @@
+{
+  "study_id": "STUDY-20261016-230654",
+  "agent_version": "1.0.0",
+  "task": {
+    "schema_version": "hc-research-v1",
+    "study_id": "RM001",
+    "mode": "atc",
+    "scope": "dm_equivalent",
+    "description": "配网 + 3 微网 目标级联协调容量研究（主网为已批准接口等值）",
+    "capacity_direction": "D1",
+    "outer_search": {
+      "lambda_max_mw": 30.0,
+      "precision_mw": 0.25,
+      "max_iter": 15
+    },
+    "atc": {
+      "max_iter": 8,
+      "time_limit_s": 120,
+      "residual_tol": 0.001,
+      "objective_tol": 0.0001,
+      "rho0": 1.0
+    },
+    "dro": {
+      "enabled": false,
+      "radius_l1": null,
+      "radius_linf": null
+    },
+    "solver": {
+      "max_iter": 300,
+      "tolerance": 1e-06
+    },
+    "seed": 20261009
+  },
+  "regions": [
+    {
+      "region_id": "D1",
+      "level": "D",
+      "parent_region_id": "",
+      "model_id": "model_d1"
+    },
+    {
+      "region_id": "T1",
+      "level": "T",
+      "parent_region_id": "",
+      "model_id": "model_t1"
+    },
+    {
+      "region_id": "M1",
+      "level": "M",
+      "parent_region_id": "D1",
+      "model_id": "model_m1"
+    },
+    {
+      "region_id": "M2",
+      "level": "M",
+      "parent_region_id": "D1",
+      "model_id": "model_m2"
+    },
+    {
+      "region_id": "M3",
+      "level": "M",
+      "parent_region_id": "D1",
+      "model_id": "model_m3"
+    }
+  ],
+  "interfaces": [
+    {
+      "pcc_id": "PCC-T1-D1",
+      "parent_region_id": "T1",
+      "child_region_id": "D1",
+      "parent_bus_id": "BUS-T1-01",
+      "child_bus_id": "BUS-D1-01",
+      "meter_side": "parent",
+      "transformer_id": "TR-TD-01",
+      "p_min_mw": -20.0,
+      "p_max_mw": 20.0,
+      "q_min_mvar": -10.0,
+      "q_max_mvar": 10.0,
+      "v_min_pu": 0.95,
+      "v_max_pu": 1.05,
+      "limit_ref": "LIMIT-REF-TD-001",
+      "p_base_mw": 20.0,
+      "q_base_mvar": 10.0,
+      "v_base_pu": 0.10000000000000009
+    },
+    {
+      "pcc_id": "PCC-D1-M1",
+      "parent_region_id": "D1",
+      "child_region_id": "M1",
+      "parent_bus_id": "BUS-D1-11",
+      "child_bus_id": "BUS-M1-01",
+      "meter_side": "parent",
+      "transformer_id": "TR-DM-01",
+      "p_min_mw": -5.0,
+      "p_max_mw": 5.0,
+      "q_min_mvar": -3.0,
+      "q_max_mvar": 3.0,
+      "v_min_pu": 0.95,
+      "v_max_pu": 1.05,
+      "limit_ref": "LIMIT-REF-DM-001",
+      "p_base_mw": 5.0,
+      "q_base_mvar": 3.0,
+      "v_base_pu": 0.10000000000000009
+    },
+    {
+      "pcc_id": "PCC-D1-M2",
+      "parent_region_id": "D1",
+      "child_region_id": "M2",
+      "parent_bus_id": "BUS-D1-12",
+      "child_bus_id": "BUS-M2-01",
+      "meter_side": "parent",
+      "transformer_id": "TR-DM-02",
+      "p_min_mw": -5.0,
+      "p_max_mw": 5.0,
+      "q_min_mvar": -3.0,
+      "q_max_mvar": 3.0,
+      "v_min_pu": 0.95,
+      "v_max_pu": 1.05,
+      "limit_ref": "LIMIT-REF-DM-002",
+      "p_base_mw": 5.0,
+      "q_base_mvar": 3.0,
+      "v_base_pu": 0.10000000000000009
+    },
+    {
+      "pcc_id": "PCC-D1-M3",
+      "parent_region_id": "D1",
+      "child_region_id": "M3",
+      "parent_bus_id": "BUS-D1-13",
+      "child_bus_id": "BUS-M3-01",
+      "meter_side": "parent",
+      "transformer_id": "TR-DM-03",
+      "p_min_mw": -5.0,
+      "p_max_mw": 5.0,
+      "q_min_mvar": -3.0,
+      "q_max_mvar": 3.0,
+      "v_min_pu": 0.95,
+      "v_max_pu": 1.05,
+      "limit_ref": "LIMIT-REF-DM-003",
+      "p_base_mw": 5.0,
+      "q_base_mvar": 3.0,
+      "v_base_pu": 0.10000000000000009
+    }
+  ],
+  "capacity_frontier": [
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 0.0,
+      "status": "feasible",
+      "limiting_constraint": "",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 0.0,
+        "PV-M1": 0.0,
+        "PV-M2": 0.0,
+        "PV-M3": 0.0
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 30.0,
+      "status": "infeasible",
+      "limiting_constraint": "REVERSE_FLOW_LIMIT",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 15.0,
+        "PV-M1": 6.0,
+        "PV-M2": 4.5,
+        "PV-M3": 4.5
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 15.0,
+      "status": "infeasible",
+      "limiting_constraint": "REVERSE_FLOW_LIMIT",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 7.5,
+        "PV-M1": 3.0,
+        "PV-M2": 2.25,
+        "PV-M3": 2.25
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 7.5,
+      "status": "infeasible",
+      "limiting_constraint": "REVERSE_FLOW_LIMIT",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 3.75,
+        "PV-M1": 1.5,
+        "PV-M2": 1.125,
+        "PV-M3": 1.125
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 3.75,
+      "status": "infeasible",
+      "limiting_constraint": "REVERSE_FLOW_LIMIT",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 1.875,
+        "PV-M1": 0.75,
+        "PV-M2": 0.5625,
+        "PV-M3": 0.5625
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 1.875,
+      "status": "infeasible",
+      "limiting_constraint": "REVERSE_FLOW_LIMIT",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 0.9375,
+        "PV-M1": 0.375,
+        "PV-M2": 0.28125,
+        "PV-M3": 0.28125
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 0.9375,
+      "status": "feasible",
+      "limiting_constraint": "",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 0.46875,
+        "PV-M1": 0.1875,
+        "PV-M2": 0.140625,
+        "PV-M3": 0.140625
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 1.40625,
+      "status": "feasible",
+      "limiting_constraint": "",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 0.703125,
+        "PV-M1": 0.28125,
+        "PV-M2": 0.2109375,
+        "PV-M3": 0.2109375
+      }
+    },
+    {
+      "direction_id": "D1",
+      "control_policy_id": "atc",
+      "lambda_mw": 1.640625,
+      "status": "infeasible",
+      "limiting_constraint": "REVERSE_FLOW_LIMIT",
+      "cost_yuan": 0.0,
+      "unknown_reason": "",
+      "region_mw": {
+        "PV-D1": 0.8203125,
+        "PV-M1": 0.328125,
+        "PV-M2": 0.24609375,
+        "PV-M3": 0.24609375
+      }
+    }
+  ],
+  "metrics": {
+    "study_id": "STUDY-20261016-230654",
+    "mode": "atc",
+    "scope": "dm_equivalent",
+    "dataset_version": "c771654107f373448b6bb259ee63dbdc7a846e3ca89c1d6b6269ac87e87ddc87",
+    "max_lambda_mw": 1.40625,
+    "feasible_points": 3,
+    "infeasible_points": 6,
+    "unknown_points": 0,
+    "total_cost_yuan": 0.0,
+    "nonanticipativity_pass": true,
+    "energy_conservation_pass": true,
+    "generated_at": "2026-10-16T23:06:55+08:00"
+  },
+  "nonanticipativity": {
+    "pass": true,
+    "violation_count": 0,
+    "violations": [],
+    "note": "第一阶段的日前承诺必须在所有场景间相等；实时响应属第二阶段，允许场景相关"
+  },
+  "energy_conservation": {
+    "pass": true,
+    "issue_count": 0,
+    "issues": []
+  },
+  "checkpoints": [
+    {
+      "step": "R01_freeze_inputs",
+      "status": "ok",
+      "at": "2026-10-16T23:06:54+08:00",
+      "elapsed_s": 0.088,
+      "input_count": 15,
+      "input_digest": "c771654107f373448b6bb259ee63dbdc7a846e3ca89c1d6b6269ac87e87ddc87"
+    },
+    {
+      "step": "R02_hierarchy",
+      "status": "ok",
+      "at": "2026-10-16T23:06:54+08:00",
+      "elapsed_s": 0.093,
+      "regions": 5,
+      "interfaces": 4,
+      "levels": [
+        "D",
+        "M",
+        "T"
+      ]
+    },
+    {
+      "step": "R03_capacity_outer",
+      "status": "ok",
+      "at": "2026-10-16T23:06:55+08:00",
+      "elapsed_s": 0.763,
+      "outer_status": "feasible",
+      "lambda_mw": 1.40625,
+      "iterations": 9
+    }
+  ],
+  "scope_declaration": [
+    "研究范围模式：dm_equivalent",
+    "控制模式：atc",
+    "电气计算全部由 OpenDSS 完成；数学优化器仅生成候选调度，不替代电气仿真",
+    "暂不覆盖：暂态稳定、保护配合、谐波、频率全过程和现场控制闭环",
+    "上级网络为批准的主配接口限额与 OpenDSS 电源等值；本结论不构成完整主网优化结论"
+  ],
+  "generated_at": "2026-10-16T23:06:55+08:00"
+}

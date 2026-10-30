@@ -1,0 +1,19 @@
+{
+  "id": "HC.REMEDIATION.PROPOSE",
+  "version": "1.0.0",
+  "skill_code": "SK-13",
+  "card": "skills/cards/SK-13_HC_REMEDIATION_PROPOSE.md",
+  "display_name": "整改建议候选",
+  "description": "根据实测的绑定约束给出候选整改方向；只给方向与依据，不给改造后的承载力数值。",
+  "actions": ["propose_remediation"],
+  "handler": "hc_agent.remediation:propose",
+  "permission": "candidate_generation",
+  "requires": ["binding_constraint"],
+  "outputs": ["candidates", "disclaimer"],
+  "auto_enabled": false,
+  "notes": [
+    "auto_enabled=false：整改建议不由系统自动生成，必须由用户明确要求。",
+    "只为真正越限的约束给候选；没越限的约束不出方案，避免列一堆无关建议。",
+    "本技能不计算改造后的承载力（需要重新建模与容量搜索）。"
+  ]
+}

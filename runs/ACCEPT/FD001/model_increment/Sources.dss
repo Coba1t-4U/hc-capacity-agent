@@ -1,0 +1,2 @@
+! 上级电源等值（设计文档 17.7 sources）
+New Vsource.src_SRC_001 bus1=BUS-MV-001.1.2.3 basekv=10 pu=1.02 angle=0 R1=0.5 X1=2 R0=1.5 X0=6

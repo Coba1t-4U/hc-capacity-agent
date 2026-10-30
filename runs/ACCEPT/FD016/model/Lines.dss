@@ -1,0 +1,13 @@
+! 线路元件（设计文档 17.6）
+New Line.line_LN_MV_001 bus1=BUS-MV-001.1.2.3 bus2=BUS-MV-002.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_MV_002 bus1=BUS-MV-002.1.2.3 bus2=BUS-MV-003.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_MV_003 bus1=BUS-MV-003.1.2.3 bus2=BUS-MV-004.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_MV_004 bus1=BUS-MV-004.1.2.3 bus2=BUS-MV-005.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_MV_005 bus1=BUS-MV-004.1.2.3 bus2=BUS-MV-006.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_MV_006 bus1=BUS-MV-006.1.2.3 bus2=BUS-MV-007.1.2.3 linecode=LC_001 length=1.2 units=km
+New Line.line_LN_LV_011 bus1=BUS-LV-001.1.2.3 bus2=BUS-LV-001A.1.2.3 linecode=LC_002 length=0.12 units=km
+New Line.line_LN_LV_012 bus1=BUS-LV-001A.1.2.3 bus2=BUS-LV-001B.1.2.3 linecode=LC_002 length=0.12 units=km
+New Line.line_LN_LV_021 bus1=BUS-LV-002.1.2.3 bus2=BUS-LV-002A.1.2.3 linecode=LC_002 length=0.12 units=km
+New Line.line_LN_LV_022 bus1=BUS-LV-002A.1.2.3 bus2=BUS-LV-002B.1.2.3 linecode=LC_002 length=0.12 units=km
+New Line.line_LN_LV_031 bus1=BUS-LV-003.1.2.3 bus2=BUS-LV-003A.1.2.3 linecode=LC_002 length=0.12 units=km
+New Line.line_LN_LV_032 bus1=BUS-LV-003A.1.2.3 bus2=BUS-LV-003B.1.2.3 linecode=LC_002 length=0.12 units=km

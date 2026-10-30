@@ -1,0 +1,18 @@
+{
+  "id": "HC.REMEDIATION.FROM_RUN",
+  "version": "1.0.0",
+  "skill_code": "SK-14",
+  "card": "skills/cards/SK-14_HC_REMEDIATION_FROM_RUN.md",
+  "display_name": "按运行产物出整改候选",
+  "description": "读取一次运行的 run_summary.json / run_outcome.json，按其中的绑定约束与越限明细给出整改候选。",
+  "actions": ["propose_remediation_from_run"],
+  "handler": "hc_agent.remediation:from_run",
+  "permission": "candidate_generation",
+  "requires": ["run_dir"],
+  "outputs": ["candidates", "binding_constraint", "disclaimer"],
+  "auto_enabled": false,
+  "notes": [
+    "输入是运行目录，不是手填数字——避免人把错的越限信息喂进去。",
+    "读不到结论时返回 ok=false 并说明原因，不返回空候选冒充成功。"
+  ]
+}

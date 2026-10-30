@@ -1,0 +1,49 @@
+{
+  "nodes": [
+    {
+      "region_id": "D1",
+      "level": "D",
+      "parent": ""
+    },
+    {
+      "region_id": "T1",
+      "level": "T",
+      "parent": ""
+    },
+    {
+      "region_id": "M1",
+      "level": "M",
+      "parent": "D1"
+    },
+    {
+      "region_id": "M2",
+      "level": "M",
+      "parent": "D1"
+    },
+    {
+      "region_id": "M3",
+      "level": "M",
+      "parent": "D1"
+    }
+  ],
+  "edges": [
+    {
+      "parent": "D1",
+      "child": "M1"
+    },
+    {
+      "parent": "D1",
+      "child": "M2"
+    },
+    {
+      "parent": "D1",
+      "child": "M3"
+    }
+  ],
+  "levels": [
+    "D",
+    "M",
+    "T"
+  ],
+  "interface_count": 4
+}

@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# 本机数据与密钥（**不要提交**）
+llm.json
+chat.sqlite*
+dss_cases.json
+engine_mode.json
+logs/
+
+# 运行产物
+runs/DESKTOP/
+runs/GOLDEN/
+dss_runs/
+release/
+
+# 工具产物
+tests/_desktop_shots/
+*.log

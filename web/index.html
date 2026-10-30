@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配网承载力与主配微协同优化 Agent · 运行监控台</title>
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root{
+  --bg:#0d1117; --bg2:#151b23; --bg3:#1c232d; --line:#2a323d;
+  --fg:#e6edf3; --fg2:#9aa7b4; --fg3:#6b7684;
+  --green:#3fb950; --yellow:#d29922; --red:#f85149; --grey:#6e7681;
+  --blue:#58a6ff; --purple:#bc8cff; --cyan:#39c5cf;
+  --radius:10px; --mono:"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--fg);
+  font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------------------------------------------------------------- layout */
+header{
+  border-bottom:1px solid var(--line); background:var(--bg2);
+  padding:18px 26px; position:sticky; top:0; z-index:20;
+  backdrop-filter:blur(8px);
+}
+.hdr{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+h1{font-size:17px;margin:0;font-weight:600;letter-spacing:.2px}
+.sub{color:var(--fg3);font-size:12.5px}
+main{padding:22px 26px 60px;max-width:1500px;margin:0 auto}
+
+/* ----------------------------------------------------------------- cards */
+.grid{display:grid;gap:14px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:var(--radius);padding:15px 16px;
+}
+.card.sel{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.card h3{margin:0 0 3px;font-size:14px;font-weight:600}
+.card .cap{color:var(--fg3);font-size:12px;min-height:32px}
+.badge{
+  display:inline-block;padding:1px 8px;border-radius:20px;
+  font-size:11.5px;font-weight:600;letter-spacing:.3px;
+}
+.b-green{background:rgba(63,185,80,.16);color:var(--green);border:1px solid rgba(63,185,80,.35)}
+.b-yellow{background:rgba(210,153,34,.16);color:var(--yellow);border:1px solid rgba(210,153,34,.35)}
+.b-red{background:rgba(248,81,73,.16);color:var(--red);border:1px solid rgba(248,81,73,.35)}
+.b-grey{background:rgba(110,118,129,.16);color:var(--grey);border:1px solid rgba(110,118,129,.35)}
+.b-blue{background:rgba(88,166,255,.16);color:var(--blue);border:1px solid rgba(88,166,255,.35)}
+
+/* --------------------------------------------------------------- metrics */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin:14px 0}
+.kpi{background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.kpi .l{color:var(--fg3);font-size:11.5px;margin-bottom:4px}
+.kpi .v{font:600 21px/1.25 var(--mono);letter-spacing:-.4px}
+.kpi .v.sm{font-size:15px}
+.kpi .u{color:var(--fg3);font-size:11.5px;font-weight:400;margin-left:3px}
+.null{color:var(--fg3);font-style:italic;font-weight:400;font-size:13px}
+
+/* --------------------------------------------------------------- panels */
+section{margin-top:26px}
+h2{font-size:14px;margin:0 0 12px;font-weight:600;color:var(--fg);
+   display:flex;align-items:center;gap:9px}
+h2::before{content:"";width:3px;height:14px;background:var(--blue);border-radius:2px}
+h2 .hint{color:var(--fg3);font-weight:400;font-size:12px}
+
+/* --------------------------------------------------------------- tables */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--fg3);font-weight:500;font-size:11.5px;text-transform:none;
+   white-space:nowrap;background:var(--bg3)}
+td.n,th.n{text-align:right;font-family:var(--mono)}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+.scroll{max-height:380px;overflow:auto;border:1px solid var(--line);
+        border-radius:8px;background:var(--bg2)}
+
+/* ---------------------------------------------------------------- trace */
+.trace{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px}
+.tp{
+  border:1px solid var(--line);border-radius:8px;padding:8px 11px;
+  background:var(--bg3);min-width:96px;
+}
+.tp .dk{font:600 14px/1.3 var(--mono)}
+.tp .st{font-size:11px;margin-top:3px}
+.tp.feasible{border-color:rgba(63,185,80,.5)}
+.tp.infeasible{border-color:rgba(248,81,73,.5)}
+.tp.unknown{border-color:rgba(210,153,34,.5)}
+
+/* ---------------------------------------------------------------- misc */
+.bar{height:7px;border-radius:4px;background:var(--bg3);overflow:hidden;
+     display:flex;margin-top:5px}
+.bar i{display:block;height:100%}
+.note{color:var(--fg3);font-size:12px;margin-top:9px;line-height:1.65}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;font-size:12.5px}
+.kv dt{color:var(--fg3)}
+.kv dd{margin:0;font-family:var(--mono);word-break:break-all}
+.pill{font-family:var(--mono);font-size:11.5px;background:var(--bg3);
+      border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.risk{color:var(--yellow);font-size:12.5px;margin:3px 0}
+.warnbox{border-left:3px solid var(--yellow);background:rgba(210,153,34,.07);
+         padding:10px 13px;border-radius:0 6px 6px 0;font-size:12.5px;margin-top:12px}
+.errbox{border-left:3px solid var(--red);background:rgba(248,81,73,.07);
+        padding:10px 13px;border-radius:0 6px 6px 0;font-size:12.5px;margin-top:12px}
+.okbox{border-left:3px solid var(--green);background:rgba(63,185,80,.07);
+       padding:10px 13px;border-radius:0 6px 6px 0;font-size:12.5px;margin-top:12px}
+footer{color:var(--fg3);font-size:12px;margin-top:36px;padding-top:16px;
+       border-top:1px solid var(--line);line-height:1.8}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:6px 14px;border:1px solid var(--line);border-radius:7px;
+     background:var(--bg2);cursor:pointer;font-size:13px;color:var(--fg2)}
+.tab:hover{border-color:var(--blue);color:var(--fg)}
+.tab.on{background:rgba(88,166,255,.13);border-color:var(--blue);color:var(--blue);
+        font-weight:600}
+.empty{color:var(--fg3);text-align:center;padding:46px;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <h1>配网承载力与主配微协同优化 Agent</h1>
+    <span class="sub">运行监控台 · Distribution Network Hosting Capacity Agent</span>
+  </div>
+  <div class="sub" id="hdrline" style="margin-top:6px"></div>
+</header>
+
+<main>
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+  <footer>
+    <div>数据来源：运行产物文件（<span class="pill">run_summary.json</span>
+      <span class="pill">constraint_results.csv</span>
+      <span class="pill">search_trace.csv</span>
+      <span class="pill">verification.json</span>
+      <span class="pill">access_check.json</span>
+      <span class="pill">research_summary.json</span>）</div>
+    <div id="footnote"></div>
+  </footer>
+</main>
+
+<script>
+"use strict";
+let DATA = null;
+
+/* ------------------------------------------------------------- helpers */
+const $ = (s, r = document) => r.querySelector(s);
+const el = (t, cls, txt) => {
+  const n = document.createElement(t);
+  if (cls) n.className = cls;
+  if (txt !== undefined && txt !== null) n.textContent = txt;
+  return n;
+};
+const esc = s => String(s == null ? "" : s)
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** 数值格式化。null 一律显示为"未获取"，绝不用 0 或估数填充。 */
+function fmt(v, digits = 2) {
+  if (v === null || v === undefined || v === "" || Number.isNaN(v))
+    return '<span class="null">未获取</span>';
+  const n = Number(v);
+  if (!isFinite(n)) return '<span class="null">未获取</span>';
+  if (Number.isInteger(n)) return n.toLocaleString("en-US");
+  return n.toLocaleString("en-US",
+    { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+const pct = (a, b) => (b > 0 ? (100 * a) / b : 0);
+
+const LEVEL = {
+  green:  { t: "绿色 · 有开放空间", c: "b-green"  },
+  yellow: { t: "黄色 · 容量受限",   c: "b-yellow" },
+  red:    { t: "红色 · 无可开放空间", c: "b-red"  },
+  grey:   { t: "灰色 · 无法评估",   c: "b-grey"   }
+};
+const ST = {
+  feasible:   { t: "可行",    c: "var(--green)"  },
+  infeasible: { t: "不可行",  c: "var(--red)"    },
+  unknown:    { t: "unknown", c: "var(--yellow)" },
+  pass:       { t: "通过",    c: "var(--green)"  },
+  fail:       { t: "越限",    c: "var(--red)"    }
+};
+
+function levelBadge(lv) {
+  const m = LEVEL[lv] || LEVEL.grey;
+  return `<span class="badge ${m.c}">${esc(m.t)}</span>`;
+}
+function stBadge(s) {
+  const m = ST[s];
+  if (!m) return `<span class="badge b-grey">${esc(s || "—")}</span>`;
+  return `<span style="color:${m.c};font-size:12px;font-weight:600">${m.t}</span>`;
+}
+
+/** 带单位的数值：值为 null 时不输出单位，避免出现"未获取 kW"这类误导性拼接 */
+function fmtU(v, unit, digits = 2) {
+  const s = fmt(v, digits);
+  if (v === null || v === undefined || v === "" || Number.isNaN(Number(v)))
+    return s;
+  return s + `<span class="u">${esc(unit)}</span>`;
+}
+
+/** 约束用中文名（仅作显示标签，约束编号原样保留） */
+const CNAME = {
+  VOLTAGE_LIMIT: "节点电压越限",
+  THERMAL_LIMIT: "设备载流 / 反向重过载",
+  REVERSE_FLOW_LIMIT: "反向潮流（倒送）",
+  IMBALANCE_LIMIT: "三相不平衡",
+  SHORT_CIRCUIT_LIMIT: "短路容量"
+};
+
+/* ---------------------------------------------------------------- views */
+function renderTabs() {
+  const t = $("#tabs");
+  t.innerHTML = "";
+  DATA.cases.forEach((c, i) => {
+    const b = el("div", "tab" + (i === 0 ? " on" : ""));
+    b.textContent = c.id;
+    b.onclick = () => {
+      [...t.children].forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      renderCase(c);
+    };
+    t.appendChild(b);
+  });
+}
+
+function renderOverview() {
+  const v = $("#view");
+  v.innerHTML = "";
+  const sec = el("section");
+  sec.appendChild(el("h2", null, "算例总览"))
+     .insertAdjacentHTML("beforeend",
+       ` <span class="hint">共 ${DATA.cases.length} 个算例，` +
+       `数值全部取自运行产物</span>`);
+
+  const g = el("div", "grid cards");
+  DATA.cases.forEach(c => {
+    const d = el("div", "card");
+    const cap = c.kind === "research"
+      ? (c.max_lambda_mw == null ? null : c.max_lambda_mw + " MW")
+      : null;
+    d.innerHTML = `
+      <h3>${esc(c.title)}</h3>
+      <div class="cap">${esc(c.subtitle)}</div>
+      <div style="margin:9px 0 8px">${levelBadge(c.level)}</div>
+      <div class="kv" style="grid-template-columns:auto 1fr;font-size:12px">
+        <dt>运行号</dt><dd>${esc(c.run_id || c.study_id || "—")}</dd>
+        <dt>容量</dt><dd>${
+          c.kind === "research"
+            ? (c.max_lambda_mw == null
+                ? '<span class="null">未获取</span>'
+                : esc(fmt(c.max_lambda_mw, 3)) + " MW")
+            : (c.capacity_physical_kw == null
+                ? '<span class="null">未获取</span>'
+                : esc(fmt(c.capacity_physical_kw, 2)) + " kW")}</dd>
+        <dt>独立复算</dt><dd>${
+          c.verification
+            ? (c.verification.pass
+                ? '<span style="color:var(--green)">通过 · 0 差异</span>'
+                : `<span style="color:var(--red)">未通过 · ` +
+                  `${esc(c.verification.mismatch_count)} 项差异</span>`)
+            : '<span class="null">不适用</span>'}</dd>
+        <dt>主导限制</dt><dd>${esc(CNAME[c.binding_constraint] ||
+                                   c.binding_constraint || "—")}</dd>
+      </div>`;
+    d.onclick = () => {
+      const idx = DATA.cases.indexOf(c);
+      [...$("#tabs").children].forEach((x, i) =>
+        x.classList.toggle("on", i === idx));
+      renderCase(c);
+    };
+    g.appendChild(d);
+  });
+  sec.appendChild(g);
+  v.appendChild(sec);
+}
+
+function renderCase(c) {
+  const v = $("#view");
+  v.innerHTML = "";
+  if (c.kind === "research") return renderResearch(c);
+
+  /* --- 结论 KPI --- */
+  const sec1 = el("section");
+  sec1.innerHTML = `<h2>结论 <span class="hint">${esc(c.title)}${
+    c.scenario_basis ? " · 口径：" + esc(c.scenario_basis) : ""}</span></h2>`;
+  const cs = c.constraint_summary || {};
+  const k = el("div", "kpis");
+  k.innerHTML = `
+    <div class="kpi"><div class="l">${
+      c.kind === "access" ? "申请容量" : "物理可开放容量"}</div>
+      <div class="v">${fmtU(c.capacity_physical_kw, "kW", 2)}</div></div>
+    <div class="kpi"><div class="l">管理可开放容量</div>
+      <div class="v">${fmtU(c.capacity_managed_kw, "kW", 2)}</div></div>
+    <div class="kpi"><div class="l">约束校验</div>
+      <div class="v sm" style="color:var(--green)">通过 ${fmt(cs.pass, 0)}</div>
+      <div style="font-size:11.5px;color:var(--fg3)">
+        越限 <span style="color:${cs.fail ? "var(--red)" : "var(--fg3)"}">${
+          fmt(cs.fail, 0)}</span> ·
+        unknown <span style="color:${cs.unknown ? "var(--yellow)" : "var(--fg3)"}">${
+          fmt(cs.unknown, 0)}</span></div></div>
+    <div class="kpi"><div class="l">独立复算</div>
+      <div class="v sm" style="color:${
+        c.verification && c.verification.pass
+          ? "var(--green)" : "var(--red)"}">${
+        c.verification ? (c.verification.pass ? "通过" : "未通过") : "—"}</div>
+      <div style="font-size:11.5px;color:var(--fg3)">${
+        c.verification ? `差异 ${fmt(c.verification.mismatch_count, 0)} 项` : ""}</div>
+      </div>`;
+  sec1.appendChild(k);
+
+  if (c.level_reason) {
+    const box = el("div",
+      c.level === "green" ? "okbox"
+      : c.level === "red" ? "errbox" : "warnbox");
+    box.innerHTML = `<b>分级依据</b>：${esc(c.level_reason)}` +
+      (c.binding_constraint
+        ? `　主导限制因素：<span class="pill">${esc(c.binding_constraint)}</span>` +
+          ` <span style="color:var(--fg3)">${esc(CNAME[c.binding_constraint] || "")}</span>`
+        : "");
+    sec1.appendChild(box);
+  }
+  v.appendChild(sec1);
+
+  /* --- 搜索轨迹 --- */
+  if (c.search_trace && c.search_trace.length) {
+    const sec = el("section");
+    sec.innerHTML = `<h2>容量搜索轨迹
+      <span class="hint">方法 ${esc(c.search_method || "—")} ·
+      迭代 ${esc(c.search_iterations ?? "—")} 次 ·
+      状态 ${esc(c.search_status || "—")}</span></h2>`;
+    const tr = el("div", "trace");
+    c.search_trace.forEach(t => {
+      const d = el("div", "tp " + (t.status || ""));
+      d.innerHTML = `<div class="dk">${fmt(t.delta_kw, 0)}<span
+        style="font-size:11px;color:var(--fg3)"> kW</span></div>
+        <div class="st">${stBadge(t.status)}</div>
+        <div style="font-size:11px;color:var(--fg3);margin-top:3px">
+          通过 ${t.pass} · 越限 ${t.fail} · ? ${t.unknown}</div>
+        ${t.binding_constraint
+          ? `<div style="font-size:10.5px;color:var(--fg3);margin-top:2px">
+             ${esc(t.binding_constraint)}</div>` : ""}`;
+      tr.appendChild(d);
+    });
+    sec.appendChild(tr);
+    if (c.feasible_lower_kw != null && c.infeasible_upper_kw != null) {
+      const n = el("div", "note");
+      n.innerHTML = `已验证 <b style="color:var(--green)">可行下界 ${
+        fmt(c.feasible_lower_kw, 2)} kW</b> ·
+        不可行上界 <b style="color:var(--red)">${
+        fmt(c.infeasible_upper_kw, 2)} kW</b> ·
+        间隔 ${fmt(c.infeasible_upper_kw - c.feasible_lower_kw, 2)} kW。
+        结论取已验证可行的下界，不宣称已找到连续最大值。`;
+      sec.appendChild(n);
+    }
+    (c.search_notes || []).forEach(t => {
+      const n = el("div", "note", "· " + t);
+      sec.appendChild(n);
+    });
+    v.appendChild(sec);
+  }
+
+  /* --- 并网审查 --- */
+  if (c.access_check) {
+    const a = c.access_check;
+    const sec = el("section");
+    sec.innerHTML = `<h2>并网申请校核 <span class="hint">SK-11 ·
+      按申请容量校核（非容量搜索）</span></h2>`;
+    const k2 = el("div", "kpis");
+    k2.innerHTML = `
+      <div class="kpi"><div class="l">申请号</div>
+        <div class="v sm">${esc(a.application_id || "—")}</div></div>
+      <div class="kpi"><div class="l">结论候选</div>
+        <div class="v sm" style="color:${
+          a.decision_candidate === "可行" ? "var(--green)" : "var(--red)"}">${
+          esc(a.decision_candidate || "—")}</div></div>
+      <div class="kpi"><div class="l">存量越限</div>
+        <div class="v">${fmt(a.baseline_fail, 0)}</div></div>
+      <div class="kpi"><div class="l">申请引入的新增越限</div>
+        <div class="v" style="color:${
+          (a.newly_induced || []).length ? "var(--red)" : "var(--green)"}">${
+          fmt((a.newly_induced || []).length, 0)}</div></div>`;
+    sec.appendChild(k2);
+
+    const box = el("div", (a.newly_induced || []).length ? "warnbox" : "okbox");
+    box.innerHTML = `按设计文档 17.3 区分<b>存量问题</b>与<b>申请引入的变化</b>：` +
+      `存量越限 ${a.baseline_fail} 项，含申请后越限 ${a.application_fail} 项，` +
+      `其中由本申请新引入 ${(a.newly_induced || []).length} 项。` +
+      `不得把既有问题一概推导为申请导致。`;
+    sec.appendChild(box);
+
+    if ((a.newly_induced || []).length) {
+      const s = el("div", "scroll");
+      s.innerHTML = `<table><thead><tr><th>约束</th><th>对象</th></tr></thead>
+        <tbody>${a.newly_induced.map(x => `<tr>
+          <td>${esc(x.constraint_id)} <span style="color:var(--fg3)">${
+            esc(CNAME[x.constraint_id] || "")}</span></td>
+          <td class="n">${esc(x.object_id)}</td></tr>`).join("")}</tbody></table>`;
+      sec.appendChild(s);
+    }
+    v.appendChild(sec);
+  }
+
+  /* --- 约束分类 --- */
+  if (c.constraint_classes && c.constraint_classes.length) {
+    const sec = el("section");
+    sec.innerHTML = `<h2>五类强制约束校验
+      <span class="hint">设计文档 6.2 / 表 23</span></h2>`;
+    const s = el("div", "scroll");
+    s.innerHTML = `<table><thead><tr>
+        <th>约束</th><th class="n">通过</th><th class="n">越限</th>
+        <th class="n">unknown</th><th style="width:180px">构成</th>
+      </tr></thead><tbody>${c.constraint_classes.map(x => {
+        const tot = x.pass + x.fail + x.unknown;
+        return `<tr>
+          <td>${esc(CNAME[x.constraint_id] || x.constraint_id)}
+            <div style="font-size:11px;color:var(--fg3)">${esc(x.constraint_id)}</div></td>
+          <td class="n" style="color:var(--green)">${x.pass}</td>
+          <td class="n" style="color:${x.fail ? "var(--red)" : "var(--fg3)"}">${x.fail}</td>
+          <td class="n" style="color:${x.unknown ? "var(--yellow)" : "var(--fg3)"}">${x.unknown}</td>
+          <td><div class="bar">
+            <i style="width:${pct(x.pass, tot)}%;background:var(--green)"></i>
+            <i style="width:${pct(x.fail, tot)}%;background:var(--red)"></i>
+            <i style="width:${pct(x.unknown, tot)}%;background:var(--yellow)"></i>
+          </div></td></tr>`;
+      }).join("")}</tbody></table>`;
+    sec.appendChild(s);
+    sec.appendChild(Object.assign(el("div", "note"),
+      { textContent: "unknown 表示该约束能力未覆盖（如缺少故障模型或零序参数），" +
+        "按设计文档 17.12 既不计为通过、也不计为不可行。" }));
+    v.appendChild(sec);
+  }
+
+  /* --- 越限明细 --- */
+  if (c.failures && c.failures.length) {
+    const sec = el("section");
+    sec.innerHTML = `<h2>越限明细
+      <span class="hint">共 ${c.failure_total} 项，列出前 ${c.failures.length} 项</span></h2>`;
+    const s = el("div", "scroll");
+    s.innerHTML = `<table><thead><tr>
+        <th>约束</th><th>对象</th><th>场景</th><th>时刻</th>
+        <th class="n">计算值</th><th class="n">限值</th><th class="n">余量</th>
+      </tr></thead><tbody>${c.failures.map(f => `<tr>
+        <td>${esc(CNAME[f.constraint_id] || f.constraint_id)}</td>
+        <td>${esc(f.object_id)}</td>
+        <td style="color:var(--fg3)">${esc(f.scenario_id || "")}</td>
+        <td style="color:var(--fg3)">${esc((f.timestamp || "").slice(11, 16))}</td>
+        <td class="n">${fmt(f.value, 4)} <span style="color:var(--fg3)">${
+          esc(f.unit || "")}</span></td>
+        <td class="n">${f.upper_limit != null ? "≤ " + fmt(f.upper_limit, 2) : ""}${
+          f.lower_limit != null ? " ≥ " + fmt(f.lower_limit, 2) : ""}</td>
+        <td class="n" style="color:var(--red)">${fmt(f.margin, 4)}</td>
+      </tr>`).join("")}</tbody></table>`;
+    sec.appendChild(s);
+    v.appendChild(sec);
+  }
+
+  /* --- 复算 / 门禁 / 追溯 --- */
+  renderTrust(c, v);
+}
+
+function renderTrust(c, v) {
+  const sec = el("section");
+  sec.innerHTML = `<h2>可信验证与追溯 <span class="hint">设计文档第 9 章</span></h2>`;
+  const cols = el("div", "grid cards");
+
+  const ver = el("div", "card");
+  ver.innerHTML = `<h3>独立复算</h3>` + (c.verification ? `
+    <div class="kv">
+      <dt>结论</dt><dd style="color:${
+        c.verification.pass ? "var(--green)" : "var(--red)"};font-weight:600">${
+        c.verification.pass ? "通过" : "未通过"}</dd>
+      <dt>复算运行号</dt><dd>${esc(c.verification.verify_run_id || "—")}</dd>
+      <dt>输入指纹</dt><dd>${c.verification.input_match
+        ? "一致" : "不一致"}</dd>
+      <dt>比对指标</dt><dd>${fmt(c.verification.total_metrics, 0)} 项</dd>
+      <dt>差异</dt><dd>${fmt(c.verification.mismatch_count, 0)} 项</dd>
+    </div>
+    <div class="note">${esc(c.verification.note || "")}</div>`
+    : `<div class="note">本算例未执行独立复算。</div>`);
+
+  const gate = el("div", "card");
+  const g2 = c.release_gate;
+  gate.innerHTML = `<h3>发布门禁</h3>` + (g2 ? `
+    <div style="margin-bottom:8px">
+      <span class="badge ${g2.passed ? "b-green" : "b-yellow"}">${
+        g2.passed ? "全部通过" : "未满足发布条件"}</span></div>
+    <div class="kv">${(g2.gates || []).map(x => `
+      <dt>${esc({ independent_verification: "独立复算",
+                  professional_review: "专业复核",
+                  approval: "发布审批" }[x.gate] || x.gate)}</dt>
+      <dd style="color:${x.passed ? "var(--green)" : "var(--red)"}">${
+        x.passed ? "已满足" : "未提交"}</dd>`).join("")}</div>
+    ${g2.failed_gates && g2.failed_gates.length
+      ? `<div class="warnbox">未通过门禁：<b>${
+          g2.failed_gates.map(g => esc({
+            professional_review: "专业复核", approval: "发布审批",
+            independent_verification: "独立复算" }[g] || g)).join("、")
+          }</b>。三道门任何一项未过均不得发布正式结论。</div>`
+      : `<div class="okbox">三道门均已满足。</div>`}`
+    : `<div class="note">未找到门禁记录。</div>`);
+
+  const trace = el("div", "card");
+  trace.innerHTML = `<h3>可追溯性</h3><div class="kv">
+      <dt>快照</dt><dd>${esc(c.snapshot_id || "—")}</dd>
+      <dt>拓扑版本</dt><dd>${esc(c.topology_version || "—")}</dd>
+      <dt>规则包</dt><dd>${esc(c.rule_version || "—")}</dd>
+      <dt>技能版本</dt><dd>${c.skill_version_count
+        ? c.skill_version_count + " 项已冻结" : "—"}</dd>
+      <dt>引擎</dt><dd>${esc(c.engine.interface || "—")} ${
+        esc(c.engine.interface_version || "")}</dd>
+      <dt>输入摘要</dt><dd style="font-size:11px">${
+        esc((c.input_digest || "").slice(0, 16))}…</dd>
+    </div>`;
+
+  cols.append(ver, gate, trace);
+  sec.appendChild(cols);
+  if ((c.risks || []).length) {
+    const r = el("div", "warnbox");
+    r.innerHTML = "<b>风险与缺口</b><br>" +
+      c.risks.map(x => `<div class="risk">· ${esc(x)}</div>`).join("");
+    sec.appendChild(r);
+  }
+  v.appendChild(sec);
+}
+
+function renderResearch(c) {
+  const v = $("#view");
+  v.innerHTML = "";
+  const sec = el("section");
+  sec.innerHTML = `<h2>容量边界 <span class="hint">${esc(c.title)}</span></h2>`;
+  const k = el("div", "kpis");
+  k.innerHTML = `
+    <div class="kpi"><div class="l">最大可行 λ</div>
+      <div class="v">${fmtU(c.max_lambda_mw, "MW", 3)}</div></div>
+    <div class="kpi"><div class="l">可行点</div>
+      <div class="v" style="color:var(--green)">${fmt(c.feasible_points, 0)}</div></div>
+    <div class="kpi"><div class="l">不可行点</div>
+      <div class="v" style="color:var(--red)">${fmt(c.infeasible_points, 0)}</div></div>
+    <div class="kpi"><div class="l">unknown 点</div>
+      <div class="v" style="color:var(--yellow)">${fmt(c.unknown_points, 0)}</div></div>`;
+  sec.appendChild(k);
+  if (c.reason) {
+    const b = el("div", "note");
+    b.textContent = c.reason;
+    sec.appendChild(b);
+  }
+  v.appendChild(sec);
+
+  if (c.frontier && c.frontier.length) {
+    const s2 = el("section");
+    s2.innerHTML = `<h2>容量边界逐点结果
+      <span class="hint">capacity_frontier.csv · 按 λ 从大到小</span></h2>`;
+    const d = el("div", "scroll");
+    // 分区容量按资产逐项列出，而不是把原始 JSON 字符串直接丢在单元格里
+    const reg = v => {
+      if (!v) return "—";
+      try {
+        const o = typeof v === "string" ? JSON.parse(v) : v;
+        const parts = Object.entries(o)
+          .filter(([, x]) => Number(x) > 0)
+          .map(([k, x]) => `${k} ${Number(x).toLocaleString("en-US",
+            { maximumFractionDigits: 4 })}`);
+        return parts.length ? parts.join(" · ") : "全部为 0";
+      } catch { return String(v); }
+    };
+    d.innerHTML = `<table><thead><tr>
+        <th class="n">λ (MW)</th><th>状态</th><th>主导限制</th>
+        <th class="n">成本 (元)</th><th>各区域新增容量 (MW)</th>
+      </tr></thead><tbody>${c.frontier.map(f => `<tr>
+        <td class="n">${fmt(f.lambda_mw, 5)}</td>
+        <td>${stBadge(f.status)}</td>
+        <td>${esc(f.limiting_constraint || "—")}</td>
+        <td class="n">${
+          (f.cost_yuan === 0 || f.cost_yuan == null)
+            ? '<span class="null">未获取</span>' : fmt(f.cost_yuan, 2)}</td>
+        <td style="font-size:11.5px;color:var(--fg2)">${esc(reg(f.region_mw))}</td>
+      </tr>`).join("")}</tbody></table>`;
+    s2.appendChild(d);
+    s2.appendChild(Object.assign(el("div", "note"), {
+      textContent: "仅已验证点标记为 feasible；unknown 不计为不可行，" +
+        "也不计为容量不可行。多点联合边界是一组容量向量，" +
+        "不能用单点最大值求和代替。成本列为 0 表示本算例外购电价输入为 0 " +
+        "或经济性核算未纳入，不代表真实零成本。" }));
+    v.appendChild(s2);
+  }
+
+  if (c.interface_trace && c.interface_trace.length) {
+    const s3 = el("section");
+    s3.innerHTML = `<h2>接口协调轨迹
+      <span class="hint">目标级联（ATC）· 设计文档 20.3</span></h2>`;
+    const d = el("div", "scroll");
+    d.innerHTML = `<table><thead><tr>
+        <th class="n">迭代</th><th class="n">λ (MW)</th>
+        <th class="n">目标值</th><th class="n">最大归一化残差</th>
+        <th>安全校核</th></tr></thead><tbody>${
+      c.interface_trace.map(t => `<tr>
+        <td class="n">${t.iteration}</td>
+        <td class="n">${fmt(t.lambda_mw, 4)}</td>
+        <td class="n">${fmt(t.objective, 2)}</td>
+        <td class="n">${fmt(t.residual, 6)}</td>
+        <td style="color:${t.security_ok ? "var(--green)" : "var(--red)"}">${
+          t.security_ok ? "通过" : "未通过"}</td>
+      </tr>`).join("")}</tbody></table>`;
+    s3.appendChild(d);
+    v.appendChild(s3);
+  }
+
+  const s4 = el("section");
+  s4.innerHTML = `<h2>一致性与范围声明</h2>`;
+  const cols = el("div", "grid cards");
+  const ck = el("div", "card");
+  ck.innerHTML = `<h3>一致性检查</h3><div class="kv">
+      <dt>非预见性</dt><dd style="color:${
+        c.nonanticipativity_pass ? "var(--green)" : "var(--red)"}">${
+        c.nonanticipativity_pass ? "通过" : "未通过"}</dd>
+      <dt>储能能量守恒</dt><dd style="color:${
+        c.energy_conservation_pass ? "var(--green)" : "var(--red)"}">${
+        c.energy_conservation_pass ? "通过" : "未通过"}</dd>
+      <dt>数据集版本</dt><dd style="font-size:11px">${
+        esc((c.dataset_version || "").slice(0, 16))}…</dd>
+      <dt>运行号</dt><dd>${esc(c.study_id || "—")}</dd>
+    </div>`;
+  const sc = el("div", "card");
+  sc.innerHTML = `<h3>范围声明</h3>` +
+    (c.scope_declaration || []).map(x =>
+      `<div class="note" style="margin-top:4px">· ${esc(x)}</div>`).join("");
+  cols.append(ck, sc);
+  s4.appendChild(cols);
+  v.appendChild(s4);
+}
+
+/* ----------------------------------------------------------------- boot */
+async function boot() {
+  try {
+    const r = await fetch("data.json", { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    DATA = await r.json();
+  } catch (e) {
+    $("#view").innerHTML = `<div class="empty">
+      <p>未能加载 <span class="pill">web/data.json</span>（${esc(e.message)}）。</p>
+      <p style="margin-top:10px">请先生成数据包：<br>
+      <span class="pill">python tools/export_dashboard.py --root runs/ACCEPT --out web/data.json</span></p>
+      <p style="margin-top:10px;color:var(--fg3)">
+      若直接双击打开本文件，浏览器的 file:// 同源策略会阻止读取本地 JSON，
+      请改用本地静态服务器：<br>
+      <span class="pill">python -m http.server 8000 --directory web</span>
+      然后访问 <span class="pill">http://localhost:8000/</span></p>
+      </div>`;
+    return;
+  }
+  if (!DATA.cases || !DATA.cases.length) {
+    $("#view").innerHTML = `<div class="empty">数据包中没有可用算例。</div>`;
+    return;
+  }
+  $("#hdrline").textContent =
+    `数据源 ${DATA.generated_from} · ${DATA.case_count} 个算例 · ` +
+    `所有数值取自运行产物，未经估算`;
+  $("#footnote").textContent = DATA.note || "";
+  renderTabs();
+  renderOverview();
+  // 支持 #CASE-ID 深链，便于直接分享某个算例视图
+  const want = (location.hash || "").replace("#", "");
+  const pick = DATA.cases.findIndex(c => c.id === want.toUpperCase());
+  const idx = pick >= 0 ? pick : 0;
+  [...$("#tabs").children].forEach((x, i) => x.classList.toggle("on", i === idx));
+  if (pick >= 0) {
+    renderCase(DATA.cases[idx]);
+  } else {
+    renderCase(DATA.cases[0]);
+    [...$("#tabs").children][0].onclick = () => {
+      [...$("#tabs").children].forEach((x, i) =>
+        x.classList.toggle("on", i === 0));
+      renderOverview();
+    };
+  }
+}
+boot();
+</script>
+</body>
+</html>

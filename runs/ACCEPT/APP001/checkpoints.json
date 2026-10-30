@@ -1,0 +1,74 @@
+[
+  {
+    "step": "S01_freeze_inputs",
+    "status": "ok",
+    "at": "2026-10-16T23:06:52+08:00",
+    "elapsed_s": 0.287,
+    "input_count": 9,
+    "input_digest": "88881dcb50c2bf7f98b95d881c426a1c3cdbab5eb89a7eeeb6a8600d08900f91"
+  },
+  {
+    "step": "S02_validate_bundle",
+    "status": "ok",
+    "at": "2026-10-16T23:06:52+08:00",
+    "elapsed_s": 0.458,
+    "total_issues": 0,
+    "blocking_count": 0
+  },
+  {
+    "step": "S03_build_case",
+    "status": "ok",
+    "at": "2026-10-16T23:06:53+08:00",
+    "elapsed_s": 1.077,
+    "scenarios": 3,
+    "slices": 36,
+    "model_hash": "5d6402bc831b"
+  },
+  {
+    "step": "S04_run_baseline",
+    "status": "ok",
+    "at": "2026-10-16T23:06:53+08:00",
+    "elapsed_s": 1.127,
+    "slices": 1980,
+    "constraint_pass": 123,
+    "constraint_fail": 0,
+    "baseline_admissible": true
+  },
+  {
+    "step": "S05_access_check",
+    "status": "ok",
+    "at": "2026-10-16T23:06:53+08:00",
+    "elapsed_s": 1.182,
+    "requested_capacity_kw": 250.0,
+    "decision_candidate": "可行",
+    "pass_count": 120,
+    "fail_count": 0
+  },
+  {
+    "step": "S07_verify_run",
+    "status": "ok",
+    "at": "2026-10-16T23:06:53+08:00",
+    "elapsed_s": 1.307,
+    "mismatch_count": 0
+  },
+  {
+    "step": "S08_generate_report",
+    "status": "ok",
+    "at": "2026-10-16T23:06:53+08:00",
+    "elapsed_s": 1.445,
+    "report": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\APP001\\report\\report.docx",
+    "gate_passed": false,
+    "failed_gates": [
+      "professional_review",
+      "approval"
+    ]
+  },
+  {
+    "step": "S09_seal_evidence",
+    "status": "ok",
+    "at": "2026-10-16T23:06:54+08:00",
+    "elapsed_s": 1.659,
+    "files": 99,
+    "digest": "dec610655e570a0bb364e5f8d69f5dd4eb50d1ae68714106b28e4004bc31c0b6"
+  }
+]

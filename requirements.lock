@@ -1,0 +1,35 @@
+# hc_agent 依赖锁定（设计文档 17.10：安装依赖应使用精确版本和锁定文件；
+# 同时记录 Python、求解器底层库、操作系统及模型转换器版本）
+#
+# 说明：本工程在本机已验证环境下运行，核心电气计算依赖 OpenDSSDirect.py。
+# 该包已解包到 ../opendss_demo/pylibs（见 opendss_demo/README.md），
+# 无需 pip 安装即可使用；如需在受控环境重新安装，执行：
+#   pip install OpenDSSDirect.py==0.9.4
+#
+# ---- 电气计算（必需，版本已锁定）----
+OpenDSSDirect.py==0.9.4
+# 底层实现（由 OpenDSSDirect.py 间接引入，实际加载版本）
+#   DSS C-API 0.14.5 (based on OpenDSS SVN 3723)
+#   DSS-Python 0.15.7
+pycparser==3.0
+typing_extensions==4.16.0
+
+# ---- 数据读取（必需）----
+openpyxl==3.1.5
+numpy==2.3.5
+pandas==3.0.1
+
+# ---- 报告生成（必需）----
+python-docx==1.2.0
+
+# ---- 可选：缺失时按内置降级路径运行 ----
+# networkx            拓扑连通性/孤岛检查；缺失时退化为纯 Python 邻接表
+# PyYAML              rules.yaml 解析；缺失时使用 rules.py 内置 YAML 子集解析器
+# scipy               SLSQP 局部调度与概率 LP；缺失时使用确定性备用调度/闭式最坏概率
+# pyarrow             profiles.parquet 读取
+# matplotlib          报告图表（当前报告未使用）
+
+# ---- 运行环境 ----
+# Python  3.12.14 (main, Sep  1 2026) [MSC v.1944 64 bit (AMD64)]
+# OS      Windows-11-10.0.26200-SP0
+# engine  OpenDSSDirect.py 0.9.4 / DSS C-API 0.14.5 / OpenDSS SVN 3723

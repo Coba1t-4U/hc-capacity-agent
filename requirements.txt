@@ -1,0 +1,22 @@
+# 运行必需
+OpenDSSDirect.py==0.9.4
+openpyxl>=3.1
+numpy>=2.0
+python-docx>=1.1
+
+# 可选增强（拓扑检查 / YAML / 优化 / 表格）
+networkx>=3.0
+PyYAML>=6.0
+scipy>=1.11
+pandas>=2.0
+pyarrow>=14.0
+
+# 开发
+pytest>=7.0
+
+# 打包
+PyInstaller>=6.0
+
+# 第二引擎（交叉校核）。注意：它要求 pandas~=2.3，
+# 与上面的 pandas>=2.0 共存时建议装在独立目录（见 README_如何在PyCharm中打开.md）
+pandapower>=3.5

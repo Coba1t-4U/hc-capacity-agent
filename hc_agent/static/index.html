@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>配网承载力与主配微协同优化 Agent</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ 标题栏（56px，可拖动） ============ -->
+<header id="titlebar">
+  <div class="tb-left">
+    <span class="app-icon">承</span>
+    <button class="tb-icon-btn" id="btn-collapse" title="折叠导航">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="none"
+           stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M2 4h12M2 8h8M2 12h12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="tb-center">配网承载力与主配微协同优化 Agent</div>
+  <div class="tb-right">
+    <button class="tb-icon-btn" id="btn-help" title="帮助 / 关于">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="none"
+           stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <circle cx="8" cy="8" r="6.2"/>
+        <path d="M6.2 6.1a1.9 1.9 0 1 1 2 2v1.1M8.1 11.6h.01"/>
+      </svg>
+    </button>
+    <button class="tb-icon-btn" id="btn-refresh" title="刷新界面">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="none"
+           stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M13.2 7.5a5.2 5.2 0 1 1-1.6-3.7"/>
+        <path d="M13.4 2.4v3.3h-3.3"/>
+      </svg>
+    </button>
+    <button class="win-btn" id="btn-min" title="最小化">
+      <svg viewBox="0 0 12 12" width="12" height="12" stroke="currentColor" stroke-width="1.1">
+        <path d="M2 6h8"/>
+      </svg>
+    </button>
+    <button class="win-btn" id="btn-max" title="最大化">
+      <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.1">
+        <rect x="2.2" y="2.2" width="7.6" height="7.6"/>
+      </svg>
+    </button>
+    <button class="win-btn close" id="btn-close" title="关闭">
+      <svg viewBox="0 0 12 12" width="12" height="12" stroke="currentColor" stroke-width="1.1">
+        <path d="M3 3l6 6M9 3l-6 6"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ 状态栏（36px） ============ -->
+<div id="statusbar">
+  <span class="crumb" id="sb-crumb">运行总览 / 环境与就绪度</span>
+  <span class="faint">|</span>
+  <button class="status-item" id="sb-backend" title="计算后端">
+    <span class="dot gray"></span><span>后端检查中…</span>
+  </button>
+  <button class="status-item" id="sb-engine" title="OpenDSS 引擎通道">
+    <span class="dot gray"></span><span>引擎检查中…</span>
+  </button>
+  <button class="status-item" id="sb-watchdog" title="引擎看门狗与自愈">
+    <span class="dot gray"></span><span>看门狗检查中…</span>
+  </button>
+  <button class="status-item" id="sb-crashlog" title="崩溃可观测">
+    <span class="dot gray"></span><span>崩溃日志检查中…</span>
+  </button>
+  <div class="status-right">
+    <button class="status-item" id="sb-runs" title="已产出的运行">
+      <span class="dot gray"></span><span>运行记录</span>
+      <b id="sb-run-count">0</b>
+    </button>
+  </div>
+</div>
+
+<!-- ============ 主体 ============ -->
+<div id="app">
+  <nav id="nav">
+    <div class="nav-logo">
+      <span class="app-icon">承</span><span>承载力 Agent</span>
+    </div>
+    <div class="nav-item active" data-page="overview">
+      <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+        <rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/>
+        <rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>
+      </svg>
+      <span>运行总览</span>
+    </div>
+    <div class="nav-item" data-page="workbench">
+      <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M2 12.5l3.5-3.5 2.5 2.5L14 5.5"/><path d="M10.5 5.5H14v3.5"/>
+      </svg>
+      <span>容量分析</span>
+    </div>
+    <div class="nav-item" data-page="results">
+      <svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/><path d="M6 8.5h4M6 11h4"/>
+      </svg>
+      <span>结果与证据</span>
+    </div>
+  </nav>
+
+  <aside id="subnav"></aside>
+
+  <main id="content">
+    <div id="page-body"></div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "id": "HC.AUDIT.VERIFY",
+  "version": "1.0.0",
+  "skill_code": "SK-15",
+  "card": "skills/cards/SK-15_HC_AUDIT_VERIFY.md",
+  "display_name": "审计链校验",
+  "description": "校验一次运行的哈希链审计日志，回答这份结果有没有被改动过。只读，不改任何产物。",
+  "actions": ["verify_audit_chain"],
+  "handler": "hc_agent.audit_chain_summary:verify",
+  "permission": "read_only",
+  "requires": ["run_dir"],
+  "outputs": ["ok", "count", "broken_at", "reason", "head_hash"],
+  "auto_enabled": true,
+  "notes": [
+    "只读技能，任何权限级别都能用（包括 L0 只读）。",
+    "auto_enabled=true：打开结果页时可以自动校验一次，不改变任何数据。",
+    "老运行没有链时可以补建（另见 seal_run），但补建本身要记一条新事件。"
+  ]
+}

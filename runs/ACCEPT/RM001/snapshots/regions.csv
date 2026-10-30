@@ -1,0 +1,6 @@
+﻿region_id,level,parent_region_id,model_id
+D1,D,,model_d1
+T1,T,,model_t1
+M1,M,D1,model_m1
+M2,M,D1,model_m2
+M3,M,D1,model_m3

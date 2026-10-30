@@ -1,0 +1,168 @@
+{
+  "kb_id": "kb_capacity",
+  "generated_at": "2026-10-18T13:23:07",
+  "note": "题目由文档自身反推生成，只验证**检索能否找到出处**，不验证回答是否正确。hit@K=1 不等于问答准确率 100%。",
+  "count": 20,
+  "items": [
+    {
+      "question": "读等级时的常见误判是什么",
+      "expected_chunk_id": "doc_e991dd1d3f0b#4",
+      "expected_doc_id": "doc_e991dd1d3f0b",
+      "topic": "读等级时的常见误判",
+      "source": "红黄绿分级与数据风险 / 读等级时的常见误判",
+      "reference": "【红黄绿分级与数据风险 / 读等级时的常见误判】\n1. **把灰色当绿色。** 灰色不是\"没问题\"，是\"还不能下结论\"。\n2. **只看容量不看等级。** 有容量但等级灰色，仍然不能发布。\n3. **把 red 理解成\"设备坏了\"。** red 表示没有开放容量，\n   原因可能是基线就越限，也可能是某个约束在很小容量下就触发。\n   具体原因要看 `binding_constraint` 与 `"
+    },
+    {
+      "question": "为什么用罚函数而不是直接消元的判据是什么",
+      "expected_chunk_id": "doc_bca214f5d8b1#5",
+      "expected_doc_id": "doc_bca214f5d8b1",
+      "topic": "为什么用罚函数而不是直接消元",
+      "source": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 为什么用罚函数而不是直接消元",
+      "reference": "【目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 为什么用罚函数而不是直接消元】\n因为上下层的信息不共享：上层不知道下层全部约束，下层也不知道上层全部约束。\n罚函数法只要求交换**耦合变量的目标值与回报值**，属于\"最小数据交换\"。"
+    },
+    {
+      "question": "三个层级怎么算",
+      "expected_chunk_id": "doc_be4c331cf4a8#0",
+      "expected_doc_id": "doc_be4c331cf4a8",
+      "topic": "三个层级",
+      "source": "主配微协同基本概念 / 三个层级",
+      "reference": "【主配微协同基本概念 / 三个层级】\n主配微协同（也称**主配微三级协同**）指**主网（输电网）— 配电网—微电网**三层的协调运行。\n| 层级 | 典型对象 | 关注什么 |\n|---|---|---|\n| 主网（输电网） | 省级/区域电网、机组、断面 | 机组组合、经济调度、断面越限、备用 |\n| 配电网 | 馈线、台区、配变、分布式电源 | 电压、载流、反向潮流、可开放容量 |\n| 微电"
+    },
+    {
+      "question": "术语有哪些要求",
+      "expected_chunk_id": "doc_be4c331cf4a8#5",
+      "expected_doc_id": "doc_be4c331cf4a8",
+      "topic": "术语",
+      "source": "主配微协同基本概念 / 术语",
+      "reference": "【主配微协同基本概念 / 术语】\n- **关口/联络线功率**：层间交换的有功/无功。\n- **耦合变量**：被两层同时约束的量（就是联络线功率）。\n- **一致性约束**：要求上下层对同一个耦合量的取值相等。\n- **目标级联法（ATC）**：一种分层分解协调方法，见后续小节。\n- **主配一体化**：把输配电网放在同一个优化模型里考虑。\n- **多层级自治**：各层在本地自主决策，只在必要时向"
+    },
+    {
+      "question": "关于收敛判据与参数（配套算例的真实取值），结论是什么",
+      "expected_chunk_id": "doc_bca214f5d8b1#2",
+      "expected_doc_id": "doc_bca214f5d8b1",
+      "topic": "收敛判据与参数（配套算例的真实取值）",
+      "source": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "reference": "【目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）】\n本项目配套的三微网算例（`mainATC2.m` / `parameterATC.m`）里："
+    },
+    {
+      "question": "一个真实例子是什么",
+      "expected_chunk_id": "doc_019ca8a02c9c#5",
+      "expected_doc_id": "doc_019ca8a02c9c",
+      "topic": "一个真实例子",
+      "source": "容量搜索方法与收敛口径 / 一个真实例子",
+      "reference": "【容量搜索方法与收敛口径 / 一个真实例子】\n351.5625 | 不可行 | 电压 |\n| 15 | 339.84375 | 不可行 | 电压 |\n| 16 | 333.984375 | 可行 | — |\n最终容量 **333.984375 kW**，卡在 `bus-lv-002.C` 的电压上限\n（实测 1.100829 pu，限值 1.10 pu，余量 −0.000829 pu）。\n注意第 "
+    },
+    {
+      "question": "红黄绿分级与数据风险的判据是什么",
+      "expected_chunk_id": "doc_e991dd1d3f0b#0",
+      "expected_doc_id": "doc_e991dd1d3f0b",
+      "topic": "红黄绿分级与数据风险",
+      "source": "红黄绿分级与数据风险",
+      "reference": "【红黄绿分级与数据风险】\n承载力结论带一个等级，用于对外快速表达\"还能不能接\"。"
+    },
+    {
+      "question": "三、网损的变化规律怎么算",
+      "expected_chunk_id": "doc_79d6b195373c#6",
+      "expected_doc_id": "doc_79d6b195373c",
+      "topic": "三、网损的变化规律",
+      "source": "分布式电源接入的系统影响 / 三、网损的变化规律",
+      "reference": "【分布式电源接入的系统影响 / 三、网损的变化规律】\n```\n网损 ≈ Σ (P_flow² + Q_flow²) / U² · R\n```\n- DG 出力小时：就近供电，线路潮流减小 → **网损下降**；\n- DG 出力超过本地负荷：功率反向长距离输送 → **网损上升**；\n- 所以\"装得越多越省线损\"是错的，**存在最优渗透率**。\n本工程 `双台区对比` 的 23.91 kW 网损（占负"
+    },
+    {
+      "question": "一次迭代的流程有哪些要求",
+      "expected_chunk_id": "doc_bca214f5d8b1#1",
+      "expected_doc_id": "doc_bca214f5d8b1",
+      "topic": "一次迭代的流程",
+      "source": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 一次迭代的流程",
+      "reference": "【目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 一次迭代的流程】\n1. 上层把自己希望的交换功率（目标值）**下发**给下层；\n2. 下层在自己约束下优化，**回报**它实际能接受的交换功率；\n3. 上层比较\"目标\"与\"实际回报\"的**不一致量（误差）**；\n4. 误差超阈值就**加大罚函数权重**，回到第 1 步。"
+    },
+    {
+      "question": "关于T 33593《分布式电源并网技术要求》，结论是什么",
+      "expected_chunk_id": "doc_e0410611239e#2",
+      "expected_doc_id": "doc_e0410611239e",
+      "topic": "T 33593《分布式电源并网技术要求》",
+      "source": "并网与分布式电源标准要点 / 二、GB/T 33593《分布式电源并网技术要求》",
+      "reference": "【并网与分布式电源标准要点 / 二、GB/T 33593《分布式电源并网技术要求》】\n适用于通过 380 V 及以下、或 10(6) kV 电压等级接入的分布式电源。\n常见要求（【待核】）：\n- 并网点电压偏差、频率偏差应满足 GB/T 12325、GB/T 15945；\n- 分布式电源应具备孤岛保护，且不主动向无故障停电区域供电；\n- 接入容量与公共连接点短路容量之比有上限要求（各地执行口径不同"
+    },
+    {
+      "question": "两段式搜索是什么",
+      "expected_chunk_id": "doc_019ca8a02c9c#2",
+      "expected_doc_id": "doc_019ca8a02c9c",
+      "topic": "两段式搜索",
+      "source": "容量搜索方法与收敛口径 / 两段式搜索",
+      "reference": "【容量搜索方法与收敛口径 / 两段式搜索】\n实际轨迹通常分两段，这也是排查时容易看错的地方：\n1. **粗扫描**：从 0 开始按等距步长（如 750 kW）向上试探，定位越限区间\n2. **二分细化**：在最后一个可行点与第一个不可行点之间反复取中点，\n   直到区间宽度小于精度\n`results/search_trace.csv` 里的 `iteration` 字段**不是全局唯一的** ——"
+    },
+    {
+      "question": "三、配微协同（配网与微网）的判据是什么",
+      "expected_chunk_id": "doc_820f9446adb7#4",
+      "expected_doc_id": "doc_820f9446adb7",
+      "topic": "三、配微协同（配网与微网）",
+      "source": "参考文献索引与主题归类 / 三、配微协同（配网与微网）",
+      "reference": "【参考文献索引与主题归类 / 三、配微协同（配网与微网）】\n| 文献 | 主要贡献 |\n|---|---|\n| 考虑需求响应和联络线交互的主动配电网多目标协同调度优化（徐岩） | 需求响应 + 联络线交互的多目标调度 |\n| 面向配电网的多微电网协同优化调度研究（汤雯博） | 配网与多微网的协同调度 |\n| 面向主配微协同的新型配电网多层级自治策略（郑建华） | 多层级**自治**策略 |\n| 全"
+    },
+    {
+      "question": "怎么用这份索引怎么算",
+      "expected_chunk_id": "doc_820f9446adb7#6",
+      "expected_doc_id": "doc_820f9446adb7",
+      "topic": "怎么用这份索引",
+      "source": "参考文献索引与主题归类 / 怎么用这份索引",
+      "reference": "【参考文献索引与主题归类 / 怎么用这份索引】\n问\"某个方法有什么依据\"时，先判断属于哪一类：\n- 谈**架构分工/数据交换** → 第一类\n- 谈**怎么分解求解、收敛性** → 第二类\n- 谈**配网与微网之间的协调** → 第三类\n- 谈**不确定性口径或碳约束** → 第四类"
+    },
+    {
+      "question": "二、电压降怎么算有哪些要求",
+      "expected_chunk_id": "doc_c28dfc9f4d08#2",
+      "expected_doc_id": "doc_c28dfc9f4d08",
+      "topic": "二、电压降怎么算",
+      "source": "配电网规划与供电半径 / 二、电压降怎么算",
+      "reference": "【配电网规划与供电半径 / 二、电压降怎么算】\n线路电压降的工程近似（三项负荷、集中参数）：\n```\nΔU ≈ (P·R + Q·X) / U_n          ΔU% ≈ (P·R + Q·X) / U_n² × 100%\n```\n- `P`、`Q`：流过该段线路的有功、无功（kW、kvar）\n- `R`、`X`：该段线路电阻、电抗（Ω）\n- `U_n`：线电压（kV）\n**关键洞察**：`"
+    },
+    {
+      "question": "关于三类时间场景，结论是什么",
+      "expected_chunk_id": "doc_066b52c7d1da#1",
+      "expected_doc_id": "doc_066b52c7d1da",
+      "topic": "三类时间场景",
+      "source": "场景与工况：为什么同一个台区有几个结论 / 三类时间场景",
+      "reference": "【场景与工况：为什么同一个台区有几个结论 / 三类时间场景】\n| 场景 ID | 类别 | 含义 |\n|---|---|---|\n| `S_BASE` | typical_day 典型日 | 基准工况，含典型日 24 小时曲线 |\n| `S_HIGH_PV_LOW_LOAD` | 高光伏·低负荷 | 光伏大发且负荷很低，最容易出现电压偏高与反向潮流 |\n| `S_LOW_PV_HIGH_LOAD`"
+    },
+    {
+      "question": "需要系数（demand factor）是什么",
+      "expected_chunk_id": "doc_0fdbe5fb9e00#3",
+      "expected_doc_id": "doc_0fdbe5fb9e00",
+      "topic": "需要系数（demand factor）",
+      "source": "负荷特性与同时率 / 二、同时率与需要系数 / 需要系数（demand factor）",
+      "reference": "【负荷特性与同时率 / 二、同时率与需要系数 / 需要系数（demand factor）】\n```\n需要系数 K_需 = 用户最大负荷 / 用户设备装机容量            （≤ 1）\n```\n需要系数法计算负荷：\n```\nP_js = K_需 × ΣP_装机\n```\n常见需要系数【待核，出自 GB/T 50293《城市电力规划规范》与各类负荷计算手册】：\n| 负荷类型 | 需要系数范围 |"
+    },
+    {
+      "question": "一、为什么短路电流会限制可开放容量的判据是什么",
+      "expected_chunk_id": "doc_c2f219a203ae#1",
+      "expected_doc_id": "doc_c2f219a203ae",
+      "topic": "一、为什么短路电流会限制可开放容量",
+      "source": "短路电流与设备校验 / 一、为什么短路电流会限制可开放容量",
+      "reference": "【短路电流与设备校验 / 一、为什么短路电流会限制可开放容量】\n配电网的设备（断路器、隔离开关、母线、电缆）都按**额定短路耐受能力**选型。\n电网的短路电流水平由**系统阻抗**决定：\n```\nI_k = U / (√3 · Z_k)            Z_k = 系统阻抗 + 线路阻抗 + 变压器阻抗\n```\n接入分布式电源后，电源也会往故障点\"喂\"电流，**故障点总电流是电网与电源的叠加"
+    },
+    {
+      "question": "收敛判据与参数（配套算例的真实取值）怎么算",
+      "expected_chunk_id": "doc_bca214f5d8b1#3",
+      "expected_doc_id": "doc_bca214f5d8b1",
+      "topic": "收敛判据与参数（配套算例的真实取值）",
+      "source": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "reference": "【目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）】\n本项目配套的三微网算例（`mainATC2.m` / `parameterATC.m`）里：\n| 参数 | 取值 | 含义 |\n|---|---|---|\n| 一致性误差阈值 | `postError > 0.2` 继续迭代 | 上下层耦合变量"
+    },
+    {
+      "question": "收敛判据与参数（配套算例的真实取值）有哪些要求",
+      "expected_chunk_id": "doc_bca214f5d8b1#4",
+      "expected_doc_id": "doc_bca214f5d8b1",
+      "topic": "收敛判据与参数（配套算例的真实取值）",
+      "source": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "reference": "【目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）】\nrou_fuel_G = 600` | 元/MWh 级 |\n| 启停费用 | `rouG_ON = 0.1`、`rouG_OFF = 0.05` | 千元级 |\n罚函数权重按时段不同（`pho` 是一个 1×24 的向量），\n说明不同时段的耦合"
+    },
+    {
+      "question": "关于三道门禁，结论是什么",
+      "expected_chunk_id": "doc_c7be87301c9b#1",
+      "expected_doc_id": "doc_c7be87301c9b",
+      "topic": "三道门禁",
+      "source": "独立复算与发布门禁 / 三道门禁",
+      "reference": "【独立复算与发布门禁 / 三道门禁】\n| 门禁 | 含义 |\n|---|---|\n| 独立复算 `independent_verification` | 用**另一条引擎通道**重跑，逐字段比对 |\n| 专业复核 `professional_review` | 由专业人员在系统内确认 |\n| 审批 `approval` | 按流程完成审批 |\n三者都满足，`release_gate.passed`"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+﻿metric_key,object_ref,primary,verify,abs_diff,tolerance,status
+input_digest,,f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555,f2e32865df407ec8034bd4d9cc1833453af4b16f7ffe3e42b26b37202cff6555,,,exact_match
+engine_interface_version,,0.9.4,0.9.4,,,exact_match
+scenario_coverage,,"S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD","S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD",,,exact_match
+all_converged,,true,true,,,exact_match
+constraint.total,,420,420,,,exact_match
+constraint.pass,,420,420,,,exact_match
+constraint.fail,,0,0,,,exact_match
+constraint.unknown,,0,0,,,exact_match
+constraint_rows.count,,420,420,,,exact_match
+constraint_rows.digest,,19f39f77b7136d673ff0d84d6847c0feb582479d564f6d7ceba2a6e4504cf44c,19f39f77b7136d673ff0d84d6847c0feb582479d564f6d7ceba2a6e4504cf44c,,,exact_match
+constraint.all_pass,,true,true,,,exact_match
+capacity_physical_kw,,515.625,515.625,0,0.001,match
+search_status,,ok,ok,,,exact_match
+binding_constraint,,VOLTAGE_LIMIT,VOLTAGE_LIMIT,,,exact_match

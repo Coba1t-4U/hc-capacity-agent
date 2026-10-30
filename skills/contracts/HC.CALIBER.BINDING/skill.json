@@ -1,0 +1,20 @@
+{
+  "id": "HC.CALIBER.BINDING",
+  "version": "1.0.0",
+  "skill_code": "SK-16",
+  "card": "skills/cards/SK-16_HC_CALIBER_BINDING.md",
+  "display_name": "口径绑定校验",
+  "description": "校验一次运行的结论在当前环境（计算版本/规则包/参数）下是否仍然成立；口径变化时给出逐分量差异。",
+  "actions": ["verify_caliber_binding"],
+  "handler": "hc_agent.caliber_check:verify",
+  "permission": "read_only",
+  "requires": ["run_dir"],
+  "outputs": ["ok", "reason", "diffs", "digest"],
+  "auto_enabled": true,
+  "notes": [
+    "只读技能，任何权限级别可用。",
+    "凭证 B = {F, v_calc, Θ, γ}：数据指纹、计算版本、口径、参数。",
+    "失效不抛异常，返回结构化差异（告诉用户是数据变了还是规则变了）。",
+    "只比对当前环境能取到值的分量；取不到不等于变了。"
+  ]
+}

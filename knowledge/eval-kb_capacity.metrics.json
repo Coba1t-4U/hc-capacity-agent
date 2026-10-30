@@ -1,0 +1,85 @@
+{
+  "count": 20,
+  "items_source": "stored",
+  "eval_path": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\knowledge\\eval-kb_capacity.json",
+  "note": "只验证检索能否找到出处，不验证回答是否正确；hit@K=1 不等于问答准确率 100%。",
+  "hit@1": 0.75,
+  "hit@3": 1.0,
+  "hit@5": 1.0,
+  "mrr": 0.8667,
+  "avg_top1_score": 2.6567,
+  "samples": [
+    {
+      "question": "读等级时的常见误判是什么",
+      "expected": "红黄绿分级与数据风险 / 读等级时的常见误判",
+      "rank": 1
+    },
+    {
+      "question": "为什么用罚函数而不是直接消元的判据是什么",
+      "expected": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 为什么用罚函数而不是直接消元",
+      "rank": 1
+    },
+    {
+      "question": "三个层级怎么算",
+      "expected": "主配微协同基本概念 / 三个层级",
+      "rank": 1
+    },
+    {
+      "question": "术语有哪些要求",
+      "expected": "主配微协同基本概念 / 术语",
+      "rank": 2
+    },
+    {
+      "question": "关于收敛判据与参数（配套算例的真实取值），结论是什么",
+      "expected": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "rank": 2
+    },
+    {
+      "question": "一个真实例子是什么",
+      "expected": "容量搜索方法与收敛口径 / 一个真实例子",
+      "rank": 1
+    },
+    {
+      "question": "红黄绿分级与数据风险的判据是什么",
+      "expected": "红黄绿分级与数据风险",
+      "rank": 2
+    },
+    {
+      "question": "三、网损的变化规律怎么算",
+      "expected": "分布式电源接入的系统影响 / 三、网损的变化规律",
+      "rank": 1
+    }
+  ],
+  "misses": [
+    {
+      "question": "术语有哪些要求",
+      "expected": "主配微协同基本概念 / 术语",
+      "got": "术语表 / 字段名对照（读产物时用）",
+      "rank": 2
+    },
+    {
+      "question": "关于收敛判据与参数（配套算例的真实取值），结论是什么",
+      "expected": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "got": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "rank": 2
+    },
+    {
+      "question": "红黄绿分级与数据风险的判据是什么",
+      "expected": "红黄绿分级与数据风险",
+      "got": "红黄绿分级与数据风险 / 分级规则（HC-RULES@1.0 批准）",
+      "rank": 2
+    },
+    {
+      "question": "三、配微协同（配网与微网）的判据是什么",
+      "expected": "参考文献索引与主题归类 / 三、配微协同（配网与微网）",
+      "got": "主配微协同基本概念 / 联络线（关口）功率是关键耦合量",
+      "rank": 2
+    },
+    {
+      "question": "收敛判据与参数（配套算例的真实取值）有哪些要求",
+      "expected": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "got": "目标级联法与分解协调方法 / 目标级联法（ATC, Analytical Target Cascading） / 收敛判据与参数（配套算例的真实取值）",
+      "rank": 3
+    }
+  ]
+}

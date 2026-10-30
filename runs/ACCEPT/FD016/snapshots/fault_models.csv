@@ -1,0 +1,4 @@
+﻿resource_id,model_type,parameter_ref,manufacturer_ref,valid_from,valid_to
+PV001,inverter_fault_current,FM-PV001,MFG-A,2026-06-01T00:00:00+08:00,2026-12-31T00:00:00+08:00
+PV002,inverter_fault_current,FM-PV002,MFG-A,2026-06-01T00:00:00+08:00,2026-12-31T00:00:00+08:00
+PV003,inverter_fault_current,FM-PV003,MFG-A,2026-06-01T00:00:00+08:00,2026-12-31T00:00:00+08:00

@@ -1,0 +1,15 @@
+﻿metric_key,object_ref,primary,verify,abs_diff,tolerance,status
+input_digest,,88881dcb50c2bf7f98b95d881c426a1c3cdbab5eb89a7eeeb6a8600d08900f91,88881dcb50c2bf7f98b95d881c426a1c3cdbab5eb89a7eeeb6a8600d08900f91,,,exact_match
+engine_interface_version,,0.9.4,0.9.4,,,exact_match
+scenario_coverage,,"S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD","S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD",,,exact_match
+all_converged,,true,true,,,exact_match
+constraint.total,,123,123,,,exact_match
+constraint.pass,,123,123,,,exact_match
+constraint.fail,,0,0,,,exact_match
+constraint.unknown,,0,0,,,exact_match
+constraint_rows.count,,123,123,,,exact_match
+constraint_rows.digest,,0d3f6dcc0ef0e2eace5148b4bedc9bed7cac1164ec5cb59a1f9d4bdc64a460ba,0d3f6dcc0ef0e2eace5148b4bedc9bed7cac1164ec5cb59a1f9d4bdc64a460ba,,,exact_match
+constraint.all_pass,,true,true,,,exact_match
+capacity_physical_kw,,,,,0.001,exact_match
+search_status,,,,,,exact_match
+binding_constraint,,,,,,exact_match

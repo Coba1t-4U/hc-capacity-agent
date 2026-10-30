@@ -1,0 +1,2 @@
+﻿study_id,mode,scope,dataset_version,max_lambda_mw,feasible_points,infeasible_points,unknown_points,total_cost_yuan,nonanticipativity_pass,energy_conservation_pass,generated_at
+STUDY-20261016-230654,atc,dm_equivalent,c771654107f373448b6bb259ee63dbdc7a846e3ca89c1d6b6269ac87e87ddc87,1.40625,3,6,0,0,true,true,2026-10-16T23:06:55+08:00

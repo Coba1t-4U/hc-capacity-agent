@@ -1,0 +1,5 @@
+{
+  "level": "grey",
+  "reason": "1 项约束为 unknown，不生成正式结论",
+  "formal": false
+}

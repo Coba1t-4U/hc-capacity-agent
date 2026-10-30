@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hc-agent"
+version = "1.0.0"
+description = "配网承载力智能体Agent（以 OpenDSS 为唯一电气计算引擎）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+
+# 核心运行依赖。注意：缺失的可选依赖不会导致启动失败，
+# 各模块内置降级路径（见 requirements.lock 的说明）。
+dependencies = [
+    "OpenDSSDirect.py==0.9.4",
+    "openpyxl>=3.1",
+    "numpy>=2.0",
+    "python-docx>=1.1",
+]
+
+[project.optional-dependencies]
+# 可选增强：拓扑检查、YAML 解析、数学优化
+extras = [
+    "networkx>=3.0",
+    "PyYAML>=6.0",
+    "scipy>=1.11",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+# 设计文档 17.10 的 CLI 契约
+hc-agent-pipeline = "hc_agent.pipeline:main"
+hc-agent-verification = "hc_agent.verification:main"
+hc-agent-reporting = "hc_agent.reporting:main"
+hc-agent-research = "hc_agent.research_pipeline:main"
+
+[tool.setuptools]
+packages = [
+    "hc_agent",
+    "hc_agent.io",
+    "hc_agent.model",
+    "hc_agent.engines",
+    "hc_agent.research",
+    "hc_agent.coordination",
+    "hc_agent.uncertainty",
+    "hc_agent.optimization",
+]
+
+[tool.setuptools.package-data]
+hc_agent = ["../skills/*.json", "../rules/*.yaml"]

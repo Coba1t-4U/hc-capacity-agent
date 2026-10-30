@@ -1,0 +1,16 @@
+{
+  "application_id": "APP-2026-0001",
+  "version": 1,
+  "generation_type": "pv",
+  "requested_capacity_kw": 250.0,
+  "rated_s_kva": 275.0,
+  "connection_voltage_kv": 0.4,
+  "candidate_node_ids": [
+    "BUS-LV-002"
+  ],
+  "phase": "ABC",
+  "control_mode": "fixed_pf",
+  "control_ref": "CTRL-PF-UNITY",
+  "planned_connection_date": "2026-08-01",
+  "applicant_ref": "APPLICANT-DEMO-001"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "hc-research-v1",
+  "study_id": "RM001",
+  "mode": "atc",
+  "scope": "dm_equivalent",
+  "description": "配网 + 3 微网 目标级联协调容量研究（主网为已批准接口等值）",
+  "capacity_direction": "D1",
+  "outer_search": {
+    "lambda_max_mw": 30.0,
+    "precision_mw": 0.25,
+    "max_iter": 15
+  },
+  "atc": {
+    "max_iter": 8,
+    "time_limit_s": 120,
+    "residual_tol": 0.001,
+    "objective_tol": 0.0001,
+    "rho0": 1.0
+  },
+  "dro": {
+    "enabled": false,
+    "radius_l1": null,
+    "radius_linf": null
+  },
+  "solver": {
+    "max_iter": 300,
+    "tolerance": 1e-06
+  },
+  "seed": 20261009
+}

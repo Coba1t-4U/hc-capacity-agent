@@ -1,0 +1,4 @@
+﻿asset_id,owner_region_id,bus_id,p_min_mw,p_max_mw,q_min_mvar,q_max_mvar,ramp_mw_per_h,cost_model_id,initial_state
+GEN-D1,D1,BUS-D1-05,0.2,2.0,-1.0,1.0,1.0,COST-D1-G1,on
+GEN-M1,M1,BUS-M1-02,0.05,0.5,-0.3,0.3,0.5,COST-M1-G1,on
+GEN-M2,M2,BUS-M2-02,0.05,0.5,-0.3,0.3,0.5,COST-M2-G1,on

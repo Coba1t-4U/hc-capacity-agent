@@ -1,0 +1,2 @@
+﻿object_id,allocation_id,window_start,window_end,capacity_physical_kw,capacity_managed_kw,search_lower_kw,search_upper_kw,search_status,level,binding_constraint,result_hash
+FD-001,BUS-LV-002,2026-07-01T00:00:00+08:00,2026-07-02T00:00:00+08:00,0,0,0,2000,ok,grey,THERMAL_LIMIT,3229c8c63103db44447adc5d0713b4d2ee00e6846c4b5c0fdcdb931b9455d8d1

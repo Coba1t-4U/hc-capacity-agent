@@ -1,0 +1,274 @@
+# ============================================================================
+# hc_agent 规则包（设计文档 4.8 规则中心设计 / 表 18 规则类别）
+#
+# 规则中心负责表达"什么情况下允许计算、采用什么口径判断、结果如何分级、
+# 什么动作必须人工审批"。规则与技能分离：技能负责执行专业过程，规则负责
+# 决定适用范围和判定口径；规则发布后必须版本化、审批、可回退，并在每次
+# 任务中冻结引用。
+#
+# 本文件中 null 表示"尚待审批而必须阻断的值"。设计文档 17.9 与表 44 明确
+# 规定：未确认项不得由研发人员或大模型自行设定生产默认值。
+# 因此本模板包 status: draft，且所有限值均为 null——它是**待审模板**，
+# 不能用于正式任务；正式任务必须使用经批准的规则包（如各黄金算例的
+# rules.yaml）。
+#
+# 规则冲突消解顺序（设计文档 4.8）：
+#   安全边界优先 > 业务专规优先 > 对象范围更具体优先 > 版本生效时间明确优先
+# 仍无法消解时必须转人工。
+# ============================================================================
+
+schema_version: hc-rules-v1
+rule_package: HC-RULES@1.0-TEMPLATE
+status: draft
+approval_ref: null
+effective_from: null
+owner: 配网专业委员会
+description: 待专业审批的规则包模板；所有限值为 null，使用时会阻断
+
+scope:
+  region: null
+  voltage_levels_kv: [0.4, 10, 35]
+
+# ---------------------------------------------------------------------------
+# 1. 约束判定规则（表 18「约束判定规则」）
+#    限值的单位、适用对象、持续时间、依据条款和批准记录必须齐备。
+#    结构化条件优先，不把完整判据埋在提示词中。
+# ---------------------------------------------------------------------------
+constraints:
+  - rule_id: VOLTAGE_LIMIT
+    rule_class: voltage
+    metric: voltage_pu
+    operator: between
+    min: null
+    max: null
+    unit: pu
+    duration_minutes: null
+    standard_ref: null
+    failure_action: block
+    priority: 10
+    scope: {voltage_levels_kv: [0.4, 10], object_levels: [dt, feeder]}
+    note: 电压上下限与持续时间判据须由配网专业委员会批准
+
+  - rule_id: THERMAL_LIMIT
+    rule_class: thermal
+    metric: loading_pct
+    operator: "<="
+    max: null
+    unit: pct
+    duration_minutes: null
+    standard_ref: null
+    failure_action: block
+    priority: 20
+    note: 持续/短时允许载流与持续时间的取值口径须批准
+
+  - rule_id: REVERSE_FLOW_LIMIT
+    rule_class: reverse_flow
+    metric: reverse_flow_kw
+    operator: "<="
+    max: null
+    unit: kW
+    duration_minutes: null
+    standard_ref: null
+    failure_action: block
+    priority: 15
+    note: 允许反送边界须批准；须明确按设备还是按断面判定
+
+  - rule_id: IMBALANCE_LIMIT
+    rule_class: imbalance
+    metric: imbalance_pct
+    operator: "<="
+    max: null
+    unit: pct
+    duration_minutes: null
+    standard_ref: null
+    failure_action: block
+    priority: 25
+    note: 三相不平衡定义须明确；100*|V2|/|V1| 与电流幅值偏差是不同 metric_id
+
+  - rule_id: SHORT_CIRCUIT_LIMIT
+    rule_class: short_circuit
+    metric: fault_current_a
+    operator: "<="
+    max: null
+    unit: A
+    duration_minutes: null
+    standard_ref: null
+    failure_action: block
+    priority: 5
+    note: 须明确故障类型、故障电阻、接地方式与上级电源阻抗
+
+# ---------------------------------------------------------------------------
+# 2. 容量搜索规则（表 18「容量搜索规则」）
+#    搜索上下界、增量步长、二分精度、管理裕度、容量占用和层级约束。
+# ---------------------------------------------------------------------------
+search:
+  allocation_mode: fixed_weights
+  monotonicity_required_for_bisection: true
+  lower_kw: 0
+  upper_kw: null
+  precision_kw: null
+  step_kw: null
+  max_iter: null
+  note: 上下界、精度与离散步长须按业务与计算预算批准
+
+# ---------------------------------------------------------------------------
+# 3. 管理容量规则（设计文档 17.9）
+#    管理容量需先明确物理容量口径：capacity_physical_kw 为在含已并网源的
+#    基线之上可增加的容量，不能再扣一次已并网装机。
+#    管理裕度、同时率、占用和上下级约束按 formula_id 的批准顺序处理，
+#    不在程序中硬编码统一减法。
+# ---------------------------------------------------------------------------
+management:
+  formula_id: null
+  coincidence_factor: null
+  margin_ratio: null
+  reservation_policy_ref: null
+  hierarchy_policy_ref: null
+  note: formula_id 为 null 时程序必须阻断，不得硬编码统一减法
+
+# ---------------------------------------------------------------------------
+# 4. 红黄绿分级规则（表 18「红黄绿分级规则」）
+#    各约束余量、临界区间、数据风险和结果状态的组合逻辑。
+#    分级只生成等级和解释，不改变原始计算值。
+# ---------------------------------------------------------------------------
+grading:
+  red_at_or_below_kw: null
+  yellow_margin_ratio: null
+  grey_on_data_risk: true
+  note: 阈值须批准；灰色为内部状态，不生成红黄绿正式结论
+
+# ---------------------------------------------------------------------------
+# 5. 场景构造规则（表 18「场景构造规则」）
+#    典型日、极端出力、低负荷高光伏、检修转供、同时率和时间粒度。
+# ---------------------------------------------------------------------------
+scenarios:
+  generate_derived: true
+  derived: [high_pv_low_load, low_pv_high_load, maintenance_transfer]
+  time_step_minutes: null
+  coincidence_factor_applied_in_profiles: true
+  note: 同时率如已体现在曲线中不得再次相乘
+
+# ---------------------------------------------------------------------------
+# 6. 计算参数规则（表 18「计算参数规则」）
+#    潮流类型、收敛容差、迭代上限、平衡方式、无功策略和短路模型。
+# ---------------------------------------------------------------------------
+solver:
+  analysis_type: powerflow_3ph
+  tolerance: null
+  max_iter: null
+  max_control_iter: null
+  timeout_s: null
+  note: 使用批准默认值或人工确认
+
+# ---------------------------------------------------------------------------
+# 7. 复算容差（设计文档 9.1-4：浮点字段按批准容差判断）
+# ---------------------------------------------------------------------------
+verification:
+  metric_tolerances_ref: null
+  voltage_pu_abs: null
+  loading_pct_abs: null
+  capacity_kw_abs: null
+  note: 确定性复现字段集合及数值容差须由专家与测试机构批准
+
+# ---------------------------------------------------------------------------
+# 8. 发布门禁（设计文档 11.2：独立复算 + 专业复核 + 发布审批三道门）
+# ---------------------------------------------------------------------------
+release:
+  require_verification: true
+  require_professional_review: true
+  require_approval: true
+
+# ---------------------------------------------------------------------------
+# 9. 数据接入规则（表 18「数据接入规则」）
+# ---------------------------------------------------------------------------
+data_access:
+  allowed_schema_versions: [hc-input-v1]
+  require_snapshot_freeze: true
+  require_hash_registration: true
+  reject_on_blocking_quality: true
+  max_file_mb: null
+  allowed_extensions: [.json, .csv, .xlsx, .yaml, .yml, .dss, .parquet]
+  note: 文件格式、来源授权、命名、时间有效性、重复提交与恶意文件检查
+
+# ---------------------------------------------------------------------------
+# 10. 数据质量规则（表 18「数据质量规则」）
+# ---------------------------------------------------------------------------
+data_quality:
+  blocking_codes:
+    - SCHEMA_MISSING_FIELD
+    - DUPLICATE_ID
+    - FOREIGN_KEY_MISSING
+    - TOPOLOGY_ISLAND
+    - TOPOLOGY_DISCONNECTED
+    - PHASE_CONFLICT
+    - VERSION_CONFLICT
+    - TIMEZONE_INCONSISTENT
+    - TIME_COVERAGE_INSUFFICIENT
+    - DUPLICATE_KEY
+    - PHASE_MIX_CONFLICT
+    - WEIGHT_SUM_INVALID
+    - RULE_UNSET
+    - RULE_UNAPPROVED
+    - RESERVATION_DUPLICATE
+    - SCOPE_REF_UNRESOLVED
+  warning_codes:
+    - MULTI_SOURCE_BOUNDARY
+    - RESERVATION_DOUBLE_COUNT
+    - PARSE_WARNING_FIELD_NOT_MAPPED
+    - PROFILE_INTERPOLATED
+  min_quality_score: null
+  note: severity/blocking/quality_score/issue_code 的阈值须批准
+
+# ---------------------------------------------------------------------------
+# 11. 异常与重试规则（表 18「异常与重试规则」）
+#     区分可重试、可补数、需人工和禁止继续四类故障。
+# ---------------------------------------------------------------------------
+exception_policy:
+  retryable_codes: [DSS_TIMEOUT, DSS_DEPENDENCY_LOAD_FAILED, DSS_UNKNOWN]
+  max_retry: null
+  backoff_seconds: null
+  needs_data_codes: [SCHEMA_MISSING_FIELD, FILE_MISSING, RULE_UNSET]
+  needs_human_codes: [DSS_NOT_CONVERGED, VERIFICATION_MISMATCH,
+                      RULE_UNAPPROVED, TOPOLOGY_ISLAND]
+  forbidden_actions:
+    - 通过关闭必要控制使结果表面收敛
+    - 通过改变拓扑使结果表面收敛
+    - 放宽业务约束使结果表面收敛
+    - 把 unknown 当作不可行
+    - 由监督 Agent 自行豁免复算失败
+  note: 重试上限与退避参数须批准
+
+# ---------------------------------------------------------------------------
+# 12. 安全权限规则（表 18「安全权限规则」）
+# ---------------------------------------------------------------------------
+security_policy:
+  subject_action_resource_condition: true
+  deny_by_default: true
+  audit_on_deny: true
+  forbidden_tool_classes:
+    - 调度控制
+    - 遥控分合闸
+    - 保护定值修改
+    - 现场设备写操作
+  note: Agent 工具集合中不得配置任何现场设备写操作（设计文档表 35）
+
+# ---------------------------------------------------------------------------
+# 13. 接入审批规则（表 18「接入审批规则」）
+# ---------------------------------------------------------------------------
+approval_policy:
+  approval_role: null
+  required_evidence: [constraint_results.csv, verification.json, audit/events.jsonl]
+  expiry_days: null
+  note: 申请材料完整性、专业复核、独立复算、审批人和有效期须批准
+
+# ---------------------------------------------------------------------------
+# 14. 版本与生效规则（表 18「版本与生效规则」）
+# ---------------------------------------------------------------------------
+version_policy:
+  rule_version: HC-RULES@1.0-TEMPLATE
+  status: draft
+  effective_from: null
+  applicable_regions: []
+  conflict_priority: [safety_boundary, business_specific, object_specific,
+                      version_effective]
+  note: 禁止使用未批准版本；冲突无法消解时转人工

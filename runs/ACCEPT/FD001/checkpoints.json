@@ -1,0 +1,74 @@
+[
+  {
+    "step": "S01_freeze_inputs",
+    "status": "ok",
+    "at": "2026-10-16T23:06:48+08:00",
+    "elapsed_s": 0.29,
+    "input_count": 9,
+    "input_digest": "84bba2f1057ad2c1d126ed376c2338b5d68eb5a70ffb3cb8a908f5584823c8bf"
+  },
+  {
+    "step": "S02_validate_bundle",
+    "status": "ok",
+    "at": "2026-10-16T23:06:48+08:00",
+    "elapsed_s": 0.457,
+    "total_issues": 0,
+    "blocking_count": 0
+  },
+  {
+    "step": "S03_build_case",
+    "status": "ok",
+    "at": "2026-10-16T23:06:49+08:00",
+    "elapsed_s": 1.399,
+    "scenarios": 3,
+    "slices": 36,
+    "model_hash": "fbe23e4d539e"
+  },
+  {
+    "step": "S04_run_baseline",
+    "status": "ok",
+    "at": "2026-10-16T23:06:49+08:00",
+    "elapsed_s": 1.449,
+    "slices": 1980,
+    "constraint_pass": 106,
+    "constraint_fail": 14,
+    "baseline_admissible": true
+  },
+  {
+    "step": "S06_search_capacity",
+    "status": "ok",
+    "at": "2026-10-16T23:06:49+08:00",
+    "elapsed_s": 1.628,
+    "method": "bracket_and_bisect",
+    "capacity": 0.0,
+    "search_status": "ok",
+    "iterations": 1
+  },
+  {
+    "step": "S07_verify_run",
+    "status": "ok",
+    "at": "2026-10-16T23:06:49+08:00",
+    "elapsed_s": 1.772,
+    "mismatch_count": 0
+  },
+  {
+    "step": "S08_generate_report",
+    "status": "ok",
+    "at": "2026-10-16T23:06:49+08:00",
+    "elapsed_s": 1.893,
+    "report": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD001\\report\\report.docx",
+    "gate_passed": false,
+    "failed_gates": [
+      "professional_review",
+      "approval"
+    ]
+  },
+  {
+    "step": "S09_seal_evidence",
+    "status": "ok",
+    "at": "2026-10-16T23:06:49+08:00",
+    "elapsed_s": 2.121,
+    "files": 101,
+    "digest": "affed2e8a3b0dedae84d5f41d93daa74de8c9d58e134ad3406d02a3b1d3fc2c8"
+  }
+]

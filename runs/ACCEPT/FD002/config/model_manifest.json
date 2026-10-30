@@ -1,0 +1,38 @@
+{
+  "model_files": {
+    "LineCodes.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\LineCodes.dss",
+    "Lines.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Lines.dss",
+    "Transformers.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Transformers.dss",
+    "Sources.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Sources.dss",
+    "Loads.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Loads.dss",
+    "PVSystems.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\PVSystems.dss",
+    "Switches.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Switches.dss",
+    "Controls.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Controls.dss",
+    "Master.dss": "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\hc_agent_project\\runs\\ACCEPT\\FD002\\model\\Master.dss"
+  },
+  "master_hash": "0fe1fa01fcb3f360576b07dde416a3e0799198e9af3945adf34df2f928ad9439",
+  "id_map": {
+    "line": {
+      "LN-MV-001": "line_LN_MV_001",
+      "LN-MV-002": "line_LN_MV_002",
+      "LN-LV-001": "line_LN_LV_001"
+    },
+    "transformer": {
+      "DT-001": "xf_DT_001"
+    },
+    "source": {
+      "SRC-001": "src_SRC_001"
+    },
+    "load": {
+      "L001": "load_L001",
+      "L002": "load_L002"
+    },
+    "pv": {
+      "PV001": "pv_PV001",
+      "PV002": "pv_PV002"
+    }
+  },
+  "notes": [
+    "生成 3 条线路、1 台变压器、2 个负荷、2 个光伏、1 个电源"
+  ]
+}

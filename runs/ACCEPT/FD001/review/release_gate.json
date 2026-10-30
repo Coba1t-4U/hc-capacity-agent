@@ -1,0 +1,27 @@
+{
+  "rule_package": "HC-RULES@1.0",
+  "gates": [
+    {
+      "gate": "independent_verification",
+      "required": true,
+      "passed": true
+    },
+    {
+      "gate": "professional_review",
+      "required": true,
+      "passed": false
+    },
+    {
+      "gate": "approval",
+      "required": true,
+      "passed": false
+    }
+  ],
+  "failed_gates": [
+    "professional_review",
+    "approval"
+  ],
+  "result_hash": "ba2c6b5e8f84635dc01e430ea97ac9836acca6184307341250ed800b6c094018",
+  "approval_bound": false,
+  "passed": false
+}

@@ -1,0 +1,77 @@
+{
+  "selected": "opendssdirect",
+  "requested": null,
+  "fell_back": false,
+  "version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4",
+  "detail": "pylib=C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+  "capability": {
+    "channel": "opendssdirect",
+    "in_process": true,
+    "significant_digits": null,
+    "supports_python_callbacks": true,
+    "killable_on_hang": false,
+    "min_reliable_tolerance": 1e-09,
+    "notes": [
+      "双精度；与独立复算使用同一接口包版本",
+      "进程内原生库异常时本进程会一起死，需由看门狗兜底"
+    ]
+  },
+  "rejected": [],
+  "health": {
+    "opendssdirect": {
+      "channel": "opendssdirect",
+      "available": true,
+      "version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7\nOpenDSSDirect.py version: 0.9.4",
+      "detail": "pylib=C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs",
+      "capability": {
+        "channel": "opendssdirect",
+        "in_process": true,
+        "significant_digits": null,
+        "supports_python_callbacks": true,
+        "killable_on_hang": false,
+        "min_reliable_tolerance": 1e-09,
+        "notes": [
+          "双精度；与独立复算使用同一接口包版本",
+          "进程内原生库异常时本进程会一起死，需由看门狗兜底"
+        ]
+      }
+    },
+    "dss-python": {
+      "channel": "dss-python",
+      "available": true,
+      "version": "DSS C-API Library version 0.14.5 revision 87d85c2622c8281b92255335bc7c09b11191b21d based on OpenDSS SVN 3723 [FPC 3.2.2] (64-bit build) MVMULT INCREMENTAL_Y CONTEXT_API PM 20240329033747; License Status: Open \nDSS-Python version: 0.15.7",
+      "detail": "ALT-DSS 接口可用",
+      "capability": {
+        "channel": "dss-python",
+        "in_process": true,
+        "significant_digits": null,
+        "supports_python_callbacks": true,
+        "killable_on_hang": false,
+        "min_reliable_tolerance": 1e-09,
+        "notes": [
+          "ALT-DSS 接口（IDSS/IText），与 OpenDSSDirect 引擎同源",
+          "进程内原生库异常时本进程会一起死，需由看门狗兜底"
+        ]
+      }
+    },
+    "cli": {
+      "channel": "cli",
+      "available": true,
+      "version": "**********************EPRI OpenDSS simulator**********************",
+      "detail": "exe=F:\\BaiduNetdiskDownload\\OpenDSS\\x64\\OpenDSScmd.exe",
+      "capability": {
+        "channel": "cli",
+        "in_process": false,
+        "significant_digits": 6,
+        "supports_python_callbacks": false,
+        "killable_on_hang": true,
+        "min_reliable_tolerance": 1e-05,
+        "notes": [
+          "独立进程，挂死可强杀；适合隔离与对照验证",
+          "经 CSV 导出，有效位约 5~6 位，**不可**用于字段级复算比对",
+          "不支持 Python 回调，逐时间片设值需改为生成 DSS 文本"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "engine_id": "pandapower",
+  "engine_label": "pandapower",
+  "scope": "balanced_positive_sequence",
+  "scope_label": "正序平衡（交叉校核）",
+  "note": "模型口径不同（OpenDSS 三相不平衡 vs pandapower 正序平衡），只做量级与极值校核，不逐节点等价，也**不参与容量判定**。",
+  "tolerances": {
+    "v_pu_abs": 0.03,
+    "loss_pct": 10.0
+  },
+  "points": [
+    {
+      "point": "pv_peak",
+      "timestamp": "2026-07-01T13:00:00+08:00",
+      "model": {
+        "timestamp": "2026-07-01T13:00:00+08:00",
+        "buses": 5,
+        "lines": 3,
+        "trafo": 1,
+        "loads": 2,
+        "sgen": 2,
+        "ext_grid": 1,
+        "skipped": []
+      },
+      "pandapower": {
+        "converged": true,
+        "vmin_pu": 1.0182539518513858,
+        "vmax_pu": 1.020298843918615,
+        "max_loading_pct": 6.3857500715842095,
+        "losses_kw": 0.9348911544973335,
+        "load_kw": 262.0,
+        "pv_kw": 325.0,
+        "source_kw": -62.06511183669619
+      },
+      "opendss": {
+        "available": true,
+        "vmin_pu": 1.016792806,
+        "vmax_pu": 1.018840545,
+        "losses_kw": 0.9350697019999954,
+        "pv_kw": 325.00110048000005,
+        "buses": 5
+      },
+      "checks": {
+        "vmin": "match",
+        "vmax": "match",
+        "losses": "match"
+      },
+      "diff": {
+        "vmin_pu": {
+          "opendss": 1.016793,
+          "pandapower": 1.018254,
+          "abs": 0.001461
+        },
+        "vmax_pu": {
+          "opendss": 1.018841,
+          "pandapower": 1.020299,
+          "abs": 0.001458
+        },
+        "losses_kw": {
+          "opendss": 0.93507,
+          "pandapower": 0.934891,
+          "abs": 0.000179
+        }
+      },
+      "verdict": "match"
+    },
+    {
+      "point": "load_peak",
+      "timestamp": "2026-07-01T19:00:00+08:00",
+      "model": {
+        "timestamp": "2026-07-01T19:00:00+08:00",
+        "buses": 5,
+        "lines": 3,
+        "trafo": 1,
+        "loads": 2,
+        "sgen": 2,
+        "ext_grid": 1,
+        "skipped": []
+      },
+      "pandapower": {
+        "converged": true,
+        "vmin_pu": 0.9489256183078619,
+        "vmax_pu": 1.0171051050730278,
+        "max_loading_pct": 46.209887570753764,
+        "losses_kw": 14.556984524109835,
+        "load_kw": 530.0,
+        "pv_kw": 29.33,
+        "source_kw": 515.2269823737739
+      },
+      "opendss": {
+        "available": true,
+        "vmin_pu": 0.9433858094,
+        "vmax_pu": 1.013961297,
+        "losses_kw": 14.337799019999864,
+        "pv_kw": 29.330084267999997,
+        "buses": 5
+      },
+      "checks": {
+        "vmin": "match",
+        "vmax": "match",
+        "losses": "match"
+      },
+      "diff": {
+        "vmin_pu": {
+          "opendss": 0.943386,
+          "pandapower": 0.948926,
+          "abs": 0.00554
+        },
+        "vmax_pu": {
+          "opendss": 1.013961,
+          "pandapower": 1.017105,
+          "abs": 0.003144
+        },
+        "losses_kw": {
+          "opendss": 14.337799,
+          "pandapower": 14.556985,
+          "abs": 0.219186
+        }
+      },
+      "verdict": "match"
+    }
+  ],
+  "engine_version": "3.5.6",
+  "verdict": "match",
+  "summary": {
+    "points": 2,
+    "match": 2,
+    "differ": 0
+  }
+}

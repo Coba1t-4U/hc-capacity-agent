@@ -1,0 +1,15 @@
+! hc_agent 生成算例（设计文档 8.1 标准算例目录）
+! snapshot_id=SNAP-002 topology_version=TOPO-002
+Clear
+New object=circuit.hccircuit
+Set defaultbasefrequency=50
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/LineCodes.dss"
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/Lines.dss"
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/Transformers.dss"
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/Loads.dss"
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/PVSystems.dss"
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/Sources.dss"
+Redirect "C:/Users/Chen/Documents/deepseek-harness/default-workspace/hc_agent_project/runs/ACCEPT/APP001/verification/work/case_cap/Switches.dss"
+Set VoltageBases=[10, 0.4]
+CalcVoltageBases
+Set mode=snapshot

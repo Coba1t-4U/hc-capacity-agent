@@ -1,0 +1,15 @@
+﻿metric_key,object_ref,primary,verify,abs_diff,tolerance,status
+input_digest,,84bba2f1057ad2c1d126ed376c2338b5d68eb5a70ffb3cb8a908f5584823c8bf,84bba2f1057ad2c1d126ed376c2338b5d68eb5a70ffb3cb8a908f5584823c8bf,,,exact_match
+engine_interface_version,,0.9.4,0.9.4,,,exact_match
+scenario_coverage,,"S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD","S_BASE,S_HIGH_PV_LOW_LOAD,S_LOW_PV_HIGH_LOAD",,,exact_match
+all_converged,,true,true,,,exact_match
+constraint.total,,121,121,,,exact_match
+constraint.pass,,106,106,,,exact_match
+constraint.fail,,14,14,,,exact_match
+constraint.unknown,,1,1,,,exact_match
+constraint_rows.count,,121,121,,,exact_match
+constraint_rows.digest,,be1bac0086b7484a6c607dbd2e2ce6ae93da015b45e25bf3154ce9e64c18b9db,be1bac0086b7484a6c607dbd2e2ce6ae93da015b45e25bf3154ce9e64c18b9db,,,exact_match
+constraint.all_pass,,false,false,,,exact_match
+capacity_physical_kw,,0,0,0,0.001,match
+search_status,,ok,ok,,,exact_match
+binding_constraint,,THERMAL_LIMIT,THERMAL_LIMIT,,,exact_match

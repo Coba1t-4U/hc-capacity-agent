@@ -1,0 +1,9 @@
+{
+  "opendss": [
+    "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\opendss_demo\\pylibs"
+  ],
+  "pandapower": [
+    "C:\\Users\\Chen\\Documents\\deepseek-harness\\default-workspace\\pylibs_pandapower"
+  ],
+  "note": "引擎库体积大且位于工程之外，不随工程复制；本文件告诉运行时去哪里找。"
+}

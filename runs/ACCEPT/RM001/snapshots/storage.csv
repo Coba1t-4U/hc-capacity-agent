@@ -1,0 +1,4 @@
+﻿asset_id,owner_region_id,bus_id,p_charge_max_mw,p_discharge_max_mw,e_min_mwh,e_max_mwh,e_initial_mwh,eta_charge,eta_discharge,terminal_policy
+ESS-D1,D1,BUS-D1-06,1.0,1.0,0.5,4.0,2.0,0.95,0.95,none
+ESS-M1,M1,BUS-M1-03,0.3,0.3,0.1,1.2,0.6,0.95,0.95,none
+ESS-M2,M2,BUS-M2-03,0.3,0.3,0.1,1.2,0.6,0.95,0.95,none

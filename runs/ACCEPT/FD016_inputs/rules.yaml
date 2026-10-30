@@ -1,0 +1,81 @@
+schema_version: hc-rules-v1
+rule_package: HC-RULES@1.0
+status: approved
+approval_ref: APPROVAL-2026-002
+effective_from: 2026-06-01T00:00:00+08:00
+scope: {region: REGION-001, voltage_levels_kv: [0.4, 10]}
+constraints:
+  - rule_id: VOLTAGE_LIMIT
+    rule_class: voltage
+    metric: voltage_pu
+    operator: between
+    min: 0.90
+    max: 1.10
+    unit: pu
+    duration_minutes: 0
+    standard_ref: GB-T-12325
+    failure_action: block
+  - rule_id: THERMAL_LIMIT
+    rule_class: thermal
+    metric: loading_pct
+    operator: "<="
+    max: 100
+    unit: pct
+    duration_minutes: 0
+    standard_ref: DL-T-5222
+    failure_action: block
+  - rule_id: REVERSE_FLOW_LIMIT
+    rule_class: reverse_flow
+    metric: reverse_flow_kw
+    operator: "<="
+    max: 400
+    unit: kW
+    duration_minutes: 0
+    standard_ref: Q-GDW-1484
+    failure_action: block
+  - rule_id: IMBALANCE_LIMIT
+    rule_class: imbalance
+    metric: imbalance_pct
+    operator: "<="
+    max: 2.0
+    unit: pct
+    duration_minutes: 0
+    standard_ref: GB-T-15543
+    failure_action: block
+  - rule_id: SHORT_CIRCUIT_LIMIT
+    rule_class: short_circuit
+    metric: fault_current_a
+    operator: "<="
+    max: 20000
+    unit: A
+    duration_minutes: 0
+    standard_ref: DL-T-5222
+    failure_action: block
+search:
+  allocation_mode: fixed_weights
+  monotonicity_required_for_bisection: true
+  lower_kw: 0
+  upper_kw: 2000
+  precision_kw: 10
+  max_iter: 25
+management:
+  formula_id: HC-MGMT-STD
+  coincidence_factor: 0.9
+  margin_ratio: 0.1
+  reservation_policy_ref: RES-POLICY-001
+  hierarchy_policy_ref: HIER-POLICY-001
+grading:
+  red_at_or_below_kw: 0
+  yellow_margin_ratio: 0.15
+verification:
+  metric_tolerances_ref: TOL-001
+  voltage_pu_abs: 1.0e-6
+  loading_pct_abs: 1.0e-4
+  capacity_kw_abs: 1.0e-3
+release:
+  require_verification: true
+  require_professional_review: true
+  require_approval: true
+scenarios:
+  generate_derived: true
+  derived: [high_pv_low_load, low_pv_high_load]
