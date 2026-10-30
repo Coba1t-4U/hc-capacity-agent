@@ -23,3 +23,6 @@ release/
 # 工具产物
 tests/_desktop_shots/
 *.log
+
+# 运行日志不进版本库
+runs/**/*.log

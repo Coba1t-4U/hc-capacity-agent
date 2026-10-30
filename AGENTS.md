@@ -96,3 +96,33 @@
 - **不啰嗦**：指出问题要一次说清，不要反复念同一件事。
 - **不道德说教**：讲事实、讲依据，不讲"你应该怎样"。
 - **尊重已定的决策**：对方明确拍了的事，说明方案后照做，不再反复劝。
+
+---
+
+## 七、代码交付规则（长期生效，用户 2026-10-30 明确要求）
+
+**写进本智能体的每一处代码，都必须：① 进 PyCharm 工程；② 提交到用户的 GitHub 账户。**
+
+具体含义（不许只做到一半）：
+
+| 步骤 | 要求 |
+|---|---|
+| 落盘 | 代码写在**母本** `Documents\deepseek-harness\default-workspace\hc_agent_project`（测试、构建在此进行） |
+| 进 PyCharm | 同步到 `Desktop\配网承载力智能体Agent`（该目录就是 PyCharm 工程 + GitHub 克隆） |
+| 上 GitHub | `git commit` + `git push` 到 `Coba1t-4U/hc-capacity-agent` |
+
+**执行方式**：用 `tools/publish.py` 一键完成同步+提交+推送，不要手工复制文件
+（手工必然漏文件）。默认无参即可，需要时加 `-m "提交信息"`：
+
+```powershell
+python tools\publish.py --dry-run        # 先看会同步什么
+python tools\publish.py -m "说明这次改了什么"
+```
+
+**硬性约束**：
+
+- `llm.json`（含 API Key）、会话库、`.venv`、`node_modules`、`dist/`、`dss_runs/`、
+  `runs/**/*.log` **一律不进仓库**（`.gitignore` 已覆盖，`publish.py` 也会跳过）。
+- 只提交"该进仓库的代码"，不要把构建产物塞进去。
+- 每次交付在最终回复里说明：改了哪些文件、提交哈希、是否已推送。
+- 推送失败（网络/权限）要**明确报告失败原因**，不得说成"已完成"。
