@@ -57,3 +57,44 @@ docs/                设计说明与实施记录
   在界面「配置」里重新填一次 Key，或从原工程复制 `llm.json` 过来。
 - 没有带 `dist/`、`release/`（打包产物）和 `hc_agent_ui/`（261 MB 旧版前端）。
 - `runs/ACCEPT` 是测试用的黄金运行，**删了部分测试会失败**。
+
+## 六、用 Git 管理（已初始化）
+
+仓库已建好，有一次初始提交（773 个文件）。Git 用的是**便携版 MinGit**
+（装在 `%LOCALAPPDATA%\Programs\MinGit`，已加入用户 PATH）。
+
+在 PyCharm 里怎么用：
+
+| 操作 | 位置 |
+|---|---|
+| 看改动 | 左侧 **Commit** 工具窗口（或 Alt+0） |
+| 提交 | 勾选文件 → 写提交信息 → **Commit** |
+| 看历史 / 回退 | 右键文件 → **Git → Show History** |
+| 比较差异 | 编辑器左侧栏色条，或 Ctrl+D |
+
+常用命令（在本目录下）：
+
+```bash
+git status          # 有哪些改动
+git diff            # 具体改了什么
+git add -A          # 全部暂存
+git commit -m "说明"  # 提交
+git log --oneline   # 历史
+git checkout -- 文件 # 丢弃单个文件的改动
+```
+
+`.gitignore` 已经排除：`llm.json`（密钥）、会话库、`runs/DESKTOP`、
+`dss_runs`、`dist`、`build`、`release`、`__pycache__`。
+
+## 七、解释器注册（只做一次）
+
+`.idea` 里写的解释器名字是 `Python 3.12 (hc_agent)`，这个名字要落到
+PyCharm 的全局 SDK 表里，否则打开会提示"解释器无效"。
+
+**步骤**：
+1. 关闭 PyCharm
+2. 双击本目录的 **`注册PyCharm解释器.cmd`**
+3. 重新打开 PyCharm 的本工程
+
+脚本会先备份 `jdk.table.xml`，写完立刻回读校验 XML 合法性。
+如果你已经在 PyCharm 里手工选过解释器，这一步可跳过。
