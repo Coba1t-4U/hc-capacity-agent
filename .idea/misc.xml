@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="Python 3.12 (hc_agent)" />
+    <option name="sdkName" value="Python 3.12 (配网承载力智能体Agent)" />
   </component>
-  <component name="ProjectRootManager" version="2"
-             project-jdk-name="Python 3.12 (hc_agent)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (配网承载力智能体Agent)" project-jdk-type="Python SDK" />
 </project>
