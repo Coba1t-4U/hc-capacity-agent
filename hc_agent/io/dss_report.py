@@ -1138,6 +1138,41 @@ def _sections(a: CaseAnalysis, s: Dict[str, Any]) -> List[Dict[str, Any]]:
     secs.append({"title": "12. 限制与后续建议", "kind": "list",
                  "items": s["limitations"]})
 
+    # 业务流覆盖：把「本系统在这条业务链上做到哪一步」写进报告。
+    # 目的是防止读者把"报告里没提到"误当成"系统已经做到"。
+    #
+    # 注意两个坑（都踩过）：
+    #   1. `_md_runs(paragraph, text)` 需要两个参数，只传文本会 TypeError；
+    #      表格里的 `**加粗**` 由 docx 写出阶段统一处理，这里给**纯文本**即可。
+    #   2. 这一节曾用 `try/except: pass` 包住，结果 TypeError 被静默吞掉，
+    #      报告里整章消失而测试只报"找不到章节"。现在**不再吞异常**：
+    #      要么正常写入，要么让报告生成失败并暴露出来。
+    from hc_agent import business_flow as _BF
+
+    _st = _BF.summary()
+    secs.append({
+        "title": "13. 业务流覆盖（八段闭环）",
+        "kind": "table",
+        "table": {
+            "headers": ["环节", "状态", "缺口 / 说明"],
+            "widths": [3.6, 1.3, 9.4],
+            "rows": [
+                [f"{x['no']}. {x['name']}",
+                 _BF.STATUS_LABELS.get(x["status"], x["status"]),
+                 x["gaps"]]
+                for x in _BF.STAGES
+            ],
+        },
+        "note": ("业务链：数据准备 → 评估计算 → 分级发布 → 接入应用 → "
+                 "提升改造 → 动态更新。"
+                 f"本系统已实现 {_st['counts']['implemented']} 段、"
+                 f"部分实现 {_st['counts']['partial']} 段、"
+                 f"未实现 {_st['counts']['absent']} 段。"
+                 "**未实现的环节不由本系统代做**，"
+                 "本报告的分级结论仅为单算例判定，"
+                 "不等同于对外发布的区域承载力等级。"),
+    })
+
     # ---- 附录：完整清单
     secs.append({"title": "附录 A 母线电压全量", "kind": "table",
                  "note": f"共 {len(s['buses'])} 个母线（按电压升序）。",

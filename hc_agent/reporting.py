@@ -513,6 +513,32 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     doc.add_paragraph(
         "本报告全部数值可回链至数据快照、规则版本或引擎输出；"
         "无法回链的内容不进入正式报告。")
+
+    # ---- 10 业务流覆盖
+    # 报告必须如实写清"这条业务链上本系统做到哪一步"，
+    # 否则读者会把"报告没提"当成"系统已经做到"。
+    # 状态来自 hc_agent.business_flow，与问答、JSON 桥同一份数据源。
+    from hc_agent import business_flow as _BF
+
+    _st = _BF.summary()
+    h("附录 A 业务流覆盖（八段闭环）")
+    doc.add_paragraph(
+        "业务链：数据准备 → 评估计算 → 分级发布 → 接入应用 → 提升改造 → 动态更新。"
+        f"本系统已实现 {_st['counts']['implemented']} 段、"
+        f"部分实现 {_st['counts']['partial']} 段、"
+        f"未实现 {_st['counts']['absent']} 段。"
+        "未实现的环节不由本系统代做；"
+        "本报告的分级结论仅为单算例判定，不等同于对外发布的区域承载力等级。")
+    _t = doc.add_table(rows=1, cols=3)
+    _t.style = "Light Grid Accent 1"
+    for _i, _name in enumerate(("环节", "状态", "缺口 / 说明")):
+        _t.rows[0].cells[_i].text = _name
+    for _x in _BF.STAGES:
+        _row = _t.add_row().cells
+        _row[0].text = f"{_x['no']}. {_x['name']}"
+        _row[1].text = _BF.STATUS_LABELS.get(_x["status"], _x["status"])
+        _row[2].text = _x["gaps"]
+
     doc.save(str(out))
 
 

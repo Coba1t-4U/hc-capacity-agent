@@ -391,6 +391,42 @@ except Exception as _exc:
     check("验收指标章节校验未抛异常", False,
           f"{type(_exc).__name__}: {_exc}")
 
+# ------------------------------------------------- 业务流覆盖章节（第 13 章）
+print("\n10) 算例报告含「业务流覆盖（八段闭环）」章节")
+try:
+    from hc_agent import business_flow as _BF
+
+    _doc13 = locals().get("_doc_path", "")
+    check("沿用已生成的报告", bool(_doc13) and Path(_doc13).is_file(), str(_doc13))
+    if _doc13 and Path(_doc13).is_file():
+        from docx import Document as _Doc13
+
+        _d13 = _Doc13(_doc13)
+        _h13 = [pp.text.strip() for pp in _d13.paragraphs]
+        check("有第 13 章「业务流覆盖（八段闭环）」",
+              any("业务流覆盖" in h and h.startswith("13.") for h in _h13),
+              str([h for h in _h13 if "业务流" in h])[:80])
+        _t13 = None
+        for _t in _d13.tables:
+            _hdr = [c.text.strip() for c in _t.rows[0].cells]
+            if "环节" in _hdr and "状态" in _hdr:
+                _t13 = _t
+                break
+        check("找到业务流覆盖表", _t13 is not None)
+        if _t13 is not None:
+            _rows13 = [[c.text.strip() for c in r.cells] for r in _t13.rows[1:]]
+            check("八段齐全", len(_rows13) == len(_BF.STAGES),
+                  f"{len(_rows13)} 行")
+            _st13 = {r[1] for r in _rows13 if len(r) > 1}
+            check("状态只用三态",
+                  _st13 <= set(_BF.STATUS_LABELS.values()), str(_st13))
+            # 必须如实出现「未实现」，否则说明在粉饰覆盖度
+            check("如实标出未实现环节", "未实现" in _st13, str(_st13))
+            check("每段都写了缺口说明",
+                  all(len(r) > 2 and r[2].strip() for r in _rows13))
+except Exception as _exc13:
+    check("业务流覆盖章节校验未抛异常", False, f"{type(_exc13).__name__}: {_exc13}")
+
 print("\n" + "=" * 74)
 print(f"结果：{ok} 通过 / {fail} 失败 / {ok + fail} 总计")
 print("=" * 74)
