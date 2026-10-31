@@ -147,6 +147,14 @@ def _qa(args: argparse.Namespace) -> Dict[str, Any]:
             "engine": "rule"}
 
 
+def _business_flow(args: argparse.Namespace) -> Dict[str, Any]:
+    from hc_agent import business_flow as BF
+
+    stage = getattr(args, "stage", "") or ""
+    if stage:
+        return {"stage": stage, "text": BF.format_stage(stage)}
+    return {"summary": BF.summary(), "text": BF.format_flow()}
+
 COMMANDS = {
     "engine_status": _engine_status,
     "acceptance": _acceptance,
@@ -154,6 +162,7 @@ COMMANDS = {
     "case_analyze": _case_analyze,
     "capacity_run": _capacity_run,
     "qa": _qa,
+    "business_flow": _business_flow,
 }
 
 
@@ -167,6 +176,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--input", default="", help="输入包目录（capacity_run）")
     ap.add_argument("--output", default="", help="输出目录（capacity_run）")
     ap.add_argument("--question", default="", help="问题文本（qa）")
+    ap.add_argument("--stage", default="", help="业务流段号或 key（business_flow）")
     return ap
 
 

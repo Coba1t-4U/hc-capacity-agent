@@ -190,4 +190,20 @@ export function apply(ctx: Context): void {
       return { text: summarize(r) }
     },
   }))
+
+  ctx.tools.register(defineTool({
+    name: 'hc_business_flow',
+    description: '配网承载力业务流八段闭环（数据准备→评估计算→分级发布→接入应用→提升改造→动态更新）中每一段的实现状态与缺口。状态如实标注：已实现/部分实现/未实现，未实现的环节不会被代替完成。',
+    parameters: {
+      stage: { type: 'string', description: '可选。段号 1-8 或 key（如 publish、compute），留空返回全部八段' },
+    },
+    output: TEXT_OUTPUT,
+    async execute(args, exec) {
+      const argv = ['business_flow']
+      const stage = args.stage === undefined ? '' : String(args.stage).trim()
+      if (stage) argv.push('--stage', stage)
+      const r = await runBridge(argv, exec.signal)
+      return { text: summarize(r) }
+    },
+  }))
 }

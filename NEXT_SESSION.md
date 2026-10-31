@@ -160,3 +160,17 @@ Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runti
 
 **结论**：以桌面根目录那份为准（`publish.py` 也指向它）。旧副本可以直接删除，
 它没有任何独有文件（已逐文件比对：只在 A 里的文件数 = 0）。
+
+---
+
+## 2026-10-31 晚：业务流八段闭环已进入智能体
+
+- `hc_agent/business_flow.py`：八段状态/缺口的结构化定义（如实标注，非目标状态）
+- `knowledge/business_flow/配网承载力业务流.md`：业务口径原文参照
+- 问答命中：`业务流是怎样的`、`第5步是什么`、`哪些环节还没做`
+- 桥命令：`python -m hc_agent.bridge business_flow [--stage N]`
+- DSH 工具：`hc_business_flow`（插件现共 7 个工具，已 build 进 lib/index.js）
+- 自检：`tests/verify_business_flow.py` 19 项全过；`verify_qa` 46 项无回归
+
+**注意**：DSH 源码移到 `桌面\配网承载力\` 后，node_modules 需重链；
+`corepack pnpm install` 在无 TTY 时会拒绝，需 `$env:CI='true'`。

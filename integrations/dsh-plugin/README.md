@@ -54,3 +54,16 @@ Python 侧实现见 `hc_agent/bridge.py`。
 
 - `corepack pnpm build` 把插件编译进 DSH 产物
 - 在 profile 的 `cordis.patch.yml` 里挂载，并在真实 DSH 会话中由模型调用
+
+## 新增工具：`hc_business_flow`（2026-10-31）
+
+| 工具 | 桥命令 | 用途 |
+|---|---|---|
+| `hc_business_flow` | `business_flow [--stage N]` | 业务流八段闭环的实现状态与缺口 |
+
+业务流八段：数据准备 → 评估计算 → 分级发布 → 接入应用 → 提升改造 → 动态更新。
+每段如实标注 `已实现 / 部分实现 / 未实现`，未实现的环节（如"发布公示"）
+**不会被本系统代做**。状态定义在 `hc_agent/business_flow.py`，
+业务口径原文在 `knowledge/business_flow/配网承载力业务流.md`。
+
+自检：`python tests/verify_business_flow.py`（19 项）。

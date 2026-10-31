@@ -285,6 +285,12 @@ RULES: List[Tuple[str, str]] = [
     (r"(最低|最小).{0,4}电压", "min_voltage"),
     (r"(负载|载流|loading|利用率|负荷率)", "loading"),
     (r"(越限|违规|不通过|没通过|未通过|没过|不合格|fail|超限)", "violations"),
+    # 业务流（八段闭环）。必须排在「等级/红黄绿」之前：
+    # 否则"红黄绿分级发布到哪一步"会先被 level 规则吃掉。
+    (r"(业务流|业务流程|闭环|八个?环节|分级发布|发布公示|"
+     r"接入申请|接入管理|提升改造|改造措施|动态更新|数据准备|"
+     r"(还没|未)(做|实现)|缺什么|缺哪|哪些没)", "business_flow"),
+    (r"第\s*[1-8]\s*(个)?(步|段|环节)", "business_flow"),
     (r"(等级|红黄绿|颜色|绿|黄|红|灰)", "level"),
     (r"(复算|验证|独立|核验).{0,6}(过|通过|结果|怎么样)", "verification"),
     (r"(发布|门禁|审批|复核).{0,6}(吗|了|过|状态|能不能)", "gate"),
@@ -473,6 +479,21 @@ class Responder:
         return Answer(A.format_matrix(res), source=str(r.path))
 
     # ================= 引擎交叉校核 =================
+    # ================= 业务流（八段闭环） =================
+    def _a_business_flow(self, it: Intent, r: RunFacts) -> Answer:
+        """业务流八段的实现状态与缺口（状态如实标注，不是目标状态）。"""
+        from hc_agent import business_flow as BF
+
+        q = getattr(it, "raw", "") or ""
+        # 问"第 N 步/某一段"时给单段详情，否则给全局八段。
+        # 注意 Intent 的字段名是 raw（不是 text），写错会静默拿不到问句。
+        if "第" in q or "段" in q or "环节" in q:
+            for i in range(1, 9):
+                if f"第{i}" in q or f"{i}." in q or f"{i}、" in q or f"第 {i}" in q:
+                    return Answer(BF.format_stage(i),
+                                  source="hc_agent/business_flow.py")
+        return Answer(BF.format_flow(), source="hc_agent/business_flow.py")
+
     def _a_engine_crosscheck(self, it: Intent, r: RunFacts) -> Answer:
         """第二引擎（pandapower，正序平衡）与 OpenDSS 的交叉校核。"""
         from hc_agent.engines import pandapower_adapter as PA
