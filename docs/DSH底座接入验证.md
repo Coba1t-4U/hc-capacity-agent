@@ -27,7 +27,7 @@ DeepSeek Harness（开源版，底座）
 $env:HC_PYTHON  = "C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
 $env:HC_PROJECT = "C:\Users\Chen\Desktop\配网承载力智能体Agent"
 $env:DEEPSEEK_API_KEY = "<你的 key>"
-cd "$env:USERPROFILE\Desktop\deepseek-harness-开源版"
+cd "$env:USERPROFILE\Desktop\配网承载力\deepseek-harness-开源版"
 node apps\cli\lib\bin.js headless --patch .\hc-agent.patch.yml --json `
   "调用 hc_engine_status 工具，然后只回答它返回的 count 数值和两个引擎名称"
 ```
@@ -50,7 +50,7 @@ node apps\cli\lib\bin.js headless --patch .\hc-agent.patch.yml --json `
 
 ```powershell
 $env:Path = "C:\Program Files\nodejs;$env:LOCALAPPDATA\Programs\MinGit\cmd;" + $env:Path
-cd "$env:USERPROFILE\Desktop\deepseek-harness-开源版"
+cd "$env:USERPROFILE\Desktop\配网承载力\deepseek-harness-开源版"
 corepack pnpm install          # 约 12 秒
 ```
 
