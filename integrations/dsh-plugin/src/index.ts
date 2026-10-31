@@ -83,17 +83,21 @@ function runBridge(args: string[], signal?: AbortSignal): Promise<BridgeResult> 
   })
 }
 
-/** 统一的输出形状：一段可读文本（DSH 直接渲染）。 */
+/** 统一的输出形状：一段可读文本（DSH 直接渲染）。
+ *
+ * `as const` 不能省：`required` 必须是字面量 `true`，否则被推断成 `boolean`，
+ * 与 DSH 的 `ParameterPropertySpec` 不兼容，报 TS2322（2026-10-31 实测踩过）。
+ */
 const TEXT_OUTPUT = {
   schema: {
-    type: 'object' as const,
+    type: 'object',
     additionalProperties: false,
     properties: {
-      text: { type: 'string' as const, required: true, description: '面向读者的结果文本' },
+      text: { type: 'string', required: true, description: '面向读者的结果文本' },
     },
   },
   render: (_args: unknown, value: { text: string }) => [{ type: 'text' as const, text: value.text }],
-}
+} as const
 
 /** 把 JSON 结果压成一段可读文本，避免把原始 JSON 直接丢给模型。 */
 function summarize(payload: BridgeResult): string {

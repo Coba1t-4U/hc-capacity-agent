@@ -1,0 +1,16 @@
+# 把配网承载力智能体（hc_agent）挂到开源版 DeepSeek Harness 底座上。
+#
+# 用法（在 DSH 源码根目录执行）：
+#   node apps/cli/lib/bin.js --profile web   --patch .\hc-agent.patch.yml --dump-config
+#   node apps/cli/lib/bin.js headless        --patch .\hc-agent.patch.yml --json "调用 hc_engine_status"
+#
+# 说明：
+#   * `insert` 无 `id` 时追加到 profile 顶层条目列表末尾；
+#   * `name` 用**相对路径**（相对本 patch 文件所在目录）。Cordis 会把它解析成 file:// URL，
+#     所以既不用发布到 npm，也不用改任何 package.json；
+#   * 插件运行时读两个环境变量：HC_PYTHON（解释器）、HC_PROJECT（hc_agent 工程根）。
+#
+# 前提：插件已构建到 packages/tool/tool-hc-agent/lib/index.js（corepack pnpm build）。
+- insert:
+    - id: tool-hc-agent
+      name: "./packages/tool/tool-hc-agent/lib/index.js"

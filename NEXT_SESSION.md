@@ -125,3 +125,19 @@ DSH 开源版                  %USERPROFILE%\Desktop\deepseek-harness-开源版
 Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe
 引擎库                      ...\default-workspace\opendss_demo\pylibs、...\pylibs_pandapower
 ```
+
+---
+
+## 2026-10-31 更新：底座接入**已跑通**
+
+开源版 DSH 从源码构建后，通过 `--patch` 挂载 `tool-hc-agent`，在真实模型会话中
+调用了 `hc_engine_status`，拿回 Python 侧引擎数据并作答。证据与复现步骤见
+`docs/DSH底座接入验证.md`。
+
+已完成：
+- 插件编译进 `lib/index.js`（`tsc -b` 通过，注入错误能报错）
+- `corepack pnpm build` 通过（10 gate / 30 秒）
+- `--dump-config` 确认插件进 profile 树
+- headless 真实会话调用工具成功
+
+仍未做：把插件挂进**日常使用的那个 DSH profile**（需备份，属改动现有环境）。

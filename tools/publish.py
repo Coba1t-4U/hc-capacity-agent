@@ -36,6 +36,7 @@ from pathlib import Path
 
 SRC = Path(__file__).resolve().parents[1]          # 母本工程根
 DST = Path.home() / "Desktop" / "配网承载力智能体Agent"
+REMOTE = "git@github.com:Coba1t-4U/hc-capacity-agent.git"
 
 #: 需要同步的目录（与仓库实际跟踪范围一致）
 DIRS = ["hc_agent", "skills", "rules", "tests", "tools", "docs",
@@ -139,11 +140,24 @@ def main(argv=None) -> int:
     ap.add_argument("--no-push", action="store_true", help="只提交不推送")
     args = ap.parse_args(argv)
 
-    if not DST.is_dir():
-        print(f"[失败] GitHub 克隆不存在：{DST}")
-        print("       先克隆：git clone git@github.com:Coba1t-4U/hc-capacity-agent.git")
-        return 1
     git = find_git()
+
+    # 克隆目录被删除时自动重建。
+    # 本机已两次出现「桌面两个目录被整体删除、回收站也清空」（2026-10-30 23:41、
+    # 2026-10-31 20:5x）。母本在 Documents 下不受影响，所以只要能从 GitHub
+    # 重克隆，发布链路就不该因为目录消失而中断。
+    if not DST.is_dir():
+        print(f"克隆不存在，自动重建：{DST}")
+        if args.dry_run:
+            print("（--dry-run：不执行克隆）")
+            return 0
+        DST.parent.mkdir(parents=True, exist_ok=True)
+        code, out = run([git, "clone", "--depth", "1", REMOTE, str(DST)], DST.parent)
+        if code != 0:
+            print("[失败] 重新克隆失败：\n" + out[-800:])
+            print("       检查：SSH 通道（~/.ssh/config → ssh.github.com:443）、权限")
+            return 1
+        print("  已重新克隆：" + str(DST))
 
     # ---- 1) 同步
     changed = []
