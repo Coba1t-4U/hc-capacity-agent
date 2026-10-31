@@ -119,7 +119,7 @@ corepack pnpm build            # 或只构建该包
 ## 关键路径速查
 
 ```
-智能体工程（GitHub 克隆）   %USERPROFILE%\Desktop\配网承载力智能体Agent
+智能体工程（GitHub 克隆）   %USERPROFILE%\Desktop\配网承载力\配网承载力智能体Agent
 智能体母本（含 runs/dss_runs）C:\Users\Chen\Documents\deepseek-harness\default-workspace\hc_agent_project
 DSH 开源版                  %USERPROFILE%\Desktop\配网承载力\deepseek-harness-开源版
 Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe
@@ -156,7 +156,7 @@ Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runti
 |---|---|---|
 | DSH 开源版 | `Desktop\配网承载力\deepseek-harness-开源版` | 完好（122,983 文件 / 2,360 MB） |
 | 智能体工程（旧副本） | `Desktop\配网承载力\配网承载力智能体Agent` | **`.git/objects` 已丢失**，git 不认它是仓库；内容停在 `a644e98`，无独有文件 |
-| 智能体工程（权威副本） | `Desktop\配网承载力智能体Agent` | 完好，HEAD `00d531c`，`.git` 完整 |
+| 智能体工程（权威副本） | `Desktop\配网承载力\配网承载力智能体Agent` | 完好，HEAD `00d531c`，`.git` 完整 |
 
 **结论**：以桌面根目录那份为准（`publish.py` 也指向它）。旧副本可以直接删除，
 它没有任何独有文件（已逐文件比对：只在 A 里的文件数 = 0）。

@@ -108,7 +108,7 @@
 | 步骤 | 要求 |
 |---|---|
 | 落盘 | 代码写在**母本** `Documents\deepseek-harness\default-workspace\hc_agent_project`（测试、构建在此进行） |
-| 进 PyCharm | 同步到 `Desktop\配网承载力智能体Agent`（该目录就是 PyCharm 工程 + GitHub 克隆） |
+| 进 PyCharm | 同步到 `Desktop\配网承载力\配网承载力智能体Agent`（该目录就是 PyCharm 工程 + GitHub 克隆） |
 | 上 GitHub | `git commit` + `git push` 到 `Coba1t-4U/hc-capacity-agent` |
 
 **执行方式**：用 `tools/publish.py` 一键完成同步+提交+推送，不要手工复制文件

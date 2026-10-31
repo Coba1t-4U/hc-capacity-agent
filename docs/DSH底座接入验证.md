@@ -25,7 +25,7 @@ DeepSeek Harness（开源版，底座）
 
 ```powershell
 $env:HC_PYTHON  = "C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
-$env:HC_PROJECT = "C:\Users\Chen\Desktop\配网承载力智能体Agent"
+$env:HC_PROJECT = "C:\Users\Chen\Desktop\配网承载力\配网承载力智能体Agent"
 $env:DEEPSEEK_API_KEY = "<你的 key>"
 cd "$env:USERPROFILE\Desktop\配网承载力\deepseek-harness-开源版"
 node apps\cli\lib\bin.js headless --patch .\hc-agent.patch.yml --json `

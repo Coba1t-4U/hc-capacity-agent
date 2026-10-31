@@ -35,8 +35,32 @@ import sys
 from pathlib import Path
 
 SRC = Path(__file__).resolve().parents[1]          # 母本工程根
-DST = Path.home() / "Desktop" / "配网承载力智能体Agent"
 REMOTE = "git@github.com:Coba1t-4U/hc-capacity-agent.git"
+
+#: 克隆可能待的位置。用户会自己整理桌面（这是他的地盘），所以这里**不写死**：
+#: 按顺序找，第一个是合法 git 仓库的即采用。新增位置时只改这张表。
+CLONE_CANDIDATES = [
+    Path.home() / "Desktop" / "配网承载力" / "配网承载力智能体Agent",
+    Path.home() / "Desktop" / "配网承载力智能体Agent",
+]
+
+
+def _detect_clone() -> Path:
+    """找到 GitHub 克隆（= PyCharm 工程）所在目录。
+
+    优先返回**已是合法 git 仓库**的候选；都不合法时返回第一个候选路径，
+    交给后面的\"自动重新克隆\"逻辑落地。
+    """
+    for p in CLONE_CANDIDATES:
+        if (p / ".git" / "objects").is_dir():
+            return p
+    for p in CLONE_CANDIDATES:
+        if p.is_dir():
+            return p
+    return CLONE_CANDIDATES[0]
+
+
+DST = _detect_clone()
 
 #: 需要同步的目录（与仓库实际跟踪范围一致）
 DIRS = ["hc_agent", "skills", "rules", "tests", "tools", "docs",
