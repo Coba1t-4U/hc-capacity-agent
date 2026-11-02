@@ -69,7 +69,13 @@ DIRS = ["hc_agent", "skills", "rules", "tests", "tools", "docs",
 #: 需要同步的单文件
 FILES = ["pyproject.toml", "README.md", "AGENTS.md", "requirements.lock",
          "requirements.txt", "NEXT_SESSION.md", ".gitignore",
-         "启动桌面版.py", "一键自检.py", "local_pylibs.json"]
+         "启动桌面版.py", "一键自检.py", "local_pylibs.json",
+         # PyCharm 工程脚手架：也必须由母本统一下发，否则克隆重建时会丢
+         ".pycharm_sdk.json", "README_如何在PyCharm中打开.md",
+         "注册PyCharm解释器.cmd", "配网承载力智能体Agent.iml"]
+
+#: 需要整体同步的子目录（含 .idea 下的工程配置）
+DIRS = DIRS + [".idea"]
 
 #: hc_agent_ui 只同步源码与启动器（node_modules / profile 是本地运行时）
 UI_ITEMS = ["assets", "package.json", "start-native.bat", "start-desktop.bat",
@@ -195,6 +201,18 @@ def main(argv=None) -> int:
         print(f"  · {rel}")
     if len(changed) > 20:
         print(f"  … 另有 {len(changed) - 20} 个")
+
+    # ---- 1.5) 漂移检测：克隆里被 git 跟踪、但母本里没有的文件。
+    # 这些通常是「直接在 PyCharm 里新建/修改」的文件：下次同步不会带上它们，
+    # 克隆一旦重建（本机已发生两次）就会丢。必须回写母本。
+    code, out = run([git, "ls-files"], DST)
+    tracked = [ln.strip() for ln in out.splitlines() if ln.strip()]
+    drift = [f for f in tracked if not (SRC / f).is_file()]
+    if drift:
+        print(f"漂移警告：{len(drift)} 个受控文件只存在于克隆（母本缺失）")
+        for f in drift[:10]:
+            print(f"  ! {f}")
+        print("  处理：把它们回写到母本，否则下次同步/重建会丢。")
 
     # ---- 2) 提交
     code, out = run([git, "status", "--porcelain"], DST)
