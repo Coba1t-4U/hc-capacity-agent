@@ -176,6 +176,23 @@ def _table(slide, left, top, width, rows, col_w, *, head_size=12,
     return tbl
 
 
+
+def _picture_pair(slide, left_img, left_cap, right_img, right_cap,
+                  top=4.6, width_cm=14.6):
+    """两图并排 + 小标题（模板的多宫格做法）。"""
+    for i, (img, cap) in enumerate(((left_img, left_cap), (right_img, right_cap))):
+        x = 1.5 + i * (width_cm + 1.2)
+        _text(slide, x, top - 0.95, width_cm, 0.8, [cap], size=13,
+              color=BLUE2, bold=True)
+        pic = slide.shapes.add_picture(str(img), Cm(x), Cm(top),
+                                       width=Cm(width_cm))
+        if pic.height / 360000 > 10.6:      # 限制高度，避免压住底部说明
+            ratio = (10.6 * 360000) / pic.height
+            pic.height = int(pic.height * ratio)
+            pic.width = int(pic.width * ratio)
+        pic.left = Cm(x)
+
+
 def _bullets(slide, left, top, width, height, items, *, size=15, color=BLACK,
              accent=PRIMARY, gap=9):
     """左侧小方块 + 要点的列表（模板正文风格）。"""
@@ -545,6 +562,83 @@ def build() -> str:
     _takeaway(s, "可追溯不是“有个日志”，而是“每条结论都能指回它的来源”。",
               GREEN, top=15.4)
 
+    # ---------- 10.5 大模型基座
+    s = _blank(prs)
+    _head(s, "大模型基座：Harness 会话与工具调度", n=11)
+    _bullets(s, 1.68, 5.2, 15.4, 8.0, [
+        ("底座为开源版 DeepSeek Harness（MIT），承担会话、推理与工具调度", {"bold": True}),
+        ("插件 tool-hc-agent 把 7 项专业能力注册为 Harness 工具", {}),
+        ("模型只做理解、拆解、追问与解释，不产生电气数值", {}),
+        ("插件经单行 JSON 协议调用 Python 桥 hc_agent.bridge", {}),
+        ("已在从源码构建的 Harness 上跑通真实会话调用（count = 2）", {}),
+    ], size=14.5, gap=12)
+    _rect(s, 17.6, 5.2, 14.7, 8.6, fill=BAND_LIGHT, line=BLUE)
+    _text(s, 18.1, 5.5, 13.8, 8.0, [
+        ("七项工具", {"size": 15, "bold": True, "color": BLUE2}),
+        ("hc_engine_status — 引擎注册表", {"size": 12.5, "space_before": 10}),
+        ("hc_capacity_run — 完整承载力评估", {"size": 12.5, "space_before": 6}),
+        ("hc_run_acceptance — 九项验收", {"size": 12.5, "space_before": 6}),
+        ("hc_engine_crosscheck — 双引擎校核", {"size": 12.5, "space_before": 6}),
+        ("hc_case_analyze — 算例单断面分析", {"size": 12.5, "space_before": 6}),
+        ("hc_agent_ask — 规则问答", {"size": 12.5, "space_before": 6}),
+        ("hc_business_flow — 业务流八段状态", {"size": 12.5, "space_before": 6}),
+    ])
+
+    # ---------- 10.6 专业 Skill 与工具体系
+    s = _blank(prs)
+    _head(s, "专业 Skill 与工具契约：把做法固化成可调用单元", n=12)
+    _card(s, CARD_X[0], CARD_T, CARD_W, CARD_H, 1, "技能卡 17 张", [
+        "每张对应一类任务：口径确认、算例接入、容量搜索、整改建议等",
+        "写清适用边界与失败处理，避免“照着感觉做”",
+        "调用时记录用了哪张卡、什么版本",
+    ], BLUE)
+    _card(s, CARD_X[1], CARD_T, CARD_W, CARD_H, 2, "技能契约 5 个", [
+        "规定输入、输出与失败语义",
+        "契约不满足即拒绝执行，不做兜底猜数",
+        "契约变更需同步验收用例",
+    ], BROWN)
+    _card(s, CARD_X[2], CARD_T, CARD_W, CARD_H, 3, "工具调用契约", [
+        "单行 JSON、单次调用、无隐式状态",
+        "失败返回 ok=false 与错误码，不返回半个结果",
+        "数值型输出必须带单位与来源字段",
+    ], GREEN)
+    _takeaway(s, "把“老师傅的做法”写成技能卡，把“能不能调”写成契约，"
+                 "才谈得上稳定复用。", BROWN, top=15.4)
+
+    # ---------- 10.7 异常工况与拦截
+    s = _blank(prs)
+    _head(s, "异常工况：识别问题、保留依据、阻止无效结果", n=13)
+    _table(s, 1.47, 5.0, 30.9, [
+        ["异常类型", "系统行为", "产物留痕"],
+        ["输入缺失或越界", "在 S02 拦截，退出码 2，不出数", "validate 报告 + 字段清单"],
+        ["基线已越限", "先报基线越限，再谈新增容量", "constraint_results.csv"],
+        ["潮流不收敛", "退出码 3，标注不收敛断面", "engine 日志 + 状态"],
+        ["复算不一致", "退出码 4，结论不得发布", "verification.json 差异项"],
+        ["产物缺失", "验收判“无数据”，不给达标", "验收矩阵无数据行"],
+        ["规则包过期", "判定旧结论失效，要求重跑", "审批号与生效日期比对"],
+    ], [7.2, 14.0, 9.7], row_h=1.65, head_size=12.5, body_size=12)
+    _takeaway(s, "六类异常都不许“沉默地给一个数”：要么拦住，要么标清楚为什么。", RED, top=16.3)
+
+    # ---------- 10.8 专业知识库
+    s = _blank(prs)
+    _head(s, "专业知识库：让知识服务于评估过程", n=14)
+    _bullets(s, 1.68, 5.2, 15.4, 8.2, [
+        ("内置 31 篇知识条目，覆盖承载力定义、配网拓扑、新能源涉网要求", {"bold": True}),
+        ("区分【已核对】与【待核】：查不到出处的标待核，不当依据用", {}),
+        ("DL/T 2041 的系统级/设备级承载力区分是本系统口径来源", {}),
+        ("规则包的 standard_ref 指向知识条目，结论可回查依据", {}),
+        ("知识条目与技能卡分离：知识回答“是什么”，技能卡规定“怎么做”", {}),
+    ], size=14.5, gap=12)
+    _rect(s, 17.6, 5.2, 14.7, 9.0, fill=BAND_LIGHT, line=GREEN)
+    _text(s, 18.1, 5.5, 13.8, 8.4, [
+        ("知识条目的可信度分级", {"size": 15, "bold": True, "color": GREEN}),
+        ("【已核对】有明确出处，可作判据引用", {"size": 13, "space_before": 12}),
+        ("【待核】来源不明或版本待确认，仅作提示", {"size": 13, "space_before": 8}),
+        ("未收录：本地规范、项目批文（需接入方提供）", {"size": 13, "space_before": 8}),
+        ("原则：宁可不答，不拿待核条目当结论依据", {"size": 13, "space_before": 14, "bold": True, "color": RED}),
+    ])
+    _takeaway(s, "知识库不是搜索框，而是“哪些话有依据、哪些话只是听说”的分界线。", GREEN, top=15.2)
+
     # ---------- 14 核心功能总览
     s = _blank(prs)
     _head(s, "核心功能总览：一句话需求到可追溯报告", n=14)
@@ -563,9 +657,18 @@ def build() -> str:
     _takeaway(s, "功能不是并列的九个按钮，而是一条串起来的链路："
                  "少了任何一环，结论都不能发布。", PRIMARY, top=17.0)
 
-    # ---------- 15 产品界面①
+    # ---------- 15 产品界面① 系统配置（两块并排，对应模板的四宫格）
     s = _blank(prs)
-    _head(s, "产品界面①：智能体任务控制交互", n=15)
+    _head(s, "产品界面①：系统配置与运行环境", n=15)
+    _picture_pair(s, SHOTS + r"\\60_config.png", "模型服务与策略设置",
+                  SHOTS + r"\\61_kb.png", "Skill 与知识库")
+    _text(s, 1.68, 16.3, 30.4, 1.2,
+          ["左侧：模型服务、规则包与默认口径；右侧：技能卡与知识库目录。"
+           "两者都是可改配置，改动会写进运行产物。"], size=12, color=GREY)
+
+    # ---------- 16 产品界面②
+    s = _blank(prs)
+    _head(s, "产品界面②：智能体任务控制交互", n=16)
     _picture(s, SHOTS + r"\35_title_new.png", 17.9, 4.45,
              caption="问答界面：提出需求后给出结论、关键结果、依据与报告路径",
              cap_top=16.15)
@@ -573,9 +676,9 @@ def build() -> str:
           ["界面自带“可以这样问”的引导与算例选择，降低首次使用门槛；"
            "回答中标注出处（产物文件），便于回查。"], size=12, color=GREY)
 
-    # ---------- 16 产品界面②
+    # ---------- 17 产品界面③
     s = _blank(prs)
-    _head(s, "产品界面②：执行轨迹、结果证据与工程交付", n=16)
+    _head(s, "产品界面③：执行轨迹、结果证据与工程交付", n=17)
     _picture(s, SHOTS + r"\33_results_new.png", 17.9, 4.45,
              caption="验收与指标页：九项指标口径说明、近期运行总体状况与审计链状态",
              cap_top=16.15)
@@ -652,6 +755,26 @@ def build() -> str:
     ])
     _takeaway(s, "批量与最不利断面，是承载力评估里最该自动化、也最容易被跳过的一步。",
               BLUE, top=16.4)
+
+    # ---------- 19.5 验证
+    s = _blank(prs)
+    _head(s, "验证：固定参考算例与完整流程", n=20)
+    _bullets(s, 1.68, 5.2, 15.2, 8.0, [
+        ("黄金运行：FD001 / FD002 / FD016 三组固定算例，结论可逐次复核", {"bold": True}),
+        ("独立复算换目录换进程，8 项关键量逐一比对", {}),
+        ("验收矩阵 9 项四态判定，缺产物记“无数据”", {}),
+        ("20 个自检套件覆盖报告、验收、问答、界面、命名、打包、业务流", {}),
+        ("双引擎交叉：电压差 ≤0.0055 pu、网损差 ≤0.22 kW", {}),
+    ], size=14.5, gap=12)
+    _rect(s, 17.4, 5.2, 14.9, 9.2, fill=BAND_LIGHT, line=PRIMARY)
+    _text(s, 17.9, 5.5, 14.0, 8.6, [
+        ("三组算例的作用", {"size": 15, "bold": True, "color": PRIMARY}),
+        ("FD002：正常可估 → 验证容量与定位", {"size": 13, "space_before": 12}),
+        ("FD001：基线越限 → 验证零结论与证据", {"size": 13, "space_before": 8}),
+        ("FD016：多场景批量 → 验证最不利断面", {"size": 13, "space_before": 8}),
+        ("任何一组不通过，结论不得发布", {"size": 13, "space_before": 14, "bold": True, "color": RED}),
+    ])
+    _takeaway(s, "验证不是跑一遍不出错，而是每次都能给出同一组可比的数。", PRIMARY, top=15.4)
 
     # ---------- 20 效率提升① 环节对比
     s = _blank(prs)
@@ -796,6 +919,15 @@ def build() -> str:
     ], size=18, color=WHITE)
     _page_no(s, 25)
 
+    # 统一重排页码：插入页后手工 n= 会重复/跳号，这里按实际顺序覆盖
+    for idx, sl in enumerate(prs.slides, 1):
+        for sh in sl.shapes:
+            if not sh.has_text_frame:
+                continue
+            if abs(sh.left - Cm(31.37)) < Cm(0.3) and sh.top > Cm(17.5):
+                txt = sh.text_frame.text.strip()
+                if txt.isdigit():
+                    sh.text_frame.paragraphs[0].runs[0].text = str(idx)
     prs.save(OUT)
     return OUT
 
