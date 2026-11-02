@@ -205,7 +205,7 @@ def main(argv=None) -> int:
     # ---- 1.5) 漂移检测：克隆里被 git 跟踪、但母本里没有的文件。
     # 这些通常是「直接在 PyCharm 里新建/修改」的文件：下次同步不会带上它们，
     # 克隆一旦重建（本机已发生两次）就会丢。必须回写母本。
-    code, out = run([git, "ls-files"], DST)
+    code, out = run([git, "-c", "core.quotepath=false", "ls-files"], DST)
     tracked = [ln.strip() for ln in out.splitlines() if ln.strip()]
     drift = [f for f in tracked if not (SRC / f).is_file()]
     if drift:

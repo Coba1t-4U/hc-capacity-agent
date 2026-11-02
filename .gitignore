@@ -29,3 +29,7 @@ runs/**/*.log
 
 # 底座源码（2.3 GB / 12 万文件）：随工程存放，不入库
 deepseek-harness/
+
+# SQLite 运行时旁路文件
+*.sqlite-shm
+*.sqlite-wal
