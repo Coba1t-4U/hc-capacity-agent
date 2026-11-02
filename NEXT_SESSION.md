@@ -75,7 +75,7 @@ export function apply(ctx: Context): void {
 
 ```powershell
 $env:Path = "C:\Program Files\nodejs;" + $env:Path
-cd "$env:USERPROFILE\Desktop\配网承载力\deepseek-harness-开源版"
+cd "$env:USERPROFILE\Desktop\配网承载力\配网承载力智能体Agent\deepseek-harness"
 corepack pnpm install          # 上次 45.6 秒
 corepack pnpm build            # 或只构建该包
 ```
@@ -121,7 +121,7 @@ corepack pnpm build            # 或只构建该包
 ```
 智能体工程（GitHub 克隆）   %USERPROFILE%\Desktop\配网承载力\配网承载力智能体Agent
 智能体母本（含 runs/dss_runs）C:\Users\Chen\Documents\deepseek-harness\default-workspace\hc_agent_project
-DSH 开源版                  %USERPROFILE%\Desktop\配网承载力\deepseek-harness-开源版
+DSH 开源版                  %USERPROFILE%\Desktop\配网承载力\配网承载力智能体Agent\deepseek-harness
 Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe
 引擎库                      ...\default-workspace\opendss_demo\pylibs、...\pylibs_pandapower
 ```
@@ -154,7 +154,7 @@ Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runti
 
 | 东西 | 现在的位置 | 状态 |
 |---|---|---|
-| DSH 开源版 | `Desktop\配网承载力\deepseek-harness-开源版` | 完好（122,983 文件 / 2,360 MB） |
+| DSH 开源版 | `Desktop\配网承载力\配网承载力智能体Agent\deepseek-harness` | 完好（122,983 文件 / 2,360 MB） |
 | 智能体工程（旧副本） | `Desktop\配网承载力\配网承载力智能体Agent` | **`.git/objects` 已丢失**，git 不认它是仓库；内容停在 `a644e98`，无独有文件 |
 | 智能体工程（权威副本） | `Desktop\配网承载力\配网承载力智能体Agent` | 完好，HEAD `00d531c`，`.git` 完整 |
 
@@ -174,3 +174,24 @@ Python 解释器               C:\Users\Chen\.dsh\dsh-runtimes\dsh-primary-runti
 
 **注意**：DSH 源码移到 `桌面\配网承载力\` 后，node_modules 需重链；
 `corepack pnpm install` 在无 TTY 时会拒绝，需 `$env:CI='true'`。
+
+---
+
+## 2026-11-02：两个工程合并为一个
+
+DSH 开源版已移入智能体工程内部，PyCharm 只需打开 **一个** 工程：
+
+```
+Desktop\配网承载力\配网承载力智能体Agent\
+├─ hc_agent / tests / tools / docs …   ← 智能体本体（入 git）
+└─ deepseek-harness\                   ← 开源版底座（2.3 GB，已 gitignore）
+```
+
+**注意**：DSH 目录移动后 pnpm 的 node_modules 链接失效，需要重链一次：
+
+```powershell
+$env:CI = 'true'; $env:DSH_CLIENT_COMMIT_HASH = 'a644e98'
+cd "$env:USERPROFILE\Desktop\配网承载力\配网承载力智能体Agent\deepseek-harness"
+corepack pnpm install
+corepack pnpm build
+```
