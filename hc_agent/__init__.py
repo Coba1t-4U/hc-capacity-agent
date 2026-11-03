@@ -1,4 +1,4 @@
-﻿"""hc_agent — 配网承载力智能体Agent。
+"""hc_agent — 配网承载力智能体Agent。
 
 设计依据：《配网承载力与主配微协同优化 Agent 设计文档》
   - 第 3 章 总体架构（单监督 Agent + 专业技能 + 规则策略 + 计算引擎）
@@ -16,6 +16,6 @@
   4. 结果解释必须来自结构化结果与证据引用；矛盾时阻断发布。
 """
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __schema_version__ = "hc-input-v1"
 __rules_version__ = "hc-rules-v1"
