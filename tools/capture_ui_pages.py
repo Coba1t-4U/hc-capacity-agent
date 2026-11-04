@@ -48,7 +48,9 @@ def find_window(title_part: str = "承载力") -> int:
             return True
         buf = ctypes.create_unicode_buffer(n + 1)
         user32.GetWindowTextW(hwnd, buf, n + 1)
-        if title_part in buf.value:
+        # 必须**精确**命中应用标题：DSH 的会话标题里也含“配网承载力”，
+        # 用包含匹配会抓到 DSH 自己的窗口（实测踩过）。
+        if buf.value.strip() == '配网承载力智能体Agent':
             found.append(hwnd)
         return True
 
@@ -101,7 +103,7 @@ def main() -> int:
     print(f"窗口 hwnd={hwnd} 尺寸={rect(hwnd)}")
     time.sleep(3)
 
-    targets = [("config", "60_config"), ("kb", "61_kb"),
+    targets = [("chat", "59_chat"), ("dss", "65_dss"), ("workbench", "66_workbench"), ("config", "60_config"), ("kb", "61_kb"),
                ("results", "62_results"), ("process", "63_process"),
                ("overview", "64_overview")]
     for key, name in targets:
