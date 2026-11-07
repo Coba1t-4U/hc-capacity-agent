@@ -94,6 +94,36 @@ def _n_bus():
         return "—"
 
 
+def lambda_rows():
+    """按 DL/T 2041-2019 计算各元件反向负载率 λ。
+
+    λ = (P_D - P_L) / S_e，本系统用三相中最大的反向有功 p_kw 除以该元件额定容量
+    （由 loading_pct 反推：S_e = |P| / (loading_pct/100)），取全场景全时段的 λ_max。
+    只统计 p_kw < 0（反向）的记录；正向时段 λ 记 0。
+    """
+    import csv
+    f = RUN / "results" / "element_results.csv"
+    if not f.is_file():
+        return []
+    best = {}
+    with f.open(encoding="utf-8-sig") as fh:
+        for r in csv.DictReader(fh):
+            try:
+                p_kw = float(r["p_kw"] or 0)
+                lp = float(r["loading_pct"] or 0)
+            except (TypeError, ValueError):
+                continue
+            if p_kw >= 0:
+                continue
+            eq = r.get("equipment_id") or ""
+            key = (eq, r.get("phase") or "")
+            lam = lp / 100.0
+            if key not in best or lam > best[key][0]:
+                best[key] = (lam, p_kw, r.get("scenario_id").lstrip("\ufeff"), r.get("timestamp"))
+    out = sorted(best.items(), key=lambda kv: -kv[1][0])[:8]
+    return [(k[0], k[1], v[0], v[1], v[2], v[3]) for k, v in out]
+
+
 def run_summary(name):
     return j(ROOT / "runs" / "ACCEPT" / name / "results" / "run_summary.json")
 
@@ -244,6 +274,21 @@ def main():
                f"裕度 {BD.get('margin')}。")
     par(d, "复算：换全新目录与进程重跑，逐项比对容量、绑定约束、母线电压与网损；"
            "结论见附录 D。")
+    h(d, "4.3.1 反向负载率 λ 校核", 2)
+    _lr = lambda_rows()
+    if _lr:
+        par(d, "λ = (P_D − P_L) / S_e；本表按三相中反向有功最大的那一相计，"
+               "取全场景全时段 λ 最大值。只列反向时段（P<0）。")
+        tbl(d, [["元件", "相", "λ_max", "反向有功 kW", "场景", "时段"]] +
+            [[e, ph, f"{lm*100:.1f}%", f"{pk:.1f}", sc, (ts or "")[:16]]
+             for e, ph, lm, pk, sc, ts in _lr],
+            [120, 22, 46, 60, 60, 90], size=7.5)
+        _top = _lr[0]
+        _g = "红" if _top[2] > 1.0 else ("黄" if _top[2] > 0.8 else "绿")
+        par(d, f"λ 最大值 {_top[2]*100:.1f}%（{_top[0]} {_top[1]} 相），按 80/100% 口径属{_g}区。")
+    else:
+        par(d, "本次运行没有反向（P<0）记录，λ 全为 0。", color=RED)
+
     h(d, "4.4 对照算例", 2)
     for _n in ("FD002", "FD001", "FD016"):
         par(d, "· " + case_line(_n))
