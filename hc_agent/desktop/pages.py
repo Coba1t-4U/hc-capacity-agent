@@ -1313,6 +1313,8 @@ class ResultsPage(Page):
                     parent=self.app):
                 self.app.open_report_path(str(out))
 
+        W.button(bar, "下载标准版报告（10 章 + 附录）", do_export,
+                 bg=T.BG).pack(side="left")
         W.button(bar, "下载结果报告（含算例计算）", do_export_framework,
                  kind="primary", bg=T.BG).pack(side="left")
         self.children.append(bar)
