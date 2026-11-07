@@ -125,11 +125,11 @@ if have:
     if rmp.is_file():
         rep_man = json.loads(rmp.read_text(encoding="utf-8"))
 sections = rep_man.get("sections") or []
-check("报告清单有 6 章", len(sections) == 6, str(len(sections)))
-check("界面章节表也是 6 章",
+check("报告清单有 7 章", len(sections) == 7, str(len(sections)))
+check("界面章节表也是 7 章",
       len(getattr(__import__("hc_agent.desktop.pages",
                              fromlist=["ResultsPage"]).ResultsPage,
-                  "CHAPTERS", ())) == 6)
+                  "CHAPTERS", ())) == 7)
 
 INTENTS = [
     ("FD002 的任务概况是什么", "chapter_task"),
