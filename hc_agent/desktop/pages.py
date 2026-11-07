@@ -1236,14 +1236,48 @@ class ResultsPage(Page):
                 wrap=900).pack(anchor="w", pady=(0, 8))
 
         # ---- 成品报告：封面 + 目录 + 页眉页脚页码，可直接下载
-        _rep = d.get("report_path") or ""
-        _run_dir = Path(str(_rep)).parent.parent if _rep else None
+        # 运行目录：优先用 state 里最近一次运行，其次按 run_id 解析。
+        # 不能用 detail["report_path"]：detail 里没有这个键（实测取不到，
+        # 于是误报“没有报告文件”）。
+        from hc_agent.desktop import runs as runs_mod
+        _run_dir = None
+        _last = self.app.state.get("last_run_dir") or ""
+        if _last:
+            _run_dir = Path(str(_last))
+        elif rid:
+            try:
+                _run_dir = runs_mod.resolve_run_dir(rid)
+            except Exception:
+                _run_dir = None
+        _rep = None
+        try:
+            _rep = runs_mod.find_report_in(_run_dir) if _run_dir else None
+            if _rep is None and rid:
+                _rep = runs_mod.find_report(rid)
+        except Exception:
+            _rep = None
         bar = tk.Frame(p, bg=T.BG)
         bar.pack(fill="x", pady=(0, 8))
 
         def do_export() -> None:
             from hc_agent import report_export
-            if _run_dir is None or not (Path(_run_dir) / "report" / "report.docx").is_file():
+            if _run_dir is None:
+                messagebox.showinfo(
+                    "没有选中的运行",
+                    "先到「运行总览 → 运行记录」里点一行，再回来导出。",
+                    parent=self.app)
+                return
+            if _rep is None and (Path(_run_dir) / "results" / "run_summary.json").is_file():
+                # 这次运行有结果但没生成报告：当场补生成，而不是让用户去找
+                try:
+                    from hc_agent import reporting
+                    reporting.generate_report(str(_run_dir))
+                except Exception as exc:
+                    messagebox.showerror("生成报告失败",
+                                         f"{type(exc).__name__}: {exc}",
+                                         parent=self.app)
+                    return
+            if not (Path(_run_dir) / "report" / "report.docx").is_file():
                 messagebox.showinfo(
                     "没有报告文件",
                     "这次运行没有 report.docx，无法导出成品。"
