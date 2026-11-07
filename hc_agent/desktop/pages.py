@@ -1313,12 +1313,8 @@ class ResultsPage(Page):
                     parent=self.app):
                 self.app.open_report_path(str(out))
 
-        W.button(bar, "下载框架版报告（含算例计算）", do_export_framework,
-                 bg=T.BG).pack(side="left", padx=(8, 0))
-        W.button(bar, "下载成品报告（含封面与目录）", do_export,
+        W.button(bar, "下载结果报告（含算例计算）", do_export_framework,
                  kind="primary", bg=T.BG).pack(side="left")
-        W.label(bar, "　生成可直接交付的 docx：封面 + 目录 + 页眉页脚页码",
-                bg=T.BG, fg=T.MUTED, font=T.F.get("small")).pack(side="left")
         self.children.append(bar)
 
         box = W.card(p)
