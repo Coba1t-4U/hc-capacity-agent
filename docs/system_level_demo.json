@@ -1,0 +1,28 @@
+{
+  "capacity_kw": 185546.875,
+  "reverse_max_kw": 0.0,
+  "reverse_hours": 0,
+  "spill_rate": 0.0485985312117503,
+  "level": "绿",
+  "counties": [
+    {
+      "county": "A县",
+      "cap_kw": 64941.4,
+      "parent_cap_kw": 185546.9,
+      "rule": "min(负荷占比分解, 剩余装机空间)"
+    },
+    {
+      "county": "B县",
+      "cap_kw": 51953.1,
+      "parent_cap_kw": 185546.9,
+      "rule": "min(负荷占比分解, 剩余装机空间)"
+    },
+    {
+      "county": "C县",
+      "cap_kw": 68652.3,
+      "parent_cap_kw": 185546.9,
+      "rule": "min(负荷占比分解, 剩余装机空间)"
+    }
+  ],
+  "note": "构造算例：8760 点由典型日扩展，参数取行业常见水平，仅用于方法验证"
+}
