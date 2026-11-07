@@ -28,18 +28,19 @@ from hc_agent.io.schema import as_str, write_csv
 
 # 附录 B 报告输出最小目录
 REPORT_SECTIONS = (
-    "1. 结论摘要：等级、物理/管理双口径容量、主导限制因素、突出发现与需关注项",
-    "2. 任务概况：场景、范围、时间窗、发起与复核信息",
-    "3. 数据与口径：快照、质量、规则、假设、模型/技能/引擎版本",
-    "4. 计算过程：场景、方法、收敛、约束校验和开放容量搜索记录",
-    "5. 评估结果：可开放容量、红黄绿等级、主导限制因素与接入校核",
-    "6. 分级与建议：分级结论、主导约束与按约束类型的整改方向",
-    "7. 计算证据：复现所需的引擎、快照、规则包与输入指纹",
-    "8. 风险与缺口：数据、模型、算法、场景和未解决问题",
-    "9. 独立验证：复算任务、输入一致性、差异和通过状态",
-    "10. 人工审批：意见、签署、有效期和发布范围",
-    "11. 证据索引：各类文件哈希、日志、结果和审计事件编号",
-    "12. 附录与附表：约束明细、业务流覆盖、术语与口径说明"
+    "1. 结论摘要：总体承载力、等级、双口径容量、首要制约因素与需关注项",
+    "2. 基本信息与评估范围：评估对象、时间、数据截止、场景与水平年",
+    "3. 基础数据与数据质量：网架、负荷、电源、来源与缺失处理",
+    "4. 评估方法与约束条件：模型、五类约束、关键参数与假设",
+    "5. 评估结果：可开放容量、等级、主导限制因素明细与接入校核",
+    "6. 制约因素分析：首要制约因素、薄弱环节清单、敏感性分析",
+    "7. 提升措施与建议：网架改造、技术手段、运行管理措施的优先级",
+    "8. 智能体专项：计算证据与结论强度（复现三要素与可追溯性）",
+    "9. 风险、不确定性与适用范围：数据/模型/场景缺口与结论有效期",
+    "10. 独立验证：复算任务、输入一致性、差异和通过状态",
+    "11. 人工审批：意见、签署、有效期和发布范围",
+    "12. 证据索引：各类文件哈希、日志、结果和审计事件编号",
+    "13. 附录与附表：参数表、标准依据、业务流覆盖与术语"
 )
 
 
@@ -403,7 +404,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     kv("需关注项",
        "结论可用于内部评估与答复支撑；对外发布的区域等级须按省公司口径另行生成。")
 
-    h("2 任务概况")
+    h("2 基本信息与评估范围")
     kv("任务号", s.get("task_id", ""))
     kv("业务场景", s.get("business_scene", ""))
     kv("对象范围", f"{s.get('scope_type','')} {s.get('scope_ids','')}")
@@ -411,7 +412,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
                  f"{s.get('time_window_end','')}（半开区间）")
     kv("运行号", s.get("run_id", ""))
 
-    h("3 数据与口径")
+    h("3 基础数据与数据质量")
     kv("快照", man.get("snapshot_id", ""))
     kv("拓扑版本", man.get("topology_version", ""))
     kv("规则包", man.get("rule_version", ""))
@@ -422,7 +423,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
                f"{fp.get('interface_version','')}")
     kv("输入清单摘要", man.get("input_digest", ""))
 
-    h("4 计算过程")
+    h("4 评估方法与约束条件")
     kv("场景数", s.get("scenario_count", ""))
     kv("时间片总数", s.get("slice_count", ""))
     kv("基线收敛", s.get("all_converged", ""))
@@ -496,7 +497,37 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     else:
         doc.add_paragraph("本任务为容量定期评估，无并网申请。")
 
-    h("6 分级与建议")
+    h("6 制约因素分析")
+    _csx = s.get("constraint_summary") or {}
+    _bsx = _csx.get("binding_constraints") or []
+    kv("基线约束统计",
+       f"共 {_csx.get('total', 0)} 项：pass {_csx.get('pass', 0)}、"
+       f"fail {_csx.get('fail', 0)}、unknown {_csx.get('unknown', 0)}")
+    if _bsx:
+        _first = _bsx[0]
+        kv("首要制约因素",
+           f"{as_str(_first.get('constraint_id'))} @ {as_str(_first.get('object_id'))}"
+           f"（{as_str(_first.get('metric'))}={_fmt(_first.get('value'))}，"
+           f"裕度 {_fmt(_first.get('margin'))}）")
+        doc.add_paragraph("薄弱环节清单：")
+        _t6 = doc.add_table(rows=1, cols=5)
+        _t6.style = "Light Grid Accent 1"
+        for _i, _n in enumerate(("约束", "对象", "指标", "计算值", "裕度")):
+            _t6.rows[0].cells[_i].text = _n
+        for _b in _bsx[:10]:
+            _row = _t6.add_row().cells
+            _row[0].text = as_str(_b.get("constraint_id"))
+            _row[1].text = as_str(_b.get("object_id"))
+            _row[2].text = as_str(_b.get("metric"))
+            _row[3].text = _fmt(_b.get("value"))
+            _row[4].text = _fmt(_b.get("margin"))
+    else:
+        kv("首要制约因素", "本次运行未记录绑定约束（基线无越限，或结果缺失）")
+    kv("敏感性分析", "未实现：本版不做参数扰动扫描（负荷/出力±10% 逐次重算）。")
+    kv("说明", "薄弱环节按约束类型与对象列出；全网设备级清单需逐级评估后汇总，"
+               "本版以单算例为限。")
+
+    h("7 提升措施与建议")
     kv("等级", _lvl)
     kv("分级依据", s.get("level_reason") or "—")
     kv("主导约束", s.get("binding_constraint") or "—")
@@ -508,7 +539,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
        "上述建议指向约束类型，具体方案的容量与投资需另行测算；"
        "本报告不对未实施改造的效果作任何承诺。")
 
-    h("7 计算证据")
+    h("8 智能体专项：计算证据与结论强度")
     _tr = ctx.get("traceability") or {}
     _lk = _tr.get("links") or {}
     kv("复现三要素", "同一份输入快照 + 同一版规则包 + 同一版引擎")
@@ -524,14 +555,14 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     kv("可追溯性", "完整（关键链接齐全）" if _tr.get("complete")
        else "不完整，缺少：" + "、".join(_tr.get("missing") or []))
 
-    h("8 风险与缺口")
+    h("9 风险、不确定性与适用范围")
     for r in (s.get("risks") or ["无已登记风险"]):
         doc.add_paragraph(str(r), style="List Bullet")
     for u in (s.get("unknowns") or []):
         doc.add_paragraph(f"unknown：ΔP={_fmt(u.get('delta_kw'))} kW，"
                           f"原因 {u.get('reason','')}", style="List Bullet")
 
-    h("9 独立验证")
+    h("10 独立验证")
     ver = ctx.get("verification") or {}
     if ver:
         kv("复算运行号", ver.get("verify_run_id", ""))
@@ -544,7 +575,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     else:
         doc.add_paragraph("尚未执行独立复算（禁止发布正式结论）。")
 
-    h("10 人工审批")
+    h("11 人工审批")
     gate = ctx.get("release_gate") or {}
     kv("发布门禁通过", gate.get("passed", "未评估"))
     kv("未通过门禁", gate.get("failed_gates", ""))
@@ -552,7 +583,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     kv("审批号", appr.get("approval_id", "未提交"))
     kv("结果哈希绑定", appr.get("result_hash", "—"))
 
-    h("11 证据索引")
+    h("12 证据索引")
     for name, desc in (
         ("manifest.json", "输入清单与哈希"),
         ("results/capacity.csv", "容量结果"),
@@ -577,7 +608,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     from hc_agent import business_flow as _BF
 
     _st = _BF.summary()
-    h("12 附录与附表：业务流覆盖（八段闭环）")
+    h("13 附录与附表：业务流覆盖（八段闭环）")
     doc.add_paragraph(
         "业务链：数据准备 → 评估计算 → 分级发布 → 接入应用 → 提升改造 → 动态更新。"
         f"本系统已实现 {_st['counts']['implemented']} 段、"
