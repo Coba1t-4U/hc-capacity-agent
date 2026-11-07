@@ -1235,6 +1235,40 @@ class ResultsPage(Page):
                 bg=T.BG, fg=T.MUTED, font=T.F.get("small"),
                 wrap=900).pack(anchor="w", pady=(0, 8))
 
+        # ---- 成品报告：封面 + 目录 + 页眉页脚页码，可直接下载
+        _rep = d.get("report_path") or ""
+        _run_dir = Path(str(_rep)).parent.parent if _rep else None
+        bar = tk.Frame(p, bg=T.BG)
+        bar.pack(fill="x", pady=(0, 8))
+
+        def do_export() -> None:
+            from hc_agent import report_export
+            if _run_dir is None or not (Path(_run_dir) / "report" / "report.docx").is_file():
+                messagebox.showinfo(
+                    "没有报告文件",
+                    "这次运行没有 report.docx，无法导出成品。"
+                    "可能停在「生成报告」之前，看运算过程的阶段轨迹能定位卡在哪。",
+                    parent=self.app)
+                return
+            try:
+                out = report_export.export(Path(_run_dir))
+            except Exception as exc:      # 导出失败要说清原因，不静默
+                messagebox.showerror("导出失败",
+                                     f"{type(exc).__name__}: {exc}",
+                                     parent=self.app)
+                return
+            if messagebox.askyesno(
+                    "已生成成品报告",
+                    f"{out.name}\n\n保存位置：{out.parent}\n\n现在打开吗？",
+                    parent=self.app):
+                self.app.open_report_path(str(out))
+
+        W.button(bar, "下载成品报告（含封面与目录）", do_export,
+                 kind="primary", bg=T.BG).pack(side="left")
+        W.label(bar, "　生成可直接交付的 docx：封面 + 目录 + 页眉页脚页码",
+                bg=T.BG, fg=T.MUTED, font=T.F.get("small")).pack(side="left")
+        self.children.append(bar)
+
         box = W.card(p)
         box.pack(fill="x")
 
