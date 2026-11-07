@@ -1307,7 +1307,8 @@ class ResultsPage(Page):
                     parent=self.app):
                 self.app.open_report_path(str(out))
 
-        W.button(bar, "下载报告（9 章）", do_export, kind="primary", bg=T.BG).pack(side="left")
+        W.button(bar, "下载结果报告（含算例计算）", do_export_framework,
+                 kind="primary", bg=T.BG).pack(side="left")
         self.children.append(bar)
 
         box = W.card(p)
