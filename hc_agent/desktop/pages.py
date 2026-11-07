@@ -1288,6 +1288,33 @@ class ResultsPage(Page):
                     parent=self.app):
                 self.app.open_report_path(str(out))
 
+        def do_export_framework() -> None:
+            # 框架版报告：正文 8 章 + 算例计算章，脚本在 tools/ 下，按路径加载执行
+            import importlib.util
+            from hc_agent.desktop import runs as runs_mod
+            root = Path(runs_mod.runs_root()).parent
+            script = root / "tools" / "build_framework_report.py"
+            if not script.is_file():
+                messagebox.showerror("找不到生成脚本", str(script), parent=self.app)
+                return
+            try:
+                spec = importlib.util.spec_from_file_location("framework_report", script)
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                mod.main()
+                out = Path(mod.OUT)
+            except Exception as exc:
+                messagebox.showerror("导出失败",
+                                     f"{type(exc).__name__}: {exc}", parent=self.app)
+                return
+            if messagebox.askyesno(
+                    "已生成框架版报告",
+                    f"{out.name}\n\n保存位置：{out.parent}\n\n现在打开吗？",
+                    parent=self.app):
+                self.app.open_report_path(str(out))
+
+        W.button(bar, "下载框架版报告（含算例计算）", do_export_framework,
+                 bg=T.BG).pack(side="left", padx=(8, 0))
         W.button(bar, "下载成品报告（含封面与目录）", do_export,
                  kind="primary", bg=T.BG).pack(side="left")
         W.label(bar, "　生成可直接交付的 docx：封面 + 目录 + 页眉页脚页码",
