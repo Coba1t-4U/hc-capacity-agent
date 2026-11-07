@@ -28,15 +28,18 @@ from hc_agent.io.schema import as_str, write_csv
 
 # 附录 B 报告输出最小目录
 REPORT_SECTIONS = (
-    "1. 任务概况：场景、范围、时间窗、发起与复核信息",
-    "2. 数据与口径：快照、质量、规则、假设、模型/技能/引擎版本",
-    "3. 计算过程：场景、方法、收敛、约束校验和开放容量搜索记录",
-    "4. 评估结果：三级对象结果、分区分时容量、红黄绿等级和主导限制因素",
-    "5. 接入校核（如适用）：基线/增量对比、结论候选和整改建议",
-    "6. 风险与缺口：数据、模型、算法、场景和未解决问题",
-    "7. 独立验证：复算任务、输入一致性、差异和通过状态",
-    "8. 人工审批：意见、签署、有效期和发布范围",
-    "9. 证据索引：各类文件哈希、日志、结果和审计事件编号",
+    "1. 结论摘要：等级、物理/管理双口径容量、主导限制因素、突出发现与需关注项",
+    "2. 任务概况：场景、范围、时间窗、发起与复核信息",
+    "3. 数据与口径：快照、质量、规则、假设、模型/技能/引擎版本",
+    "4. 计算过程：场景、方法、收敛、约束校验和开放容量搜索记录",
+    "5. 评估结果：可开放容量、红黄绿等级、主导限制因素与接入校核",
+    "6. 分级与建议：分级结论、主导约束与按约束类型的整改方向",
+    "7. 计算证据：复现所需的引擎、快照、规则包与输入指纹",
+    "8. 风险与缺口：数据、模型、算法、场景和未解决问题",
+    "9. 独立验证：复算任务、输入一致性、差异和通过状态",
+    "10. 人工审批：意见、签署、有效期和发布范围",
+    "11. 证据索引：各类文件哈希、日志、结果和审计事件编号",
+    "12. 附录与附表：约束明细、业务流覆盖、术语与口径说明"
 )
 
 
@@ -375,7 +378,32 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
         p.add_run(f"{label}：").bold = True
         p.add_run(_fmt(value) if not isinstance(value, str) else value)
 
-    h("1 任务概况")
+    h("1 结论摘要")
+    _zh = {"green": "绿", "yellow": "黄", "red": "红", "grey": "灰"}
+    _lvl = _zh.get(str(s.get("level")), str(s.get("level") or "—"))
+    _cs0 = s.get("constraint_summary") or {}
+    kv("一句话结论",
+       f"本次评估等级为{_lvl}，物理可开放容量 {_fmt(s.get('capacity_physical_kw'))} kW，"
+       f"主导限制因素为 {s.get('binding_constraint') or '—'}")
+    kv("可开放容量 (kW)",
+       f"物理 {_fmt(s.get('capacity_physical_kw'))} / 管理 {_fmt(s.get('capacity_managed_kw'))}")
+    kv("红黄绿等级", _lvl)
+    kv("主导限制因素", s.get("binding_constraint") or "—")
+    kv("基线约束校核",
+       f"共 {_cs0.get('total', 0)} 项：pass {_cs0.get('pass', 0)}、"
+       f"fail {_cs0.get('fail', 0)}、unknown {_cs0.get('unknown', 0)}")
+    _bs0 = _cs0.get("binding_constraints") or []
+    if _bs0:
+        _b0 = _bs0[0]
+        kv("突出发现",
+           f"{as_str(_b0.get('constraint_id'))} 在 {as_str(_b0.get('object_id'))} 上 "
+           f"{as_str(_b0.get('metric'))}={_fmt(_b0.get('value'))}，"
+           f"限值 [{_fmt(_b0.get('limit_lower'))}, {_fmt(_b0.get('limit_upper'))}]，"
+           f"裕度 {_fmt(_b0.get('margin'))}")
+    kv("需关注项",
+       "结论可用于内部评估与答复支撑；对外发布的区域等级须按省公司口径另行生成。")
+
+    h("2 任务概况")
     kv("任务号", s.get("task_id", ""))
     kv("业务场景", s.get("business_scene", ""))
     kv("对象范围", f"{s.get('scope_type','')} {s.get('scope_ids','')}")
@@ -383,7 +411,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
                  f"{s.get('time_window_end','')}（半开区间）")
     kv("运行号", s.get("run_id", ""))
 
-    h("2 数据与口径")
+    h("3 数据与口径")
     kv("快照", man.get("snapshot_id", ""))
     kv("拓扑版本", man.get("topology_version", ""))
     kv("规则包", man.get("rule_version", ""))
@@ -394,7 +422,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
                f"{fp.get('interface_version','')}")
     kv("输入清单摘要", man.get("input_digest", ""))
 
-    h("3 计算过程")
+    h("4 计算过程")
     kv("场景数", s.get("scenario_count", ""))
     kv("时间片总数", s.get("slice_count", ""))
     kv("基线收敛", s.get("all_converged", ""))
@@ -408,7 +436,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     # 只在 Markdown 渲染里加是不够的：本机 python-docx 可用，实际交付物是 .docx。
     cal = ctx.get("caliber") or {}
     if cal and not cal.get("error"):
-        h("3.1 本次求解口径声明")
+        h("4.1 本次求解口径声明")
         items = cal.get("items") or []
         if items:
             t = doc.add_table(rows=1, cols=3)
@@ -433,7 +461,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     elif cal.get("error"):
         doc.add_paragraph(f"口径声明生成失败：{cal['error']}")
 
-    h("4 评估结果")
+    h("5 评估结果")
     kv("物理可开放容量 (kW)", s.get("capacity_physical_kw"))
     kv("管理可开放容量 (kW)", s.get("capacity_managed_kw"))
     kv("红黄绿等级", s.get("level", ""))
@@ -460,7 +488,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
                            f"{_fmt(b.get('limit_upper'))}]")
             row[5].text = _fmt(b.get("margin"))
 
-    h("5 接入校核")
+    h("5.1 接入校核")
     if s.get("application_id"):
         kv("申请号", s.get("application_id"))
         kv("申请容量 (kW)", s.get("requested_capacity_kw"))
@@ -468,14 +496,42 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     else:
         doc.add_paragraph("本任务为容量定期评估，无并网申请。")
 
-    h("6 风险与缺口")
+    h("6 分级与建议")
+    kv("等级", _lvl)
+    kv("分级依据", s.get("level_reason") or "—")
+    kv("主导约束", s.get("binding_constraint") or "—")
+    kv("整改方向",
+       "按主导约束对症：电压越限优先调压（无功补偿或有载调压配变）；"
+       "热稳越限优先增容或负荷分流；反送越限配置储能或采用出力限制策略；"
+       "不平衡越限调整接入相别；短路越限校核开关遮断能力并限制单点接入容量。")
+    kv("使用说明",
+       "上述建议指向约束类型，具体方案的容量与投资需另行测算；"
+       "本报告不对未实施改造的效果作任何承诺。")
+
+    h("7 计算证据")
+    _tr = ctx.get("traceability") or {}
+    _lk = _tr.get("links") or {}
+    kv("复现三要素", "同一份输入快照 + 同一版规则包 + 同一版引擎")
+    for _k, _label in (("snapshot_id", "输入快照"),
+                       ("rule_package", "规则包"),
+                       ("input_digest", "输入指纹")):
+        if _lk.get(_k):
+            kv(_label, _fmt(_lk.get(_k)))
+    _fp = _lk.get("engine_fingerprint") or {}
+    if _fp:
+        kv("引擎", f"{_fp.get('engine_id', '')} / {_fp.get('interface', '')} "
+                   f"{_fp.get('interface_version', '')}")
+    kv("可追溯性", "完整（关键链接齐全）" if _tr.get("complete")
+       else "不完整，缺少：" + "、".join(_tr.get("missing") or []))
+
+    h("8 风险与缺口")
     for r in (s.get("risks") or ["无已登记风险"]):
         doc.add_paragraph(str(r), style="List Bullet")
     for u in (s.get("unknowns") or []):
         doc.add_paragraph(f"unknown：ΔP={_fmt(u.get('delta_kw'))} kW，"
                           f"原因 {u.get('reason','')}", style="List Bullet")
 
-    h("7 独立验证")
+    h("9 独立验证")
     ver = ctx.get("verification") or {}
     if ver:
         kv("复算运行号", ver.get("verify_run_id", ""))
@@ -488,7 +544,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     else:
         doc.add_paragraph("尚未执行独立复算（禁止发布正式结论）。")
 
-    h("8 人工审批")
+    h("10 人工审批")
     gate = ctx.get("release_gate") or {}
     kv("发布门禁通过", gate.get("passed", "未评估"))
     kv("未通过门禁", gate.get("failed_gates", ""))
@@ -496,7 +552,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     kv("审批号", appr.get("approval_id", "未提交"))
     kv("结果哈希绑定", appr.get("result_hash", "—"))
 
-    h("9 证据索引")
+    h("11 证据索引")
     for name, desc in (
         ("manifest.json", "输入清单与哈希"),
         ("results/capacity.csv", "容量结果"),
@@ -521,7 +577,7 @@ def _write_docx(ctx: Dict[str, Any], out: Path) -> None:
     from hc_agent import business_flow as _BF
 
     _st = _BF.summary()
-    h("附录 A 业务流覆盖（八段闭环）")
+    h("12 附录与附表：业务流覆盖（八段闭环）")
     doc.add_paragraph(
         "业务链：数据准备 → 评估计算 → 分级发布 → 接入应用 → 提升改造 → 动态更新。"
         f"本系统已实现 {_st['counts']['implemented']} 段、"

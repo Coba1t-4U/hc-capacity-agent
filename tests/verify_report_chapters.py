@@ -2,7 +2,7 @@
 
   1) 运算过程页的「运行代码」—— 如实区分实际执行 / 等效复现
   2) 容量分析跑完当场给出报告入口（不必再跑去运行记录页）
-  3) 报告 9 章逐章都能在问答里回答（且只说该章产物）
+  3) 报告 12 章逐章都能在问答里回答（且只说该章产物）
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ def check(name, cond, detail=""):
 
 
 print("=" * 74)
-print("P0 遗留三项验证：运行代码 / 报告入口 / 报告 9 章问答")
+print("P0 遗留三项验证：运行代码 / 报告入口 / 报告 12 章问答")
 print("=" * 74)
 
 from hc_agent.desktop import process as P
@@ -114,8 +114,8 @@ check("容量分析页有「本次运行结果」区块",
 for btn in ("打开计算报告", "查看运算过程", "看运行代码", "问这次运行"):
     check(f"结果区块有「{btn}」", btn in pages_src)
 
-# ================================================================ 3. 报告 9 章
-print("\n3) 报告 9 章逐章可问答")
+# ================================================================ 3. 报告 12 章
+print("\n3) 报告 12 章逐章可问答")
 from hc_agent.qa import Facts, Responder, intent
 
 # 章节表与报告清单必须对得上
@@ -125,11 +125,11 @@ if have:
     if rmp.is_file():
         rep_man = json.loads(rmp.read_text(encoding="utf-8"))
 sections = rep_man.get("sections") or []
-check("报告清单有 9 章", len(sections) == 9, str(len(sections)))
-check("界面章节表也是 9 章",
+check("报告清单有 12 章", len(sections) == 12, str(len(sections)))
+check("界面章节表也是 12 章",
       len(getattr(__import__("hc_agent.desktop.pages",
                              fromlist=["ResultsPage"]).ResultsPage,
-                  "CHAPTERS", ())) == 9)
+                  "CHAPTERS", ())) == 12)
 
 INTENTS = [
     ("FD002 的任务概况是什么", "chapter_task"),

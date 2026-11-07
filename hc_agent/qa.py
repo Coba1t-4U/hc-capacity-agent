@@ -300,6 +300,8 @@ RULES: List[Tuple[str, str]] = [
     (r"(有哪些|列出|所有|看看).{0,6}(运行|任务|算例)", "list_runs"),
     (r"(口径|假设|模型|怎么算的|依据)", "caliber"),
     # ---- 报告 9 章（按章节提问，与报告结构一一对应）
+    (r"(结论摘要|报告摘要|一句话结论|摘要是什么|摘要)", "chapter_summary"),
+    (r"(分级与建议|一台一策|红区.{0,6}建议|按等级.{0,6}建议|该怎么改)", "chapter_grade"),
     (r"(任务概况|任务的基本情况|这次(跑|执行)的是什么|谁发起|发起与复核|时间窗|范围是)", "chapter_task"),
     (r"(数据与口径|用了哪版(规则|规则包)|哪版规则|数据质量|快照|输入快照|假设是什么)", "chapter_data"),
     (r"(计算过程|算了几个(场景|时间片)|收敛|搜索记录|迭代了|用的什么方法)", "chapter_process"),
@@ -798,6 +800,52 @@ class Responder:
         else:
             lines.append("")
             lines.append("本章要求的“发起与复核信息”：产物里没有门禁记录。")
+        return Answer("\n".join(lines), source=self._src(r, "run_summary.json"))
+
+    def _a_chapter_summary(self, it: Intent, r: RunFacts) -> Answer:
+        """报告第 1 章：结论摘要（只看决策者要立刻知道的信息）。"""
+        if not r.ok:
+            return self._no_run()
+        sm = r.summary
+        zh = {"green": "绿", "yellow": "黄", "red": "红", "grey": "灰"}
+        lvl = zh.get(str(sm.get("level")), str(sm.get("level") or "—"))
+        lines = self._chapter_head(r, "结论摘要", 1)
+        lines.append(f"  · 一句话结论：等级 **{lvl}**，物理可开放容量 "
+                     f"{sm.get('capacity_physical_kw')} kW，主导限制 "
+                     f"{sm.get('binding_constraint') or '—'}")
+        lines.append(f"  · 可开放容量：物理 {sm.get('capacity_physical_kw')} kW / "
+                     f"管理 {sm.get('capacity_managed_kw')} kW")
+        cs = sm.get("constraint_summary") or {}
+        lines.append(f"  · 基线约束：共 {cs.get('total', 0)} 项，"
+                     f"fail {cs.get('fail', 0)}、unknown {cs.get('unknown', 0)}")
+        binding = (cs.get("binding_constraints") or [])
+        if binding:
+            b = binding[0]
+            lines.append(f"  · 突出发现：{b.get('constraint_id')} 在 {b.get('object_id')} 上 "
+                         f"{b.get('metric')}={b.get('value')}，裕度 {b.get('margin')}")
+        lines.append("")
+        lines.append("需关注项：结论可用于内部评估与答复支撑；"
+                     "对外发布的区域等级须按省公司口径另行生成。")
+        return Answer("\n".join(lines), source=self._src(r, "run_summary.json"))
+
+    def _a_chapter_grade(self, it: Intent, r: RunFacts) -> Answer:
+        """报告第 6 章：分级与建议（建议挂在主导约束上）。"""
+        if not r.ok:
+            return self._no_run()
+        sm = r.summary
+        zh = {"green": "绿", "yellow": "黄", "red": "红", "grey": "灰"}
+        lvl = zh.get(str(sm.get("level")), str(sm.get("level") or "—"))
+        lines = self._chapter_head(r, "分级与建议", 6)
+        lines.append(f"  · 等级：**{lvl}**")
+        lines.append(f"  · 分级依据：{sm.get('level_reason') or '—'}")
+        lines.append(f"  · 主导约束：{sm.get('binding_constraint') or '—'}")
+        lines.append("")
+        lines.append("整改方向（按约束对症，具体方案需另行测算）：")
+        lines.append("  · 电压越限 → 无功补偿或有载调压配变（调压优先于增容）")
+        lines.append("  · 热稳越限 → 增容或负荷分流")
+        lines.append("  · 反送越限 → 配置储能或采用出力限制策略")
+        lines.append("  · 不平衡越限 → 调整接入相别")
+        lines.append("  · 短路越限 → 校核开关遮断能力，限制单点接入容量")
         return Answer("\n".join(lines), source=self._src(r, "run_summary.json"))
 
     def _a_chapter_data(self, it: Intent, r: RunFacts) -> Answer:
