@@ -114,6 +114,17 @@ class App(tk.Tk):
         else:
             self.geometry(getattr(self, "_restore_geo", "1200x800+80+60"))
 
+    def _load_license(self) -> None:
+        """启动时校验本地授权；失败不阻断启动，回落演示模式。"""
+        try:
+            from hc_agent import license as lic
+            st = lic.status()
+            self.state["license"] = st
+            self.state["license_text"] = lic.banner(st)
+        except Exception:
+            self.state["license"] = None
+            self.state["license_text"] = "授权：状态未知"
+
     def _build_statusbar(self) -> None:
         """30px 状态条：白底 + 1px 顶边，字号压到 small，不与内容抢注意力。"""
         tk.Frame(self, bg=T.BORDER, height=1).pack(side="bottom", fill="x")
@@ -123,6 +134,13 @@ class App(tk.Tk):
         self.crumb = tk.Label(bar, text="", bg=T.CARD, fg=T.MUTED,
                               font=T.F.get("small"))
         self.crumb.pack(side="left", padx=(16, 12))
+        self._load_license()
+        lic_lb = tk.Label(bar, text=self.state.get("license_text", "授权：状态未知"),
+                          bg=T.CARD, fg=(T.MUTED if getattr(self.state.get("license"), "ok", False)
+                                         else "#864B48"),
+                          font=T.F.get("small"))
+        lic_lb.pack(side="right", padx=(6, 16))
+        self.license_label = lic_lb
         self.status_items: Dict[str, tuple] = {}
         for key, text in (("backend", "后端检查中…"), ("engine", "引擎检查中…"),
                           ("watchdog", "看门狗检查中…")):
@@ -265,11 +283,27 @@ class App(tk.Tk):
         return bool(getattr(getattr(self, "page", None), "SUBS", []))
 
     # ------------------------------------------------------------ 页面切换
+    def _license_gate(self, key: str) -> bool:
+        """演示模式下阻止进入需授权的页面；返回 True 表示放行。"""
+        from tkinter import messagebox
+        messagebox.showinfo(
+            "需要授权",
+            "当前为演示模式：" + str(self.state.get("license_text", "")) +
+            "\n\n容量分析与容量搜索需要有效授权。\n"
+            "请把本机机器码发给供方换取授权文件 lic.json。",
+            parent=self)
+        return False
+
     def show(self, key: str, sub: str = "") -> None:
         self.current = key
         for k, lb in list(self.nav_items.items()) + list(
                 getattr(self, "bottom_items", {}).items()):
             self._nav_leave(lb, k)
+        # 演示模式：容量分析与容量搜索锁定
+        _lic = self.state.get("license")
+        if key in ("workbench",) and _lic is not None and not _lic.ok:
+            if not self._license_gate(key):
+                return
         cls = PAGES[key]
         self.page = cls(self)
         if sub:
