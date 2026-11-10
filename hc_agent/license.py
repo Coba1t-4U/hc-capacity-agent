@@ -34,29 +34,54 @@ LICENSE_FILENAME = "lic.json"
 
 def _run(cmd: list[str]) -> str:
     try:
-        out = subprocess.run(cmd, capture_output=True, text=True, timeout=8,
+        out = subprocess.run(cmd, capture_output=True, text=True, timeout=4,
                              creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         return (out.stdout or "").strip()
     except Exception:
         return ""
 
 
-def machine_id() -> str:
-    """机器指纹：CPU + 主板 UUID + 系统盘序列号，SHA256 后取前 32 位。
+_MID_CACHE: str | None = None
+_MID_FILE = Path.home() / ".hc_agent" / "machine_id.txt"
 
-    刻意不采集 MAC（虚拟网卡会变、无线网卡随插拔变化，误伤率高）。
-    采集失败时退化到 uuid.getnode()，并在返回值里标明降级。
+
+def machine_id() -> str:
+    """机器指纹：CPU + 主板 UUID + 系统盘序列号，SHA256 取前 32 位。
+
+    性能注意：采集要调子进程（wmic / powershell），单次可能数百毫秒到数秒。
+    界面每次渲染配置页都会读它，所以必须缓存——否则会出现“打开配置页卡几秒”。
+    缓存顺序：内存 → 磁盘缓存文件 → 实际采集后写盘。
     """
+    global _MID_CACHE
+    if _MID_CACHE:
+        return _MID_CACHE
+    try:
+        if _MID_FILE.is_file():
+            cached = _MID_FILE.read_text(encoding="utf-8").strip()
+            if len(cached) == 32:
+                _MID_CACHE = cached
+                return cached
+    except Exception:
+        pass
+
     raw: list[str] = []
     raw.append(_run(["wmic", "cpu", "get", "ProcessorId"]).replace("ProcessorId", "").strip())
     raw.append(_run(["wmic", "csproduct", "get", "UUID"]).replace("UUID", "").strip())
     disk = _run(["cmd", "/c", "vol", "C:"])
     raw.append(disk.split("Volume Serial Number is")[-1].strip() if "Serial" in disk else "")
     parts = [p for p in raw if p]
+    # 注意：指纹算法一旦发布就不能改，否则历史授权全部失效。
+    # 这里保持与首发版本完全一致的取数逻辑，只加缓存。
     if len(parts) < 2:
         parts.append(f"node-{uuid.getnode()}")
-    digest = hashlib.sha256("|".join(parts).encode("utf-8")).hexdigest()
-    return digest[:32]
+    mid = hashlib.sha256("|".join(parts).encode("utf-8")).hexdigest()[:32]
+    _MID_CACHE = mid
+    try:
+        _MID_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _MID_FILE.write_text(mid, encoding="utf-8")
+    except Exception:
+        pass
+    return mid
 
 
 @dataclass
