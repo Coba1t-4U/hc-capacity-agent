@@ -55,7 +55,7 @@ def issue(machine: str, customer: str, expire: str = "", days: int = 0,
         raise SystemExit("没有私钥，先运行 --keygen")
     if not expire:
         if days <= 0:
-            raise SystemExit("必须给 --expire 或 --days")
+            days = 4 * 365          # 默认四年（用户 2026-11-10 定的规则）
         expire = (date.today() + timedelta(days=days)).isoformat()
 
     key = serialization.load_pem_private_key(KEY_PATH.read_bytes(), password=None)
