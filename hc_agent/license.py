@@ -122,19 +122,34 @@ def verify(lic_path: Path, *, today: date | None = None,
 
 
 def locate(project_root: Path | None = None) -> Path:
-    """授权文件位置：优先程序目录，其次用户目录（便于客户自行替换）。"""
+    """授权文件位置。
+
+    查找顺序：
+      1) 程序目录（打包版＝exe 同级；源码版＝工程根）下的 lic.json
+      2) 用户目录 ~/.hc_agent/lic.json
+      3) 上述两处的任意 lic*.json（容忍客户改过文件名，取最近修改的一份）
+    """
     if project_root:
-        root = Path(project_root)
+        roots = [Path(project_root)]
     else:
         import sys
-        # 打包后 __file__ 在 _internal 下，授权应放在 exe 同级目录
-        root = (Path(sys.executable).parent if getattr(sys, "frozen", False)
-                else Path(__file__).resolve().parents[1])
-    cand = [root / LICENSE_FILENAME, Path.home() / ".hc_agent" / LICENSE_FILENAME]
-    for p in cand:
-        if p.is_file():
-            return p
-    return cand[0]
+        roots = [Path(sys.executable).parent if getattr(sys, "frozen", False)
+                 else Path(__file__).resolve().parents[1]]
+    roots.append(Path.home() / ".hc_agent")
+
+    for d in roots:
+        exact = d / LICENSE_FILENAME
+        if exact.is_file():
+            return exact
+
+    loose: list[Path] = []
+    for d in roots:
+        if d.is_dir():
+            loose.extend(p for p in d.glob("lic*.json") if p.is_file())
+    if loose:
+        return max(loose, key=lambda p: p.stat().st_mtime)
+
+    return roots[0] / LICENSE_FILENAME
 
 
 def status(project_root: Path | None = None) -> Status:
