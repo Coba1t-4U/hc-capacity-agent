@@ -123,7 +123,13 @@ def verify(lic_path: Path, *, today: date | None = None,
 
 def locate(project_root: Path | None = None) -> Path:
     """授权文件位置：优先程序目录，其次用户目录（便于客户自行替换）。"""
-    root = Path(project_root) if project_root else Path(__file__).resolve().parents[1]
+    if project_root:
+        root = Path(project_root)
+    else:
+        import sys
+        # 打包后 __file__ 在 _internal 下，授权应放在 exe 同级目录
+        root = (Path(sys.executable).parent if getattr(sys, "frozen", False)
+                else Path(__file__).resolve().parents[1])
     cand = [root / LICENSE_FILENAME, Path.home() / ".hc_agent" / LICENSE_FILENAME]
     for p in cand:
         if p.is_file():
