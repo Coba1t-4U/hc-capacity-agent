@@ -76,6 +76,92 @@ class SettingsPage(tk.Frame):
         for w in self.inner.winfo_children():
             w.destroy()
 
+    def _license_card(self, parent) -> None:
+        """授权与机器码：无授权时给出机器码，便于换取 lic.json。"""
+        import tkinter as tk
+        from tkinter import messagebox
+        try:
+            from hc_agent import license as lic
+            mid = lic.machine_id()
+            banner = lic.banner(lic.status())
+        except Exception as exc:
+            mid, banner = "未获取", f"授权状态读取失败：{type(exc).__name__}"
+        box = tk.Frame(parent, bg="#FFFFFF", highlightthickness=1,
+                       highlightbackground="#D8DEE6")
+        box.pack(fill="x", pady=(0, 10))
+        tk.Label(box, text="授权", bg="#FFFFFF", fg="#1F242B",
+                 font=("微软雅黑", 11, "bold"), anchor="w").pack(
+            fill="x", padx=14, pady=(10, 2))
+        tk.Label(box, text=banner, bg="#FFFFFF",
+                 fg=("#1E6B3A" if "授权：" in banner and "演示" not in banner else "#864B48"),
+                 font=("微软雅黑", 10), anchor="w", justify="left").pack(
+            fill="x", padx=14)
+        row = tk.Frame(box, bg="#FFFFFF")
+        row.pack(fill="x", padx=14, pady=(6, 12))
+        tk.Label(row, text="本机机器码：", bg="#FFFFFF", fg="#5A626A",
+                 font=("微软雅黑", 10)).pack(side="left")
+        var = tk.StringVar(value=mid)
+        ent = tk.Entry(row, textvariable=var, state="readonly",
+                       readonlybackground="#F5F7FA", fg="#1F242B",
+                       font=("Consolas", 10), width=38, relief="flat")
+        ent.pack(side="left", padx=(2, 10), ipady=3)
+
+        def copy_mid() -> None:
+            parent.clipboard_clear()
+            parent.clipboard_append(mid)
+            messagebox.showinfo("已复制", "机器码已复制到剪贴板，请发给供方换取授权文件。",
+                                parent=parent)
+
+        tk.Button(row, text="复制", command=copy_mid, relief="flat",
+                  bg="#014C83", fg="#FFFFFF", activebackground="#0B5FA5",
+                  activeforeground="#FFFFFF", font=("微软雅黑", 9),
+                  padx=12, cursor="hand2").pack(side="left")
+        def import_lic() -> None:
+            import shutil, sys
+            from tkinter import filedialog
+            src = filedialog.askopenfilename(
+                parent=parent, title="选择授权文件 lic.json",
+                filetypes=[("授权文件", "*.json"), ("所有文件", "*.*")])
+            if not src:
+                return
+            st = lic.verify(Path(src))
+            if not st.ok:
+                messagebox.showerror("授权无效",
+                                     f"{st.reason}\n\n请确认该授权文件是为本机机器码签发的。",
+                                     parent=parent)
+                return
+            targets = []
+            if getattr(sys, "frozen", False):
+                targets.append(Path(sys.executable).parent / "lic.json")
+            else:
+                targets.append(Path(__file__).resolve().parents[2] / "lic.json")
+            targets.append(Path.home() / ".hc_agent" / "lic.json")
+            saved = None
+            for t in targets:
+                try:
+                    t.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(src, t)
+                    saved = t
+                    break
+                except Exception:
+                    continue
+            if saved is None:
+                messagebox.showerror("导入失败", "没有可写入的位置，请手工复制 lic.json。",
+                                     parent=parent)
+                return
+            messagebox.showinfo("导入成功",
+                                f"授权已写入：\n{saved}\n\n重启程序后生效。",
+                                parent=parent)
+
+        tk.Button(row, text="导入授权文件…", command=import_lic, relief="flat",
+                  bg="#F5F7FA", fg="#014C83", activebackground="#E4EBF5",
+                  font=("微软雅黑", 9), padx=10, cursor="hand2").pack(
+            side="left", padx=(8, 0))
+
+        tk.Label(box, text="授权文件 lic.json 放到程序目录或 %USERPROFILE%\\.hc_agent\\，重启后生效。",
+                 bg="#FFFFFF", fg="#5A626A", font=("微软雅黑", 9),
+                 anchor="w", justify="left").pack(fill="x", padx=14, pady=(0, 10))
+
     def _render_tabs(self) -> None:
         for w in self.side.winfo_children():
             w.destroy()
@@ -105,6 +191,7 @@ class SettingsPage(tk.Frame):
 
     # ------------------------------------------------------------ 运行环境
     def _render_env(self) -> None:
+        self._license_card(self.inner)
         W.label(self.inner, "运行环境", bg=T.BG, fg=T.TEXT,
                 font=T.F.get("h2")).pack(anchor="w", pady=(0, 10))
         info = self._collect_env()
