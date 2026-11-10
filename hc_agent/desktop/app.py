@@ -288,7 +288,7 @@ class App(tk.Tk):
         from tkinter import messagebox
         messagebox.showinfo(
             "需要授权",
-            "当前为演示模式：" + str(self.state.get("license_text", "")) +
+            str(self.state.get("license_text", "")) +
             "\n\n容量分析与容量搜索需要有效授权。\n"
             "请把本机机器码发给供方换取授权文件 lic.json。",
             parent=self)
