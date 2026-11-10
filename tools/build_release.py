@@ -84,6 +84,28 @@ def main() -> int:
             shutil.copy2(src, DIST / src.name)
             print(f"  + {src.name}")
 
+    step("2.5/5 带入说明文档与示例算例")
+    extras = [
+        (ROOT / "docs", DIST / "文档", ("*.docx", "*.md")),
+        (ROOT / "tests" / "_desktop_shots", DIST / "文档" / "界面截图", ("*.png",)),
+        (ROOT / "runs" / "ACCEPT" / "FD002", DIST / "示例算例" / "FD002", ("*.json", "*.csv", "*.yaml", "*.xlsx")),
+    ]
+    for src, dst, pats in extras:
+        if not src.is_dir():
+            continue
+        dst.mkdir(parents=True, exist_ok=True)
+        n = 0
+        for pat in pats:
+            for f in src.rglob(pat):
+                if f.stat().st_size > 30 * 1024 * 1024:
+                    continue
+                rel = f.relative_to(src)
+                tgt = dst / rel
+                tgt.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(f, tgt)
+                n += 1
+        print(f"  + {src.name} -> {dst.relative_to(DIST)}（{n} 个文件）")
+
     step("3/5 产物自检")
     # 用临时数据目录，避免污染用户真实数据
     env = dict(os.environ)

@@ -50,7 +50,7 @@ class App(tk.Tk):
         # 按屏幕比例给初始尺寸（固定值在高分屏上会偏小）
         sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
         w = max(1100, min(1760, int(sw * 0.78)))
-        h = max(700, min(1100, int(sh * 0.84)))
+        h = max(700, min(sh - 120, int(sh * 0.84)))   # 留出状态条与任务栏
         self.geometry(f"{w}x{h}+{max(0, (sw - w) // 2)}+{max(0, (sh - h) // 3)}")
 
         T.init_fonts(self)
