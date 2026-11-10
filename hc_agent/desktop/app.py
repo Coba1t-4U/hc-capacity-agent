@@ -168,7 +168,7 @@ class App(tk.Tk):
         brand.pack(fill="x", padx=14, pady=(14, 12))
         row0 = tk.Frame(brand, bg=T.NAV_BG)
         row0.pack(anchor="w")
-        tk.Label(row0, text="承载力", bg=T.NAV_BG, fg=T.TEXT,
+        tk.Label(row0, text="天智五号", bg=T.NAV_BG, fg=T.TEXT,
                  font=T.F.get("brand")).pack(side="left")
         tk.Label(row0, text="配电网智能体", bg=T.NAV_BG, fg=T.MUTED,
                  font=T.F.get("brand_sub")).pack(side="left", padx=(6, 0),
