@@ -33,3 +33,8 @@ deepseek-harness/
 # SQLite 运行时旁路文件
 *.sqlite-shm
 *.sqlite-wal
+
+# 授权文件与签发私钥不入库
+lic.json
+*_lic.json
+issuer_key.pem
