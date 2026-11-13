@@ -210,7 +210,7 @@ class SettingsPage(tk.Frame):
             rows.append(("Agent 版本", __version__, False))
             d = paths.describe()
             rows.append(("运行形态", "打包" if d.get("frozen") else "源码", False))
-            rows.append(("程序目录", d.get("bundle_root"), True))
+            rows.append(("程序目录", d.get("app_root") or d.get("bundle_root"), True))
             rows.append(("数据目录", d.get("data_root"), True))
             rows.append(("运行产物", d.get("runs_root"), True))
             rows.append(("日志目录", d.get("logs_root"), True))

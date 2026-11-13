@@ -31,6 +31,17 @@ def is_frozen() -> bool:
     return bool(getattr(sys, "frozen", False))
 
 
+def app_root() -> Path:
+    """程序安装目录（用户视角的“程序目录”）。
+
+    打包后是 exe 所在目录（HC-Agent\），不是 _internal；
+    源码模式下与 bundle_root 相同。界面显示用这个，资源查找仍用 bundle_root。
+    """
+    if is_frozen():
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parents[1]
+
+
 def bundle_root() -> Path:
     """只读资源根目录。
 
@@ -169,6 +180,7 @@ def describe() -> dict:
         "frozen": is_frozen(),
         "executable": sys.executable,
         "bundle_root": str(bundle_root()),
+        "app_root": str(app_root()),
         "data_root": str(data_root()),
         "runs_root": str(runs_root()),
         "logs_root": str(logs_root()),
