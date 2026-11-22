@@ -547,9 +547,12 @@ class Pipeline:
         solver = task.get("solver") or {}
         assert bundle and model and rules
 
+        # 优先级：task.json 的 search 覆盖规则包默认值。
+        # 规则包里的取值是模板默认（如 0-3000 kW 的配网口径），
+        # 多电压等级算例需要在 task 中给到 MW 级上界，否则会被模板压回去。
         search_cfg = dict(rules.search or {})
-        for k in ("lower_kw", "upper_kw", "precision_kw", "max_iter"):
-            if k not in search_cfg and k in (task.get("search") or {}):
+        for k in ("lower_kw", "upper_kw", "precision_kw", "max_iter", "step_kw"):
+            if k in (task.get("search") or {}):
                 search_cfg[k] = task["search"][k]
 
         specs, weights = make_new_pv_specs(bundle, task)

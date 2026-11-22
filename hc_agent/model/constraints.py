@@ -202,8 +202,11 @@ class ConstraintEvaluator:
             series.setdefault(key, []).append((as_str(row.get("timestamp")), v))
 
         out: List[ConstraintResult] = []
+        base_kv = getattr(getattr(run, "model", None), "base_kv", {}) or {}
         for rule in rules:
             for (scid, bus, phase), vals in series.items():
+                # 按母线电压等级取对应限值带；未配置 bands 时沿用全局 min/max
+                band_rule = _apply_voltage_band(rule, base_kv.get(bus.lower()))
                 if not vals:
                     continue
                 # 确定性最不利取值：先按数值，再按时间戳打破平局，
@@ -212,17 +215,17 @@ class ConstraintEvaluator:
                 worst_ts, worst_v = ordered[0]
                 ts_hi, v_hi = ordered[-1]
                 # 持续时间：越限延续的采样数 × 时间步
-                duration = self._violation_duration(vals, rule)
+                duration = self._violation_duration(vals, band_rule)
                 status, margin = evaluate_constraint(
-                    rule, worst_v if _is_low_binding(vals, rule) else v_hi,
+                    band_rule, worst_v if _is_low_binding(vals, band_rule) else v_hi,
                     duration_minutes=None)
                 if status == STATUS_FAIL and duration is not None:
                     status2, margin2 = evaluate_constraint(
-                        rule, worst_v if _is_low_binding(vals, rule) else v_hi,
+                        rule, worst_v if _is_low_binding(vals, band_rule) else v_hi,
                         duration_minutes=duration)
                     status, margin = status2, margin2
-                use_ts = worst_ts if _is_low_binding(vals, rule) else ts_hi
-                use_v = worst_v if _is_low_binding(vals, rule) else v_hi
+                use_ts = worst_ts if _is_low_binding(vals, band_rule) else ts_hi
+                use_v = worst_v if _is_low_binding(vals, band_rule) else v_hi
                 out.append(ConstraintResult(
                     scenario_id=scid, timestamp=use_ts,
                     object_id=f"{bus}.{phase}", constraint_id=rule.rule_id,
@@ -558,3 +561,21 @@ def summarize_constraints(results: Sequence[ConstraintResult]
             for b in binding[:20]
         ],
     }
+
+
+def _apply_voltage_band(rule, kv):
+    """按电压等级取限值：bands=[(min_kv, 下限, 上限)]，取不超过 kv 的最大档。"""
+    bands = getattr(rule, "bands", ()) or ()
+    if not bands or kv is None:
+        return rule
+    # 防御：bands 必须是三元组序列，解析异常时退回全局限值
+    if not all(isinstance(b, (tuple, list)) and len(b) == 3 for b in bands):
+        return rule
+    chosen = None
+    for min_kv, lo, hi in bands:
+        if kv + 1e-9 >= min_kv:
+            chosen = (lo, hi)
+    if chosen is None:
+        return rule
+    import dataclasses
+    return dataclasses.replace(rule, min=chosen[0], max=chosen[1])

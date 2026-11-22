@@ -47,6 +47,7 @@ class ConstraintRule:
     standard_ref: Optional[str] = None
     failure_action: str = "block"
     rule_class: str = "voltage"
+    bands: Tuple[Tuple[float, float, float], ...] = ()  # (min_kv, 下限, 上限)
     scope: Dict[str, Any] = field(default_factory=dict)
     priority: int = 100
     raw: Dict[str, Any] = field(default_factory=dict)
@@ -172,8 +173,9 @@ def load_rule_package(path, *, collector: Optional[IssueCollector] = None,
             duration_minutes=as_float(raw.get("duration_minutes")),
             standard_ref=as_str(raw.get("standard_ref")) or None,
             failure_action=as_str(raw.get("failure_action")) or "block",
-            rule_class=as_str(raw.get("rule_class"))
-            or _infer_class(rid, metric),
+            rule_class=(as_str(raw.get("rule_class"))
+                        or _infer_class(rid, metric)),
+            bands=_parse_bands(raw.get("bands")),
             scope=raw.get("scope") or {},
             priority=int(raw.get("priority") or 100),
             raw=raw,
@@ -381,6 +383,20 @@ def _mini_yaml(text: str, path: Path) -> Dict[str, Any]:
 
 
 # --------------------------------------------------------------- 规则求值
+
+def _parse_bands(raw) -> Tuple[Tuple[float, float, float], ...]:
+    """解析分电压等级限值：bands: [{min_kv, min, max}, ...]"""
+    if not raw:
+        return ()
+    out = []
+    for item in raw:
+        try:
+            out.append((float(item["min_kv"]), float(item["min"]), float(item["max"])))
+        except (KeyError, TypeError, ValueError):
+            continue
+    return tuple(sorted(out))
+
+
 def evaluate_constraint(rule: ConstraintRule, value: Optional[float],
                         *, duration_minutes: Optional[float] = None
                         ) -> Tuple[str, Optional[float]]:

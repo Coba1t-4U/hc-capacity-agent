@@ -125,6 +125,20 @@ class App(tk.Tk):
             self.state["license"] = None
             self.state["license_text"] = "授权：状态未知"
 
+        # HARD_BLOCK：到期后直接拒绝启动（不只是锁功能）
+        st = self.state.get("license")
+        if st is not None and not st.ok:
+            try:
+                from tkinter import messagebox
+                messagebox.showerror(
+                    "已到期",
+                    str(self.state.get("license_text", "")) +
+                    "\n\n本版本已超过使用期限，无法继续使用。\n"
+                    "如需继续使用，请联系供方获取新版本。")
+            except Exception:
+                pass
+            raise SystemExit(1)
+
     def _build_statusbar(self) -> None:
         """30px 状态条：白底 + 1px 顶边，字号压到 small，不与内容抢注意力。"""
         tk.Frame(self, bg=T.BORDER, height=1).pack(side="bottom", fill="x")
@@ -701,6 +715,28 @@ class App(tk.Tk):
                         6: "被中断"}.get(code, str(code))
                 self.progress.configure(
                     text=f"评估完成：退出码 {code}（{note}）", fg=T.SUCCESS)
+            # AUTO_OPEN_RESULT：输出目录不在数据目录时明确提示，并自动跳到结果页
+            try:
+                from hc_agent import paths as _paths
+                _root = _paths.runs_root().resolve()
+                _out = Path(str(msg.get("output_dir") or "")).resolve()
+                if _root not in _out.parents and _out != _root:
+                    messagebox.showwarning(
+                        "结果不在数据目录",
+                        "本次结果写到了：\n" + str(_out) + "\n\n"
+                        "它不在应用数据目录（" + str(_root) + "）下，\n"
+                        "「结果与证据」页看不到这次运行。\n\n"
+                        "下次请把输出目录选为数据目录下的子文件夹。",
+                        parent=self)
+            except Exception:
+                pass
+            _rid_new = str(msg.get("run_id") or "")
+            if _rid_new:
+                try:
+                    self.open_run(_rid_new)
+                    return
+                except Exception:
+                    pass
             self._load_all()
             # 重画当前页，让"本次运行结果"区块出现（该页无状态，可安全重建）
             try:

@@ -30,7 +30,8 @@ MCowBQYDK2VwAyEAvzEfJkjUKrIxegPBW+oe8nZgM5H/zUS2lpqiua0GgmI=
 """
 
 LICENSE_FILENAME = "lic.json"
-TRIAL_DAYS = 60
+TRIAL_DAYS = 0            # 0 = 不启用试用期，改用固定到期日
+FIXED_EXPIRE = "2026-12-31"   # 固定到期日（无 lic.json 时生效）
 TRIAL_FILE = Path.home() / ".hc_agent" / "first_run.txt"
 
 
@@ -182,29 +183,28 @@ def locate(project_root: Path | None = None) -> Path:
 
 
 def _trial_status(today: date | None = None) -> Status:
-    """无有效授权时的试用期判定：首次运行起 TRIAL_DAYS 天。"""
+    """无有效授权时：统一按固定到期日判定（不再按首次运行起算）。"""
     now = today or datetime.now(timezone.utc).astimezone().date()
     try:
-        if TRIAL_FILE.is_file():
-            started = datetime.strptime(TRIAL_FILE.read_text(encoding="utf-8").strip(),
-                                        "%Y-%m-%d").date()
-        else:
-            started = now
-            TRIAL_FILE.parent.mkdir(parents=True, exist_ok=True)
-            TRIAL_FILE.write_text(now.isoformat(), encoding="utf-8")
-    except Exception:
-        started = now
-    left = TRIAL_DAYS - (now - started).days
-    if left > 0:
-        return Status(True, "", customer="试用版", expire=(started + timedelta(days=TRIAL_DAYS)).isoformat(),
+        expire = datetime.strptime(FIXED_EXPIRE, "%Y-%m-%d").date()
+    except ValueError:
+        return Status(False, "固定到期日配置错误", demo=True)
+    left = (expire - now).days
+    if left >= 0:
+        return Status(True, "", customer="试用版", expire=FIXED_EXPIRE,
                       days_left=left, demo=False, trial=True, trial_days_left=left)
-    return Status(False, f"试用期已于 {started + timedelta(days=TRIAL_DAYS)} 结束",
-                  customer="试用版", demo=True, trial=False, trial_days_left=0)
+    return Status(False, f"试用期已于 {FIXED_EXPIRE} 结束",
+                  customer="试用版", expire=FIXED_EXPIRE, demo=True,
+                  trial=False, trial_days_left=left)
 
 
 def status(project_root: Path | None = None) -> Status:
-    st = verify(locate(project_root))
-    return st if st.ok else _trial_status()
+    """有效版本判定：只看固定到期日，不需要 lic.json。
+
+    2026-12-31 及之前：ok=True（功能全开）
+    之后：ok=False（调用方负责拒绝启动）
+    """
+    return _trial_status()
 
 
 def trial_info() -> dict:
@@ -222,7 +222,7 @@ def reset_trial(day: str = "2026-01-01") -> None:
 def banner(st: Status) -> str:
     """状态栏文案（界面用）。"""
     if st.ok and st.trial:
-        return f"试用版：剩 {st.trial_days_left} 天（到期后容量搜索锁定）"
+        return f"版本有效期至 {st.expire}（剩 {st.trial_days_left} 天）"
     if st.ok:
         days = f"剩 {st.days_left} 天" if 0 <= st.days_left <= 30 else f"至 {st.expire}"
         return f"授权：{st.customer or '已授权'}（{days}）"
