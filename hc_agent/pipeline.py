@@ -555,6 +555,35 @@ class Pipeline:
             if k in (task.get("search") or {}):
                 search_cfg[k] = task["search"][k]
 
+        # 按候选接入点电压等级配置：搜索上界默认值 + 反送限值分档
+        _cand_kv = None
+        try:
+            _base_kv = getattr(model, "base_kv", {}) or {}
+            for _n in (task.get("candidate_nodes") or []):
+                if isinstance(_n, dict) and as_str(_n.get("node_id")):
+                    _cand_kv = _base_kv.get(as_str(_n["node_id"]).lower())
+                    break
+        except Exception:
+            _cand_kv = None
+        _UPPER_BY_KV = ((200.0, 500000.0), (90.0, 200000.0), (30.0, 50000.0),
+                        (6.0, 20000.0), (0.0, 2000.0))
+        if _cand_kv is not None and "upper_kw" not in (task.get("search") or {}):
+            for _lim, _up in _UPPER_BY_KV:
+                if _cand_kv + 1e-9 >= _lim:
+                    search_cfg["upper_kw"] = _up
+                    break
+        # 反送限值：rules 里给 bands 时按候选点电压等级取
+        try:
+            from hc_agent.model.constraints import _apply_voltage_band
+            if _cand_kv is not None:
+                _rev = [c for c in rules.constraints if c.rule_class in ("reverse_flow", "short_circuit")]
+                for _i, _c in enumerate(_rev):
+                    if getattr(_c, "bands", ()):
+                        _rev[_i] = _apply_voltage_band(_c, _cand_kv)
+                rules._rules_by_metric = {}
+        except Exception:
+            pass
+
         specs, weights = make_new_pv_specs(bundle, task)
         new_pv_ids = [s["pv_id"] for s in specs]
         allocation_mode = as_str(task.get("allocation_mode"))

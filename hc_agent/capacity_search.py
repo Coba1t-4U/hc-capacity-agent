@@ -188,13 +188,15 @@ def _bisection_search(feasible: FeasibilityFn, lower: float, upper: float,
         t = feasible(mid, it)
         res.trace.append(t)
         if t.status == "unknown":
-            # unknown 不可被当作不可行上界（17.12）
+            # unknown 不可被当作"电气不可行"（17.12），但可作为搜索空间上界收缩：
+            # 继续在更低容量段寻找已验证可行点，最终结论仍只取 lo_val。
             res.unknowns.append({"delta_kw": mid,
-                                 "reason": "二分点为 unknown，终止并保留区间"})
+                                 "reason": "二分点为 unknown，收缩上界后继续"})
             res.notes.append(
-                f"二分点 {mid:g} kW 为 unknown；按设计 17.12 不得当作不可行上界，"
-                f"搜索终止并保留已验证区间")
-            break
+                f"二分点 {mid:g} kW 为 unknown；按设计 17.12 不判定为不可行，"
+                f"仅据此收缩搜索上界并继续向下试探")
+            hi_val = mid
+            continue
         if t.status == "feasible":
             lo_val = mid
         else:
@@ -250,6 +252,29 @@ def _discrete_scan(feasible: FeasibilityFn, lower: float, upper: float,
             break
         else:  # unknown
             unknown_points.append(delta)
+
+    # 粗扫定位失败点后，在 [最后可行, 首个失败] 之间细化，
+    # 否则大范围 + 有限点数会得出"第一个网格点就失败 ⇒ 容量为 0" 的假结论
+    if first_fail is not None and last_feasible is not None \
+            and first_fail > last_feasible:
+        lo_val, hi_val = last_feasible, first_fail
+        _tol = max(1.0, step / 10.0)
+        while (hi_val - lo_val) > _tol and it < max_iter:
+            mid = 0.5 * (lo_val + hi_val)
+            it += 1
+            t = feasible(mid, it)
+            res.trace.append(t)
+            if t.status == "feasible":
+                lo_val = mid
+            elif t.status == "unknown":
+                unknown_points.append(mid)
+                hi_val = mid
+            else:
+                hi_val = mid
+                res.binding_constraint = _bind(t, binding_extractor)
+                res.binding_detail = t.detail
+        last_feasible = lo_val
+        first_fail = hi_val
 
     res.iterations = it
     res.feasible_lower_kw = last_feasible
