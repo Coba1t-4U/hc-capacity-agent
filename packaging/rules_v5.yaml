@@ -75,6 +75,7 @@ search:
   precision_kw: 10
   max_iter: 25
 management:
+  formula_id: HC-MGMT-STD
   coincidence_factor: 0.9
   margin_ratio: 0.1
 grading:
