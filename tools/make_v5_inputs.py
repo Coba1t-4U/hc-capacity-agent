@@ -16,6 +16,7 @@ SRC = ROOT / "runs" / "ACCEPT" / "FD002" / "snapshots"
 DST = ROOT / "runs" / "V5_inputs"
 
 BUSES = [
+    ("BUS-SLACK-220", "220kV 系统侧", "FD-V5", None, 220, "ABC", "wye", None),
     ("BUS-HV-220", "220kV母线", "FD-V5", None, 220, "ABC", "wye", None),
     ("BUS-HV-110", "110kV母线", "FD-V5", None, 110, "ABC", "wye", None),
     ("BUS-MV-035", "35kV母线", "FD-V5", None, 35, "ABC", "wye", None),
@@ -28,6 +29,7 @@ BUSES = [
 ]
 
 LINES = [
+    ("LN-SLACK-01", "BUS-SLACK-220", "BUS-HV-220", "ABC", 0.5, 0.02, 0.10, 0.06, 0.30, 10, 5, 2000, True, None),
     ("LN-110-01", "BUS-HV-110", "BUS-HV-110B", "ABC", 8, 0.08, 0.40, 0.24, 1.20, 10, 5, 1200, True, None),
     ("LN-035-01", "BUS-MV-035", "BUS-MV-035B", "ABC", 5, 0.17, 0.38, 0.51, 1.14, 10, 5, 600, True, None),
     ("LN-010-01", "BUS-MV-010", "BUS-MV-010B", "ABC", 3, 0.27, 0.35, 0.81, 1.05, 10, 5, 400, True, None),
@@ -55,7 +57,7 @@ PVS = [
 ]
 
 SOURCES = [
-    ("SRC-V5", "BUS-HV-220", 1.0, 0, 0.5, 4.0, 1.5, 12.0, "MAX-MODE", "Z2-EQ-R1"),
+    ("SRC-V5", "BUS-SLACK-220", 1.0, 0, 0.5, 4.0, 1.5, 12.0, "MAX-MODE", "Z2-EQ-R1"),
 ]
 
 

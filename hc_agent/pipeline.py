@@ -576,11 +576,11 @@ class Pipeline:
         try:
             from hc_agent.model.constraints import _apply_voltage_band
             if _cand_kv is not None:
-                _rev = [c for c in rules.constraints if c.rule_class in ("reverse_flow", "short_circuit")]
-                for _i, _c in enumerate(_rev):
-                    if getattr(_c, "bands", ()):
-                        _rev[_i] = _apply_voltage_band(_c, _cand_kv)
-                rules._rules_by_metric = {}
+                # 必须写回 rules.constraints 本身，否则评估器仍用原限值
+                for _i, _c in enumerate(list(rules.constraints)):
+                    if _c.rule_class in ("reverse_flow", "short_circuit") \
+                            and getattr(_c, "bands", ()):
+                        rules.constraints[_i] = _apply_voltage_band(_c, _cand_kv)
         except Exception:
             pass
 
